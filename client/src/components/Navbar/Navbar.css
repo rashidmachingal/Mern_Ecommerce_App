@@ -1,0 +1,142 @@
+.nav-container {
+  width: 100vw;
+  height: 4.333rem;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+/* logo */
+
+.nav-logo {
+  width: 10rem;
+  height: 4.333rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.1rem;
+  cursor: pointer;
+}
+
+.nav-logo h2 {
+  font-weight: 800;
+}
+
+.nav-logo img {
+  width: 33.4px;
+  height: 54.6px;
+}
+
+/* items */
+
+.nav-items {
+  font-weight: 600;
+  height: 4.333rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-items span {
+  cursor: pointer;
+}
+
+.nav-items span:hover {
+  border-bottom: 3.6px solid #ff6715;
+}
+
+/* icons */
+
+.nav-icons {
+  width: 10rem;
+  height: 4.333rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* responsive  */
+
+.nav-search {
+  display: none;
+}
+
+.nav-menu {
+  display: none;
+}
+
+.nav-icons-ml {
+  display: none;
+}
+
+.nav-ml-list{
+    display: none;
+}
+
+@media (max-width: 555px) {
+  .nav-menu {
+    display: initial;
+  }
+  .nav-items {
+    display: none;
+  }
+  .nav-icons {
+    display: none;
+  }
+  .nav-search {
+    display: initial;
+  }
+  .nav-icons-ml {
+    display: initial;
+    width: 10rem;
+    height: 4.333rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+  }
+  .nav-whishlist {
+    display: none;
+  }
+  .nav-logo img {
+    width: 16.7px;
+    height: 27.3px;
+  }
+  .nav-logo h2 {
+    font-size: 18px;
+  }
+  /* mobile nav list */
+
+.nav-ml-list {
+    display: initial;
+    width: 100vw;
+    padding: 10px;
+    box-shadow: 0px 0px 9px -5px black;
+    background: rgb(255,103,21);
+    background: linear-gradient(90deg, rgba(255,103,21,1) 0%, rgba(255,181,140,1) 100%, rgba(255,255,255,1) 100%);
+    display: flex;
+    color: white;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    position: fixed;
+    top: 63px;
+    transition: all 0.6s ease;
+  }
+  
+  .nav-ml-list span{
+      width: 100vw;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+  
+  .nav-ml-list span:hover{
+      background: #f4f4f4;
+      color: black;
+  }
+}
