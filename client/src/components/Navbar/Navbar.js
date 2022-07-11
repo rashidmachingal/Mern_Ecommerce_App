@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import "./Navbar.css";
-import { Badge,IconButton,Tooltip } from "@material-ui/core";
-import {ShoppingCartOutlined,FavoriteBorderOutlined,PersonOutlineOutlined, Search, Menu, Close } from "@material-ui/icons";
+import { Badge,IconButton,Tooltip } from "@mui/material";
+import {FavoriteBorderOutlined,Search, Menu, Close, SearchOutlined, LocalMallOutlined } from "@mui/icons-material";
+import AccountMenu from "./Menu";
+
 
 const Navbar = () => {
 
@@ -18,22 +20,24 @@ const Navbar = () => {
           <img src="https://i.ibb.co/BZXZtfB/Anybuy-Case-Study-on-Behance-removebg-preview.png" alt="logo" />
           <h2>RashCart</h2>
         </div>
+        <div className="nav-search">
+          <SearchOutlined style={{color:"grey"}} />
+          <input placeholder="Search for products" type="text" />
+        </div>
         <div className="nav-items">
-          <span>Home</span>
-          <span>Shop</span>
-          <span>About</span>
-          <span>Contact</span>
+          <span>Shirt</span>
+          <span>T-Shirt</span>
+          <span>Pants</span>
         </div>
         <div className="nav-icons">
-          <div className="nav-search" ><IconButton><Search style={cursorPointer} /></IconButton></div>
-          <Tooltip title="Account"><IconButton><PersonOutlineOutlined style={cursorPointer} /></IconButton></Tooltip>
-          <div className="nav-whishlist" ><Tooltip title="Whishlist"><IconButton><FavoriteBorderOutlined style={cursorPointer} /></IconButton></Tooltip></div>
-          <Tooltip title="Cart"><IconButton><Badge badgeContent={3} color="primary" style={cursorPointer} ><ShoppingCartOutlined /></Badge></IconButton></Tooltip>
+          <AccountMenu iconBtn={true} />
+          <Tooltip iconBtn={false} title="Whishlist"><IconButton><FavoriteBorderOutlined style={cursorPointer} /></IconButton></Tooltip>
+          <Tooltip title="Bag"><IconButton><Badge badgeContent={3} color="primary" style={cursorPointer} ><LocalMallOutlined /></Badge></IconButton></Tooltip>
         </div>
         <div className="nav-icons-ml">
             <Search/>
-            <PersonOutlineOutlined/>
-            <Badge badgeContent={3}  color="primary" ><ShoppingCartOutlined/></Badge>
+            <AccountMenu/>
+            <Badge badgeContent={3}  color="primary" ><LocalMallOutlined/></Badge>
         </div>
         <div className="nav-ml-list" style={{left:open ? "0px" : "-100vw"}} >
          <span>Home</span>
