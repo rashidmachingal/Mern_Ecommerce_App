@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Navbar.css";
 import { Badge,IconButton,Tooltip } from "@mui/material";
-import {FavoriteBorderOutlined,Search, Menu, Close, SearchOutlined, LocalMallOutlined } from "@mui/icons-material";
+import {FavoriteBorderOutlined,Menu,Close,SearchOutlined,LocalMallOutlined } from "@mui/icons-material";
 import AccountMenu from "./Menu";
 
 
@@ -35,7 +35,6 @@ const Navbar = () => {
           <Tooltip title="Bag"><IconButton><Badge badgeContent={3} color="primary" style={cursorPointer} ><LocalMallOutlined /></Badge></IconButton></Tooltip>
         </div>
         <div className="nav-icons-ml">
-            <Search/>
             <AccountMenu/>
             <Badge badgeContent={3}  color="primary" ><LocalMallOutlined/></Badge>
         </div>
@@ -47,6 +46,12 @@ const Navbar = () => {
          <span>Contact</span>
         </div>
       </nav>
+      <div className="nav-search-ct">
+          <div className="nav-search-ml">
+           <SearchOutlined style={{color:"grey"}} />
+           <input placeholder="Search for products" type="text" />
+          </div>
+      </div>
     </>
   );
 };

@@ -62,10 +62,11 @@
   width: 21rem;
   height: 2.4rem;
   padding-left: 0.4rem;
-  background: #f4f4f4;
+  background-color: #ebebebea;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 2.6px;
 }
 
 .nav-search input{
@@ -122,8 +123,30 @@
   .nav-icons {
     display: none;
   }
+  .nav-search-ct{
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+  }
   .nav-search-ml {
     display: initial;
+    width: 93%;
+    height: 2.4rem;
+    padding-left: 0.4rem;
+    background-color: #ebebebea;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2.6px;
+  }
+  .nav-search-ml input{
+    width: 100%;
+    height: 1.8rem;
+    font-size: 15px;
+    padding-left: 0.4rem;
+    border: none;
+    outline: none;
+    background: none;
   }
   .nav-icons-ml {
     display: initial;

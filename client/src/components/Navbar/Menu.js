@@ -21,8 +21,8 @@ export default function AccountMenu({iconBtn}) {
         PaperProps={{
           elevation: 0,
           sx: {
-            filter: 'drop-shadow(0px 2px 5px #0000002b)',
-            mt: 1.5
+            filter: 'drop-shadow(0px 2px 5px rgba(0, 0, 0, 0.363))',
+            mt: 1
           },
         }}
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
