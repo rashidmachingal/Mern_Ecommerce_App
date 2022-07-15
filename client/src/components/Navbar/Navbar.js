@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./Navbar.css";
 import { Badge,IconButton,Tooltip } from "@mui/material";
-import {FavoriteBorderOutlined,Menu,Close,SearchOutlined,LocalMallOutlined } from "@mui/icons-material";
+import {FavoriteBorderOutlined,Menu,SearchOutlined,LocalMallOutlined } from "@mui/icons-material";
 import AccountMenu from "./Menu";
+import Navdrawer from "./Navdrawer";
 
 
 const Navbar = () => {
@@ -14,7 +15,7 @@ const Navbar = () => {
     <>
       <nav className="nav-container">
         <div className="nav-menu">
-        <IconButton>{open? <Close onClick={()=>setOpen(!open)} style={cursorPointer} /> : <Menu onClick={()=>setOpen(!open)} style={cursorPointer} />}</IconButton>
+        <IconButton><Menu onClick={()=>setOpen(!open)} style={cursorPointer} /></IconButton>
         </div>
         <div className="nav-logo">
           <img src="https://i.ibb.co/BZXZtfB/Anybuy-Case-Study-on-Behance-removebg-preview.png" alt="logo" />
@@ -38,12 +39,9 @@ const Navbar = () => {
             <AccountMenu/>
             <Badge badgeContent={3}  color="primary" ><LocalMallOutlined/></Badge>
         </div>
-        <div className="nav-ml-list" style={{left:open ? "0px" : "-100vw"}} >
-         <span>Home</span>
-         <span>Orders</span>
-         <span>Shop</span>
-         <span>About</span>
-         <span>Contact</span>
+        <div onClick={()=>setOpen(!open)}  style={{display:open? "initial" : "none"}} className="nav-ml-shadow"></div>
+        <div className="nav-drawer" style={{left:open ? "0px" : "-100vw"}} >
+         <Navdrawer/>
         </div>
       </nav>
       <div className="nav-search-ct">
@@ -57,3 +55,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
