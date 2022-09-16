@@ -9,7 +9,7 @@ const Navdrawer = () => {
      <div><Person/></div>
      <span>Login & Register</span>
     </div>
-    <div className="nav-dr-items">
+    <div>
     <MenuItem><ListItemIcon> <Article fontSize="small" /></ListItemIcon>My Orders</MenuItem>
     <MenuItem><ListItemIcon> <ShoppingBag fontSize="small" /></ListItemIcon>My Cart</MenuItem>
     <MenuItem><ListItemIcon> <Favorite fontSize="small" /></ListItemIcon>My Wishlist</MenuItem>
