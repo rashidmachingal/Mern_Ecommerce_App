@@ -26,9 +26,9 @@ const Navbar = () => {
           <input placeholder="Search for products" type="text" />
         </div>
         <div className="nav-items">
-          <span>Shirt</span>
-          <span>T-Shirt</span>
-          <span>Pants</span>
+          <p><a href="/" >SHIRT</a></p>
+          <p><a href="/" >T-SHIRT</a></p>
+          <p><a href="/" >JACKET</a></p>
         </div>
         <div className="nav-icons">
           <AccountMenu iconBtn={true} />

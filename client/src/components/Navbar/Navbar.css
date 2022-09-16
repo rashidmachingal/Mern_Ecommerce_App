@@ -34,15 +34,21 @@
   font-weight: 600;
   height: 4.333rem;
   display: flex;
+  gap: 0.6rem;
+}
+
+.nav-items p{
+  height: 4.333rem;
+  display: flex;
   align-items: center;
-  gap: 0.5rem;
 }
 
-.nav-items span {
-  cursor: pointer;
+.nav-items a{
+  text-decoration: none;
+  color: black;
 }
 
-.nav-items span:hover {
+.nav-items p:hover {
   border-bottom: 3.6px solid #418cd2;
 }
 
