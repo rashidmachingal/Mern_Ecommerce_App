@@ -180,6 +180,7 @@
     background: rgba(0, 0, 0, 0.372);
     animation: cssAnimation 0s 0.3s forwards;
     visibility: hidden;
+    z-index: 1;
   }
   .nav-dr-login{
     width: 100%;
