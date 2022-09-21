@@ -1,0 +1,27 @@
+export const categoriesData = [
+    {
+        id:1,
+        image:"https://i.ibb.co/n1qXG8J/1.png",
+        title:"T-SHIRTS"
+    },
+    {
+        id:2,
+        image:"https://i.ibb.co/jJYnL0V/2.png",
+        title:"CASUAL-SHIRTS"
+    },
+    {
+        id:3,
+        image:"https://i.ibb.co/yqGC4cV/3.png",
+        title:"CASUAL-TROUSERS"
+    },
+    {
+        id:4,
+        image:"https://i.ibb.co/ZXVnyjn/4.png",
+        title:"FORMAL-SHIRTS"
+    },
+    {
+        id:5,
+        image:"https://i.ibb.co/ZS5Pn2V/5.png",
+        title:"FORMAL-TROUSERS"
+    },
+]
