@@ -2,7 +2,7 @@ import { ArrowRight } from '@mui/icons-material'
 import './Categories.css'
 import { categoriesData } from './Data'
 
-export const Categories = () => {
+const Categories = () => {
   return (
     <>
      <div className="categoryContainer">
@@ -28,3 +28,5 @@ export const Categories = () => {
     </>
   )
 }
+
+export default Categories

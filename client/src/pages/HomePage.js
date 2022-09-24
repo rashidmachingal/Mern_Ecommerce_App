@@ -1,9 +1,11 @@
-import Banner from "../components/Banner/Banner"
+import {Banner,Categories, HomeProducts} from "../components"
 
 const HomePage = () => {
   return (
     <>
     <Banner/>
+    <Categories/>
+    <HomeProducts/>
     </>
   )
 }
