@@ -15,7 +15,7 @@ const Navbar = () => {
     <>
       <nav className="nav-container">
         <div className="nav-menu">
-        <IconButton><Menu onClick={()=>setOpen(!open)} style={cursorPointer} /></IconButton>
+        <IconButton onClick={()=>setOpen(!open)} style={cursorPointer} ><Menu/></IconButton>
         </div>
         <div className="nav-logo">
           <img src="https://i.ibb.co/BZXZtfB/Anybuy-Case-Study-on-Behance-removebg-preview.png" alt="logo" />
@@ -31,8 +31,8 @@ const Navbar = () => {
           <p><a href="/" >JACKET</a></p>
         </div>
         <div className="nav-icons">
-          <AccountMenu iconBtn={true} />
-          <Tooltip iconBtn={false} title="Whishlist"><IconButton><FavoriteBorderOutlined style={cursorPointer} /></IconButton></Tooltip>
+          <AccountMenu iconbtn={true} />
+          <Tooltip  title="Whishlist"><IconButton><FavoriteBorderOutlined style={cursorPointer} /></IconButton></Tooltip>
           <Tooltip title="Bag"><IconButton><Badge badgeContent={3} color="primary" style={cursorPointer} ><LocalMallOutlined /></Badge></IconButton></Tooltip>
         </div>
         <div className="nav-icons-ml">

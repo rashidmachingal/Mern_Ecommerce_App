@@ -13,7 +13,7 @@ const Categories = () => {
         <div className="category">
             {categoriesData.map((i)=>{
               return (
-               <div className='category-in'>
+               <div key={i.id} className='category-in'>
                 <div className="category-image">
                  <img src={i.image} alt="img" />
                 </div>
