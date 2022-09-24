@@ -11,17 +11,17 @@ export const categoriesData = [
     },
     {
         id:3,
-        image:"https://i.ibb.co/yqGC4cV/3.png",
+        image:"https://i.ibb.co/GWrzZnk/3.png",
         title:"CASUAL-TROUSERS"
     },
     {
         id:4,
-        image:"https://i.ibb.co/ZXVnyjn/4.png",
+        image:"https://i.ibb.co/5T22QVL/4.png",
         title:"FORMAL-SHIRTS"
     },
     {
         id:5,
-        image:"https://i.ibb.co/ZS5Pn2V/5.png",
+        image:"https://i.ibb.co/yR23kR7/5.png",
         title:"FORMAL-TROUSERS"
     },
 ]
