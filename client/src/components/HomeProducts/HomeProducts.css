@@ -1,0 +1,80 @@
+.homeProContainer{
+    width: 100%;
+    height: 30rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.homepro-title h2{
+    margin-top: 1.4rem;
+    font-weight: 400;
+}
+
+.homepro-desc span{
+    margin-top: 1.4rem;
+    color: rgba(128, 128, 128, 0.935);
+}
+
+/* product box */
+
+.home-wrapper{
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.8rem;
+    margin-top: 1.6rem;
+    width: 80%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+.homepro-box{
+    transform: translateX(0);
+    width: 214.2px;
+    /* box-shadow: 0px 0px 4px 0.1px rgb(0 0 0 / 17%); */
+}
+
+.homepro-box img{
+    width: 100%;
+    height: 288px;
+    box-shadow: 0px 0px 4px 0.1px rgb(0 0 0 / 17%);    
+}
+
+.homepro-titles h3{
+    font-weight: 700;
+    font-size: 16px;
+    margin-left: 5px;
+    text-transform: uppercase;
+}
+
+.homepro-titles h4{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 400;
+    margin-left: 5px;
+    color: rgba(108, 108, 108, 0.968);
+}
+
+.homepro-price h3{
+    font-weight: 500;
+    margin-left: 5px;
+    margin-top: 4px;
+    font-size: 17px;
+}
+
+
+/* arrows */
+
+.homepro-arrow{
+    position: absolute;
+    top: 15rem;
+    width: 2.3rem;
+    height: 2.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(238, 235, 235);
+    cursor: pointer;
+}
