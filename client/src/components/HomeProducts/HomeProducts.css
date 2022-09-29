@@ -1,6 +1,6 @@
 .homeProContainer{
     width: 100%;
-    height: 30rem;
+    padding-bottom: 10rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -12,9 +12,10 @@
     font-weight: 400;
 }
 
-.homepro-desc span{
-    margin-top: 1.4rem;
+.homepro-desc{
+    margin-top: 0.3rem;
     color: rgba(128, 128, 128, 0.935);
+    text-align: center;
 }
 
 /* product box */
@@ -30,14 +31,12 @@
 }
 
 .homepro-box{
-    transform: translateX(0);
     width: 214.2px;
-    /* box-shadow: 0px 0px 4px 0.1px rgb(0 0 0 / 17%); */
 }
 
 .homepro-box img{
     width: 100%;
-    height: 288px;
+    height: auto;
     box-shadow: 0px 0px 4px 0.1px rgb(0 0 0 / 17%);    
 }
 
@@ -77,4 +76,38 @@
     align-items: center;
     background: rgb(238, 235, 235);
     cursor: pointer;
+}
+
+/* responsive design */
+
+@media (max-width:750px) {
+    .homepro-arrow{
+        display: none;
+    }
+    .home-wrapper{
+        margin-top: 1.6rem;
+        width: 95%;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        flex: 50%;
+    }
+    .homepro-box{
+        width: calc(95%/2);
+    }
+    .homepro-titles h3{
+        font-size: 14px;
+    }
+    .homepro-titles h4{
+        font-size: 14px;
+    }
+    .homepro-price h3{
+        font-size: 15px;
+    }
+}
+
+@media (max-width:315px) {
+    .homepro-box{
+        width: 95%;
+    }
 }

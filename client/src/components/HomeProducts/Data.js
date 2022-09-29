@@ -54,12 +54,5 @@ export const HomeProductsData = [
         title:"Off White Slim Fit Formal Shirt",
         image:"https://assets.myntassets.com/h_1440,q_90,w_1080/v1/assets/images/19092316/2022/8/2/0cbc232d-46f3-4af8-96a3-e00936e3819e1659437072782-Louis-Philippe-Men-Shirts-8681659437072336-1.jpg",
         price:1059
-    },
-    {
-        id:9,
-        brand:"Roadster",
-        title:"Grey Melange Solid Round Neck T-shirt",
-        image:"https://assets.myntassets.com/h_1440,q_90,w_1080/v1/assets/images/3314157/2018/4/18/11524041081440-Roadster-Men-Grey-Melange-Solid-Round-Neck-T-shirt-3461524041081257-1.jpg",
-        price:559
-    },
+    }
 ]
