@@ -1,4 +1,4 @@
-export const HomeProductsData = [
+export const topSellingData = [
     {
         id:1,
         brand:"Roadster",

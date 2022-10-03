@@ -1,4 +1,4 @@
-import {Banner,Categories, HomeProducts} from "../components"
+import {Banner,Categories, ExploreBanner, HomeProducts} from "../components"
 
 const HomePage = () => {
   return (
@@ -6,6 +6,7 @@ const HomePage = () => {
     <Banner/>
     <Categories/>
     <HomeProducts/>
+    <ExploreBanner/>
     </>
   )
 }

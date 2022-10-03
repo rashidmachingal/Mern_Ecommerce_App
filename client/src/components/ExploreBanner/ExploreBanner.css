@@ -1,0 +1,53 @@
+.exBannerContainer{
+    margin-top: 3rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1rem;
+}
+
+.ex-banner-main{
+    width: 880px;
+    height: 252px;
+    background: url("https://i.postimg.cc/SQLhM5qt/1.png");
+    border-radius: 12px;
+}
+
+.ex-banner{
+    width: 100%;
+    height: 100%;
+    padding-left: 30px;
+    background: rgba(36, 36, 36, 0.449);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.9rem;
+}
+
+.ex-banner h2{
+    color: white;
+}
+
+.ex-banner button{
+    background: #418cd2;
+    border: none;
+    outline: none;
+    color: white;
+    width: 7rem;
+    height: 2.4rem;
+    border-radius: 2rem;
+    margin-left: 5rem;
+    cursor: pointer;
+}
+
+.ex-banner button:hover{
+    background: #418cd2df;
+}
+
+@media (max-width:888px) {
+    .ex-banner-main{
+        background-position: top;
+        width: 96%;
+    }
+}

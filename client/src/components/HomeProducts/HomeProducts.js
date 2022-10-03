@@ -1,5 +1,5 @@
 import './HomeProducts.css'
-import { HomeProductsData } from './Data'
+import { topSellingData } from './Data'
 import {ArrowBackIos, ArrowForwardIos} from '@mui/icons-material';
 import { useEffect, useRef, useState } from 'react';
 
@@ -52,7 +52,7 @@ const HomeProducts = () => {
         </span>
       </div>
       <div onScroll={scrollCheck} ref={scrl} className="home-wrapper">
-        {HomeProductsData.map((i)=>{
+        {topSellingData.map((i)=>{
           return(
             <div key={i.id} className="homepro-box">
              <img src={i.image} alt="img" />
