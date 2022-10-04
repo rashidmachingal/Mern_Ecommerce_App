@@ -1,9 +1,8 @@
 import './HomeProducts.css'
-import { topSellingData } from './Data'
 import {ArrowBackIos, ArrowForwardIos} from '@mui/icons-material';
 import { useEffect, useRef, useState } from 'react';
 
-const HomeProducts = () => {
+const HomeProducts = ({data}) => {
 
   const [scrollX, setscrollX] = useState(0); // For detecting start scroll postion
   const [scrolEnd, setscrolEnd] = useState(false); // For detecting end of scrolling
@@ -43,22 +42,19 @@ const HomeProducts = () => {
     <>
      <div className="homeProContainer">
       <div className="homepro-title">
-        <h2>Top Selling Products</h2>
+        <h2>{data[0].heading}</h2>
       </div>
       <div className="homepro-desc">
-        <span>
-         These are some of the most popular and top-selling items on Rash
-         Cart that you can buy right now.
-        </span>
+        <span>{data[0].desc}</span>
       </div>
       <div onScroll={scrollCheck} ref={scrl} className="home-wrapper">
-        {topSellingData.map((i)=>{
+        {data[1].map((i)=>{
           return(
             <div key={i.id} className="homepro-box">
              <img src={i.image} alt="img" />
              <div className="homepro-titles">
               <h3>{i.brand}</h3>
-              <h4>{i.title}</h4>
+              {i.title.length <24 ? <h4>{i.title + " "+ i.title}</h4> : <h4>{i.title}</h4>}
              </div>
              <div className="homepro-price">
               <h3>₹{i.price}</h3>
