@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import "./Navbar.css";
 import { Badge,IconButton,Tooltip } from "@mui/material";
 import {FavoriteBorderOutlined,Menu,SearchOutlined,LocalMallOutlined } from "@mui/icons-material";
 import AccountMenu from "./Menu";
 import Navdrawer from "./Navdrawer";
+import { Link } from "react-router-dom";
+import "./Navbar.css";
 
 
 const Navbar = () => {
@@ -17,10 +18,10 @@ const Navbar = () => {
         <div className="nav-menu">
         <IconButton onClick={()=>setOpen(!open)} style={cursorPointer} ><Menu/></IconButton>
         </div>
-        <div className="nav-logo">
+        <Link className="nav-logo" to="/">
           <img src="https://i.ibb.co/BZXZtfB/Anybuy-Case-Study-on-Behance-removebg-preview.png" alt="logo" />
           <h2>RashCart</h2>
-        </div>
+        </Link>
         <div className="nav-search">
           <SearchOutlined style={{color:"grey"}} />
           <input placeholder="Search for products" type="text" />

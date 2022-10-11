@@ -1,15 +1,12 @@
-import { ArrowRight } from '@mui/icons-material'
-import { Link } from 'react-router-dom'
-import './Categories.css'
 import { categoriesData } from './Data'
+import './Categories.css'
 
 const Categories = () => {
   return (
     <>
      <div className="categoryContainer">
         <div className="category-title">
-         <h2>CATEGORIES</h2>
-         <span><Link to="categories" >View All Categories </Link><ArrowRight/></span>
+         <h2>CATEGORIES TO BAG</h2>
         </div>
         <div className="category">
             {categoriesData.map((i)=>{

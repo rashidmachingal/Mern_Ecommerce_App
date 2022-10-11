@@ -24,4 +24,19 @@ export const categoriesData = [
         image:"https://i.ibb.co/yR23kR7/5.png",
         title:"FORMAL-TROUSERS"
     },
+    {
+        id:6,
+        image:"https://i.ibb.co/q9n5BTx/1.png",
+        title:"Jackets"
+    },
+    {
+        id:7,
+        image:"https://i.ibb.co/HGCBgP3/7.png",
+        title:"Casual Shoes"
+    },
+    {
+        id:8,
+        image:"https://i.ibb.co/2YG7gtz/8.png",
+        title:"Formal Shoes"
+    },
 ]
