@@ -20,6 +20,12 @@
     justify-content: center;
     margin-right: 1rem;
 }
+
+.category-title a{
+    text-decoration: none;
+    color: #000;
+}
+
 /* view all categories end */
 
 .category{

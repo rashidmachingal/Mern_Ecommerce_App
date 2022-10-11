@@ -1,4 +1,5 @@
 import { ArrowRight } from '@mui/icons-material'
+import { Link } from 'react-router-dom'
 import './Categories.css'
 import { categoriesData } from './Data'
 
@@ -8,7 +9,7 @@ const Categories = () => {
      <div className="categoryContainer">
         <div className="category-title">
          <h2>CATEGORIES</h2>
-         <span>View All Categories <ArrowRight/></span>
+         <span><Link to="categories" >View All Categories </Link><ArrowRight/></span>
         </div>
         <div className="category">
             {categoriesData.map((i)=>{
