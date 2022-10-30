@@ -1,0 +1,65 @@
+/* brand filter */
+.brand-filter{
+    width: 100%;
+    margin-top: 1rem;
+}
+.brand-filter-search{
+    padding-left: 1rem;
+    margin-right: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bd-search-icon{
+    background: rgba(234, 232, 232, 0.775);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.bd-search-ct{
+    background: rgba(234, 232, 232, 0.775);
+    width: 100%;
+    height: 1.9rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding-right: 1px;
+}
+
+.bd-search-ct input{
+    background: none;
+    border: none;
+    outline: none;
+    width: 90%;
+    height: 100%;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+.filter-brand-names{
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 1rem;
+}
+
+.filter-brand-names div{
+    display: flex;
+    gap: 0.5rem;
+}
+
+.filter-brand-names div input{
+    accent-color: #418cd2;
+}
+
+.filter-brand-names span{
+    margin-top: 0.2rem;
+    color: #418cd2;
+    cursor: pointer;
+}

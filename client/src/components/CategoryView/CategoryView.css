@@ -1,0 +1,78 @@
+.categoryViewContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 4.333rem;
+}
+
+/* breadcrumps start */
+.catview-breadcrumps{
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+
+.catview-breadcrumps h5{
+    color: black;
+}/* breadcrumps end */
+
+/* title-filters start */
+.catview-title-filters{
+    margin-top: 0.5rem;
+    width: 100%;
+    height: auto;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.catview-title-filters div:first-child{
+    width: 18%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.catview-title-filters div:nth-child(2){
+    width: 82%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.catview-title-filters button{
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    border: 0.1px solid rgba(23, 23, 23, 0.291);
+    background: white;
+    border-radius: 25px;
+    padding: 5px;
+}
+
+/* title-filters  end */
+
+
+.catview{
+    margin-top: 0.5rem;
+    display: flex;
+}
+
+/* filter start */
+.catview-filter{
+    width: 18%;
+    height: 40rem;
+    border: 1px solid lightgray;
+}
+
+.catview-filter-title{
+    padding-left: 1rem;
+    padding-top: 0.5rem;
+}
+
+/* category view products */
+
+.catview-products{
+    width: 82%;
+    height: 40rem;
+    border: 1px solid lightgray;
+}
