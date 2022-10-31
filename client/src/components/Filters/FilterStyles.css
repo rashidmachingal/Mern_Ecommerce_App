@@ -1,4 +1,4 @@
-/* brand filter */
+/* brand filter start*/
 .brand-filter{
     width: 100%;
     margin-top: 1rem;
@@ -62,4 +62,25 @@
     margin-top: 0.2rem;
     color: #418cd2;
     cursor: pointer;
+} 
+
+/* brand filter end */
+/* price filter start */
+
+.price-filter{
+    padding-left: 1rem;
+    margin-top: 1rem;
+}
+
+.price-filter-select{
+    padding-top: 0.5rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.price-filter-select select{
+    border: 0.6px solid rgba(0, 0, 0, 0.238);
+    height: 1.3rem;
+    outline: none;
+    padding-right: 0.5rem;
 }

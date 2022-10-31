@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import BrandFilter from '../Filters/BrandFilter';
 import './CategoryView.css'
 import { brandNames } from '../Filters/Data';
+import PriceFilter from '../Filters/PriceFilter';
 
 const CategoryView = () => {
 
@@ -64,6 +65,7 @@ const CategoryView = () => {
                brandData={brandData} 
                setBrandData={setBrandData}
               />
+              <PriceFilter/>
             </div>
             <div className="catview-products">
        
