@@ -60,7 +60,7 @@ const CategoryView = () => {
             </div>
             <div className="sort-by">
             <select name="" id="">
-                <option disabled selected>Sort By</option>
+                <option selected disabled>Sort By</option>
                 <option value="">Recommended</option>
                 <option value="">Price Low to Hight</option>
                 <option value="">Price Hight to Low</option>
