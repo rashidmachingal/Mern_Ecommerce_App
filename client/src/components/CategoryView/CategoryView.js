@@ -66,6 +66,9 @@ const CategoryView = () => {
                setBrandData={setBrandData}
               />
               <PriceFilter/>
+              <div className="filter-clear">
+                <span>CLEAR ALL</span>
+              </div>
             </div>
             <div className="catview-products">
        

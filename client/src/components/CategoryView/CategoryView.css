@@ -70,9 +70,18 @@
 }
 
 /* category view products */
-
 .catview-products{
     width: 82%;
     height: 40rem;
     border: 1px solid lightgray;
+}
+
+/* filter clear */
+.filter-clear{
+    text-align: center;
+    padding-top: 2rem;
+    font-weight: bold;
+    color: #418cd2;
+    cursor: pointer;
+    
 }
