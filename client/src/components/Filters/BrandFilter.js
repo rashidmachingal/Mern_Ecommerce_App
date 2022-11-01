@@ -3,7 +3,7 @@ import './FilterStyles.css';
 
 const BrandFilter = ({finalData,setFinalData,brandData,setBrandData}) => {
 
-    const [noOfElements, setnoOfElements] = useState(5);
+    const [noOfElements, setnoOfElements] = useState(7);
 
     const handleFilter = (id,idx) => {
       const temp = brandData
@@ -38,7 +38,7 @@ const BrandFilter = ({finalData,setFinalData,brandData,setBrandData}) => {
              </div>
           )
         })}
-        {noOfElements === 5 ? 
+        {noOfElements === 7 ? 
          <span 
           onClick={()=> setnoOfElements(brandData.length)}>
          +{brandData.length - noOfElements} more
