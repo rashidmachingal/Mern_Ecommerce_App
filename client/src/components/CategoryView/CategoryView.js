@@ -1,15 +1,17 @@
-import { Close } from '@mui/icons-material';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
 import { useEffect, useState } from 'react';
-import BrandFilter from '../Filters/BrandFilter';
-import './CategoryView.css'
+import { Close , FilterList } from '@mui/icons-material';
 import { brandNames } from '../Filters/Data';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import BrandFilter from '../Filters/BrandFilter';
 import PriceFilter from '../Filters/PriceFilter';
+import MobileFilter from '../Filters/MobileFilter';
+import './CategoryView.css'
 
 const CategoryView = () => {
 
   const [brandFilterData, setBrandFilterData] = useState([])
   const [brandData, setBrandData] = useState([]);
+  const [isMobileFilter, setIsMobileFilter] = useState(false);
 
   useEffect(() => {
     setBrandData(brandNames)
@@ -34,7 +36,7 @@ const CategoryView = () => {
     <>
     <div className="categoryViewContainer">
         <div className="catview-breadcrumps">
-         <Breadcrumbs aria-label="breadcrumb">
+        <Breadcrumbs aria-label="breadcrumb">
           <span>Home</span>
           <span>Categories</span>
           <h5>Formal-Shirts</h5>
@@ -53,6 +55,18 @@ const CategoryView = () => {
                 )
               })}
             </div>
+            <div onClick={()=>setIsMobileFilter(true)} className="mobile-filter">
+              <span>Filter</span><FilterList style={{fontSize:"18px"}} />
+            </div>
+            <div className="sort-by">
+            <select name="" id="">
+                <option disabled selected>Sort By</option>
+                <option value="">Recommended</option>
+                <option value="">Price Low to Hight</option>
+                <option value="">Price Hight to Low</option>
+                <option value="">Newst Coming</option>
+              </select>
+            </div>
         </div>
         <div className="catview">
             <div className="catview-filter">
@@ -64,17 +78,17 @@ const CategoryView = () => {
                setFinalData={setBrandFilterData} 
                brandData={brandData} 
                setBrandData={setBrandData}
-              />
+               />
               <PriceFilter/>
               <div className="filter-clear">
                 <span>CLEAR ALL</span>
               </div>
             </div>
             <div className="catview-products">
-       
             </div>
         </div>
     </div>
+    {isMobileFilter ? <MobileFilter setIsMobileFilter={setIsMobileFilter} /> : null}
     </>
   )
 }
