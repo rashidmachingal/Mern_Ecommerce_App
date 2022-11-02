@@ -1,4 +1,5 @@
 import './HomeProducts.css'
+import '../CategoryView/CategoryView.css'
 import {ArrowBackIos, ArrowForwardIos} from '@mui/icons-material';
 import { useEffect, useRef, useState } from 'react';
 
@@ -50,14 +51,20 @@ const HomeProducts = ({data}) => {
       <div onScroll={scrollCheck} ref={scrl} className="home-wrapper">
         {data[1].map((i)=>{
           return(
-            <div key={i.id} className="homepro-box">
-             <img src={i.image} alt="img" />
-             <div className="homepro-titles">
-              <h3>{i.brand}</h3>
-              {i.title.length <24 ? <h4>{i.title + " "+ i.title}</h4> : <h4>{i.title}</h4>}
+            <div key={i.id} className="catview-product-box">
+             <div className="catview-product-image">
+              <img src={i.image} alt={i.title} />
              </div>
-             <div className="homepro-price">
-              <h3>₹{i.price}</h3>
+             <div className="catview-product-brand">
+              <h3>{i.brand}</h3>
+             </div>
+             <div className="catview-product-title">
+             {i.title.length <24 ? <h4>{i.title + " "+ i.title}</h4> : <h4>{i.title}</h4>}
+             </div>
+             <div className="catview-product-price">
+               <h3>₹{i.price}</h3> 
+               <h6>₹2000</h6>
+               <h5>(35% OFF)</h5>
              </div>
             </div>
           )
