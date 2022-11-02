@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Close , FilterList } from '@mui/icons-material';
 import { brandNames } from '../Filters/Data';
+import {sampleProducts} from '../HomeProducts/Data'
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import BrandFilter from '../Filters/BrandFilter';
 import PriceFilter from '../Filters/PriceFilter';
@@ -85,6 +86,26 @@ const CategoryView = () => {
               </div>
             </div>
             <div className="catview-products">
+              {sampleProducts.map((i)=>{
+                return(
+                  <div key={i.id} className="catview-product-box">
+                    <div className="catview-product-image">
+                     <img src={i.image} alt={i.title} />
+                    </div>
+                    <div className="catview-product-brand">
+                      <h3>{i.brand}</h3>
+                    </div>
+                    <div className="catview-product-title">
+                     <h4>{i.title}</h4>
+                    </div>
+                    <div className="catview-product-price">
+                     <h3>₹{i.price}</h3> 
+                     <h6>₹2000</h6>
+                     <h5>(35% OFF)</h5>
+                    </div>
+                  </div>
+                )
+              })}
             </div>
         </div>
     </div>
