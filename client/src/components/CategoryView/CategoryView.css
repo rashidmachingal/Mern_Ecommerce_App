@@ -168,7 +168,7 @@
 @media (max-width:712px) {
     .catview-title-filters{
         gap: 0.1rem;
-       
+        padding-right: 0;
     }
     .catview-title-filters div:first-child{
         display: none;
