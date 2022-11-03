@@ -12,6 +12,7 @@ function App() {
       <Routes>
        <Route path="/" element={<HomePage/>} />
        <Route path="/category/:category" element={<CategoryViewPage/>} />
+       <Route path="/search" element={<CategoryViewPage/>} />
       </Routes>
       <Footer/>
     </BrowserRouter>
