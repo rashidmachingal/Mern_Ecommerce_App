@@ -2,6 +2,7 @@ import './HomeProducts.css'
 import '../CategoryView/CategoryView.css'
 import {ArrowBackIos, ArrowForwardIos} from '@mui/icons-material';
 import { useEffect, useRef, useState } from 'react';
+import {Link} from 'react-router-dom'
 
 const HomeProducts = ({data}) => {
 
@@ -51,7 +52,8 @@ const HomeProducts = ({data}) => {
       <div onScroll={scrollCheck} ref={scrl} className="home-wrapper">
         {data[1].map((i)=>{
           return(
-            <div key={i.id} className="catview-product-box">
+            <Link to={"/product/"+i.id} style={{ textDecoration: 'none' }} key={i.id}>
+            <div className="catview-product-box">
              <div className="catview-product-image">
               <img src={i.image} alt={i.title} />
              </div>
@@ -67,6 +69,7 @@ const HomeProducts = ({data}) => {
                <h5>(35% OFF)</h5>
              </div>
             </div>
+            </Link>
           )
         })}
       </div>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Close , FilterList } from '@mui/icons-material';
+import {Link} from 'react-router-dom'
 import { brandNames } from '../Filters/Data';
 import {sampleProducts} from '../HomeProducts/Data'
 import Breadcrumbs from '@mui/material/Breadcrumbs';
@@ -88,7 +89,8 @@ const CategoryView = () => {
             <div className="catview-products">
               {sampleProducts.map((i)=>{
                 return(
-                  <div key={i.id} className="catview-product-box">
+                  <Link  to={"/product/"+i.id} style={{ textDecoration: 'none' }} key={i.id}>
+                  <div className="catview-product-box">
                     <div className="catview-product-image">
                      <img src={i.image} alt={i.title} />
                     </div>
@@ -104,6 +106,7 @@ const CategoryView = () => {
                      <h5>(35% OFF)</h5>
                     </div>
                   </div>
+                  </Link>
                 )
               })}
             </div>

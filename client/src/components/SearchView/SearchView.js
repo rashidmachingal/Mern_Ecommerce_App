@@ -7,6 +7,7 @@ import BrandFilter from '../Filters/BrandFilter';
 import PriceFilter from '../Filters/PriceFilter';
 import MobileFilter from '../Filters/MobileFilter';
 import '../CategoryView/CategoryView.css'
+import { Link } from 'react-router-dom';
 
 const SearchView = () => {
 
@@ -88,6 +89,7 @@ const SearchView = () => {
             <div className="catview-products">
               {sampleProducts.map((i)=>{
                 return(
+                  <Link to={"/product/"+i.id} style={{ textDecoration: 'none' }} key={i.id}>
                   <div key={i.id} className="catview-product-box">
                     <div className="catview-product-image">
                      <img src={i.image} alt={i.title} />
@@ -104,6 +106,7 @@ const SearchView = () => {
                      <h5>(35% OFF)</h5>
                     </div>
                   </div>
+                  </Link>
                 )
               })}
             </div>
