@@ -85,7 +85,7 @@
     }
     .home-wrapper{
         margin-top: 1.6rem;
-        width: 95%;
+        width: 100%;
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
