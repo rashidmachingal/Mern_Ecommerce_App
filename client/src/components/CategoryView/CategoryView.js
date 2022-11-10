@@ -89,8 +89,7 @@ const CategoryView = () => {
             <div className="catview-products">
               {sampleProducts.map((i)=>{
                 return(
-                  <Link  to={"/product/"+i.id} style={{ textDecoration: 'none' }} key={i.id}>
-                  <div className="catview-product-box">
+                  <Link className='catview-product-box' to={"/product/"+i.id} style={{ textDecoration: 'none' }} key={i.id}>
                     <div className="catview-product-image">
                      <img src={i.image} alt={i.title} />
                     </div>
@@ -105,7 +104,6 @@ const CategoryView = () => {
                      <h6>₹2000</h6>
                      <h5>(35% OFF)</h5>
                     </div>
-                  </div>
                   </Link>
                 )
               })}
