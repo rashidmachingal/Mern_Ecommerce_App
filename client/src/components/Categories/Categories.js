@@ -1,5 +1,6 @@
 import { categoriesData } from './Data'
 import './Categories.css'
+import { Link } from 'react-router-dom'
 
 const Categories = () => {
   return (
@@ -11,14 +12,14 @@ const Categories = () => {
         <div className="category">
             {categoriesData.map((i)=>{
               return (
-               <div key={i.id} className='category-in'>
+               <Link to={"/category/"+i.title.toLocaleLowerCase()} key={i.id} className='category-in'>
                 <div className="category-image">
                  <img src={i.image} alt="img" />
                 </div>
                 <div className="category-name">
                  <h3>{i.title}</h3>
                 </div>
-               </div>
+               </Link>
               )
             })}
         </div>
