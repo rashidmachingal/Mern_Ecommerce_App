@@ -3,7 +3,7 @@ import { Badge,IconButton,Tooltip } from "@mui/material";
 import {FavoriteBorderOutlined,Menu,SearchOutlined,LocalMallOutlined } from "@mui/icons-material";
 import AccountMenu from "./Menu";
 import Navdrawer from "./Navdrawer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 
 
@@ -11,6 +11,7 @@ const Navbar = () => {
 
   const cursorPointer = {cursor: 'pointer',color:"black"}
   const [open, setOpen] = useState(false)
+  const navigate = useNavigate()
 
   return (
     <>
@@ -37,6 +38,7 @@ const Navbar = () => {
           <Tooltip title="Bag"><IconButton><Badge badgeContent={3} color="primary" style={cursorPointer} ><LocalMallOutlined /></Badge></IconButton></Tooltip>
         </div>
         <div className="nav-icons-ml">
+            <SearchOutlined onClick={()=>navigate("/mobile-search")}/>
             <AccountMenu/>
             <Badge badgeContent={3}  color="primary" ><LocalMallOutlined/></Badge>
         </div>

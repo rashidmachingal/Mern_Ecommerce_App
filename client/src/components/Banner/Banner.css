@@ -91,7 +91,7 @@
 
 @media (max-width:620px) {
     .bannerContainer{
-        margin-top: 1rem;
+        margin-top: 0rem;
         height: 20rem;
     }
     .banner-arrow{

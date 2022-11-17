@@ -1,0 +1,57 @@
+.mobile-search{display: none;}
+.mobile-search-page{display: none;}
+
+@media (max-width:555px) {
+    .mobile-search{
+        margin-top: 2rem;
+        height: 2.9rem;
+        background: rgba(218, 214, 214, 0.84);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .mobile-search div:first-child{
+        background: white;
+        width: 95%;
+        display: flex;
+        align-items: center;
+        padding-left: 0.5rem;
+    }
+    
+    .mobile-search input{
+        width: 90%;
+        height: 1.9rem;
+        border: none;
+        padding-left: 0.2rem;
+        border-radius: 2px;
+        outline: none;
+    }
+    .mobile-search-page{
+        display: block;
+        width: 100%;
+        height: 55vh;
+    }
+    .trending-keywords{
+        margin-top: 13rem;
+        height: 5rem;
+        box-shadow: 0 0 3px 0.1px rgba(0, 0, 0, 0.256);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        padding-left: 1rem;
+    }
+    .trending-keywords div:first-child h4{
+        font-weight: 400;
+    }
+    .trending-keywords div:nth-child(2){
+        display: flex;
+        gap: 0.5rem;
+    }
+    .trending-keywords button{
+        border: none;
+        height: 2rem;
+        padding: 5px;
+        border-radius: 5px;
+    }
+}

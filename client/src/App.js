@@ -1,18 +1,18 @@
 import './App.css';
-import {Footer, Navbar} from './components';
+import {Footer} from './components';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { CategoryViewPage, HomePage, ProductPage, SearchViewPage } from './pages';
+import { CategoryViewPage, HomePage, MobileSearchPage, ProductPage, SearchViewPage } from './pages';
 
 const App = ()=> {
   return (
     <>
     <BrowserRouter>
-      <Navbar/>
       <Routes>
        <Route path="/" element={<HomePage/>} />
        <Route path="/product/:id" element={<ProductPage/>} />
        <Route path="/category/:category" element={<CategoryViewPage/>} />
        <Route path="/search" element={<SearchViewPage/>} />
+       <Route path="/mobile-search" element={<MobileSearchPage/>} />
       </Routes>
       <Footer/>
     </BrowserRouter>
