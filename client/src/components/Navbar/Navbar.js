@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Badge,IconButton,Tooltip } from "@mui/material";
-import {FavoriteBorderOutlined,Menu,SearchOutlined,LocalMallOutlined } from "@mui/icons-material";
-import AccountMenu from "./Menu";
+import AccountMenu from "./AccountMenu";
+import {FavoriteBorderOutlined,Menu,SearchOutlined,LocalMallOutlined,PersonOutlineOutlined } from "@mui/icons-material";
 import Navdrawer from "./Navdrawer";
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
@@ -33,13 +33,13 @@ const Navbar = () => {
           <p><a href="/" >JACKET</a></p>
         </div>
         <div className="nav-icons">
-          <AccountMenu iconbtn={true} />
+          <Tooltip title="Profile" ><PersonOutlineOutlined style={cursorPointer} /></Tooltip>
           <Tooltip  title="Whishlist"><IconButton><FavoriteBorderOutlined style={cursorPointer} /></IconButton></Tooltip>
           <Tooltip title="Bag"><IconButton><Badge badgeContent={3} color="primary" style={cursorPointer} ><LocalMallOutlined /></Badge></IconButton></Tooltip>
         </div>
         <div className="nav-icons-ml">
             <SearchOutlined onClick={()=>navigate("/mobile-search")}/>
-            <AccountMenu/>
+            <PersonOutlineOutlined/>
             <Badge badgeContent={3}  color="primary" ><LocalMallOutlined/></Badge>
         </div>
         <div onClick={()=>setOpen(!open)}  style={{display:open? "initial" : "none"}} className="nav-ml-shadow"></div>
@@ -47,12 +47,6 @@ const Navbar = () => {
          <Navdrawer/>
         </div>
       </nav>
-      <div className="nav-search-ct">
-          <div className="nav-search-ml">
-           <SearchOutlined style={{color:"grey"}} />
-           <input placeholder="Search for products" type="text" />
-          </div>
-      </div>
     </>
   );
 };

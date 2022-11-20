@@ -224,12 +224,6 @@
     }
 }
 
-@media (max-width:555px) {
-    .cart-container{
-        margin-top: 2rem;
-    }
-}
-
 @media (max-width:650px) {
     .cart-items{
         width: 100%;

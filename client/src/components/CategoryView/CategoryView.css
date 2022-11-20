@@ -216,9 +216,3 @@
         border-right: 16px solid transparent;
     }
 }
-
-@media (max-width:555px) {
-    .categoryViewContainer{
-        margin-top: 1.5rem;
-    }
-}
