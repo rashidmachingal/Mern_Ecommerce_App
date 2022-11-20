@@ -30,7 +30,7 @@
     .mobile-search-page{
         display: block;
         width: 100%;
-        height: 55vh;
+        height: auto;
     }
     .trending-keywords{
         margin-top: 13rem;
