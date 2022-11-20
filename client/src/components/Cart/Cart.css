@@ -1,7 +1,6 @@
 .cart-container{
     margin-top: 4.333rem;
     width: 100%;
-    overflow-y: scroll;
     display: flex;
     flex-direction: column;
     align-items: center;
