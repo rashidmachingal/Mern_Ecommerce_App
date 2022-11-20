@@ -1,7 +1,7 @@
 import './App.css';
 import {Footer} from './components';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { CategoryViewPage, HomePage, MobileSearchPage, ProductPage, SearchViewPage } from './pages';
+import { CartPage, CategoryViewPage, HomePage, MobileSearchPage, ProductPage, SearchViewPage } from './pages';
 
 const App = ()=> {
   return (
@@ -13,6 +13,7 @@ const App = ()=> {
        <Route path="/category/:category" element={<CategoryViewPage/>} />
        <Route path="/search" element={<SearchViewPage/>} />
        <Route path="/mobile-search" element={<MobileSearchPage/>} />
+       <Route path="/cart" element={<CartPage/>} />
       </Routes>
       <Footer/>
     </BrowserRouter>

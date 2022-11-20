@@ -1,0 +1,270 @@
+.cart-container{
+    margin-top: 4.333rem;
+    width: 100%;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cart-title{
+    width: 90%;
+    margin-top: 1rem;
+}
+
+.cart-title h2{
+    font-weight: 500;
+    text-align: center;
+}
+
+.cart-main{
+    width: 100%;
+    margin-top: 1rem;
+    padding-left: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5rem;
+    /* background: lightblue; */
+}
+
+.cart-items{
+    width: 40rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.cart-item{
+    height: auto;
+    width: 40rem;
+    border: 0.1px solid rgba(0, 0, 0, 0.098);
+    box-shadow: 0 0 2px 0.1px rgba(0, 0, 0, 0.095);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.cart-item-img{
+    width: 6rem;
+}
+
+.cart-item-img img{
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+}
+
+.cart-item-name{
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-item-name h3{
+    max-width: 16rem;
+    font-weight: 500;
+}
+
+.cart-item-quantity{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cart-item-quantity button{
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.cart-item-price{
+    margin-left: 1rem;
+}
+
+.cart-item-price h3{
+    font-weight: 500;
+}
+
+.cart-item-price h3:first-child{
+    text-decoration: line-through;
+    color: gray;
+}
+
+.cart-item-remove{
+    cursor: pointer;
+}
+
+.order-summary{
+    width: 20rem;
+    height: auto;
+    border: 0.1px solid rgba(0, 0, 0, 0.098);
+    box-shadow: 0 0 2px 0.1px rgba(0, 0, 0, 0.095);
+}
+
+.price-details h3{
+    font-weight: 500;
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+    padding-bottom: 0.2rem;
+    color: gray;
+}
+
+.order-summary-details{
+    margin-left: 1rem;
+    margin-top: 0.3rem;
+    display: flex;
+}
+
+.order-summary-details h3{
+    font-weight: 500;
+}
+
+.order-summary-details div:first-child{
+    width: 50%;
+}
+.order-summary-details div:nth-child(2){
+    width: 50%;
+    padding-left: 1rem;
+}
+
+
+.order-summary-details h3:nth-child(2){
+    text-align: left;
+}
+
+.order-promo-code{
+    padding-left: 1rem;
+    padding-bottom: 1rem;
+    margin-top: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem ;
+}
+
+.order-promo-code h3{
+    font-weight: 500;
+}
+
+.order-promo-code div:first-child{
+    width: 40%;
+}
+
+.order-promo-code div:nth-child(2){
+    margin-top: 5px;
+    width: 60%;
+    height: 2.3rem;
+    display: flex;
+    align-items: center;
+    padding-right: 0.1rem;
+    border-radius: 6px;
+    border: 0.1px solid rgba(0, 0, 0, 0.359);
+}
+
+.order-promo-code div:nth-child(2) input{
+    padding-left: 0.3rem;
+    outline: none;
+    width: 60%;
+    height: 100%;
+    border: none;
+    border-radius: 6px;
+}
+
+.order-promo-code div:nth-child(2) button{
+    height: 95%;
+    width: 40%;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background: #418cd2;
+    color: white;
+}
+
+.total-amount{
+    margin-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.total-amount h3{
+    font-weight: 700;
+}
+
+.order-summary-checkout{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+}
+
+.order-summary-checkout h3{
+    display: none;
+}
+
+.order-summary-checkout button{
+    height: 2rem;
+    width: 90%;
+    cursor: pointer;
+    background: #418cd2;
+    color: white;
+    outline: none;
+    border: none;
+    border-radius: 25px;
+}
+
+.order-summary-checkout button:hover{
+    background: #418cd2d3;
+}
+
+@media (max-width:1100px) {
+    .cart-main{
+        flex-direction: column;
+        gap: 1rem;
+        padding-left: 0;
+    }
+}
+
+@media (max-width:555px) {
+    .cart-container{
+        margin-top: 2rem;
+    }
+}
+
+@media (max-width:650px) {
+    .cart-items{
+        width: 100%;
+        align-items: center;
+    }
+    .cart-item{
+        width: 98%;
+        flex-direction: column;
+    }
+    .cart-item-img{
+        width: 50%;
+    }
+    .cart-item-name{
+       flex-direction: row;
+    }
+    .cart-item-price{
+        display: flex;
+        gap: 1rem;
+    }
+    .order-summary-checkout{
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        background: white;
+        box-shadow: 0 0 5px 0.1px rgba(0, 0, 0, 0.287);
+        width: 100%;
+        gap: 2rem;
+    }
+    .order-summary-checkout h3{
+        display: initial;
+        font-weight: 500;
+    }
+    .order-summary-checkout button{
+        width: 50%;
+    }
+    
+}
