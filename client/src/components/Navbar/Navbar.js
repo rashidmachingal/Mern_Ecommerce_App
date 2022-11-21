@@ -4,6 +4,8 @@ import AccountMenu from "./AccountMenu";
 import {FavoriteBorderOutlined,Menu,SearchOutlined,LocalMallOutlined,PersonOutlineOutlined } from "@mui/icons-material";
 import Navdrawer from "./Navdrawer";
 import { Link, useNavigate } from "react-router-dom";
+import OutsideClickHandler from 'react-outside-click-handler';
+
 import "./Navbar.css";
 
 
@@ -11,6 +13,7 @@ const Navbar = () => {
 
   const cursorPointer = {cursor: 'pointer',color:"black"}
   const [open, setOpen] = useState(false)
+  const [openMenu, setOpenMenu] = useState(false)
   const navigate = useNavigate()
 
   return (
@@ -33,8 +36,11 @@ const Navbar = () => {
           <p><a href="/" >JACKET</a></p>
         </div>
         <div className="nav-icons">
-          <Tooltip title="Profile" ><PersonOutlineOutlined style={cursorPointer} /></Tooltip>
-          <Tooltip  title="Whishlist"><IconButton><FavoriteBorderOutlined style={cursorPointer} /></IconButton></Tooltip>
+          <OutsideClickHandler onOutsideClick={()=> setOpenMenu(false)} >
+          <Tooltip title="Profile"><IconButton onClick={()=> setOpenMenu(!openMenu)} ><PersonOutlineOutlined style={cursorPointer} /></IconButton></Tooltip>
+          {openMenu && <AccountMenu/> }
+          </OutsideClickHandler>
+          <Tooltip title="Whishlist"><IconButton><FavoriteBorderOutlined style={cursorPointer} /></IconButton></Tooltip>
           <Tooltip title="Bag"><IconButton><Badge badgeContent={3} color="primary" style={cursorPointer} ><LocalMallOutlined /></Badge></IconButton></Tooltip>
         </div>
         <div className="nav-icons-ml">
