@@ -57,3 +57,12 @@
     width: 10%;
     margin-bottom: 1rem;
 }
+
+@media (max-width:555px) {
+    .order-flow-bar{
+        justify-content: space-around;
+    }
+    .order-flow-bar-line{
+        width: 30%;
+    }
+}

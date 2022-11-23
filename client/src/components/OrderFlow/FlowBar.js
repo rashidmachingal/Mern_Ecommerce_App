@@ -1,4 +1,5 @@
 import { Check } from '@mui/icons-material'
+import './OrderFlow.css'
 
 const FlowBar = ({active}) => {
   return (

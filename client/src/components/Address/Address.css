@@ -66,8 +66,7 @@
 
 .address-box p{
     max-width: 80%;
-    text-align: justify;
-    word-spacing:-2px;
+    text-align: left;
 }
 
 .address-box div{
@@ -97,4 +96,34 @@
 
 .address-conti-btn:hover{
     background: #4594de;
+}
+
+@media (max-width:1100px) {
+    .address-container{
+        width: 80%;
+    }
+}
+
+@media (max-width:700px) {
+    .address-input-group{
+        width: 95%;
+        height: auto;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .address-item{
+        width: 100%;
+    }
+    .address-input-group button{
+        height: 3.2rem;
+    }
+    .address-input{
+        width: 95%;
+    }
+}
+
+@media (max-width:555px) {
+    .address-container{
+        width: 98%;
+    }
 }

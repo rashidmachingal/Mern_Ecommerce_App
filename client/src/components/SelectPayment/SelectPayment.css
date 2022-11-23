@@ -67,3 +67,18 @@
     align-items: center;    
     cursor: pointer;
 }
+
+@media (max-width:1100px) {
+    .select-payment{
+        width: 80%;
+    }
+}
+
+@media (max-width:555px) {
+    .select-payment{
+        width: 98%;
+    }
+    .select-payment-box{
+        width: 90%;
+    }
+}
