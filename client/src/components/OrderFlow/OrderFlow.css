@@ -1,0 +1,59 @@
+.order-flow-container{
+    margin-top: 4.333rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.order-flow-bar{
+    width: 100%;
+    height: 6rem;
+    border-bottom: 0.1px solid rgba(0, 0, 0, 0.067);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.order-flow-item{
+    display: flex;
+    width: 4.5rem;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+}
+
+.order-flow-item span{
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    border: 2px solid #418cd2;
+    color: #418cd2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.order-flow-item.active span{
+    background: #418cd2;
+    color: white;
+}
+
+.order-flow-item.active h4{
+    color: black;
+}
+
+.order-flow-item h4{
+    color: grey;
+    font-weight: 400;
+}
+
+.order-flow-bar-line{
+    border: 1px solid #418cd2;
+    border-radius: 5px;
+    width: 10%;
+    margin-bottom: 1rem;
+}
