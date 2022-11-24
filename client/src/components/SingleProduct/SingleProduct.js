@@ -1,18 +1,26 @@
 import {sampleProducts} from '../HomeProducts/Data';
 import { Rating } from '@mui/material';
 import { ArticleOutlined, FavoriteBorder, ShoppingBag } from '@mui/icons-material';
+import { useRef } from 'react';
 import Slider from "react-slick";
 import './SingleProduct.css';
 
 const SingleProduct = () => {
 
+  const slider = useRef(null);
+
 let settings = {
-  dots: true,
   infinite: false,
   speed: 700,
   slidesToShow: 1,
   slidesToScroll: 1,
+  dots: true,
+  dontAnimate:true
 };
+
+const handlePagination = (index) => {
+  slider?.current?.slickGoTo(index);
+}
 
 
   return (
@@ -20,11 +28,16 @@ let settings = {
     <div className="product-container">
         <div className="product-img-slider-main">
           <div className="product-img-slider">
-            <Slider {...settings}>
+            <Slider ref={slider} {...settings}>
             {sampleProducts.slice(1,5).map((i) => {
               return <img src={i.image} alt={i.id} key={i.id} />
             })}
             </Slider>
+          </div>
+          <div className="product-img-pagination">
+            {sampleProducts.slice(1,5).map((i,index) => {
+              return <img onClick={()=>handlePagination(index)} src={i.image} alt={i.id} key={i.id} />
+            })}
           </div>
         </div>
       <div className="product-details-section">
