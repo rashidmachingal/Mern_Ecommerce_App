@@ -1,17 +1,10 @@
 import {sampleProducts} from '../HomeProducts/Data';
-import { useState } from 'react';
 import { Rating } from '@mui/material';
 import { ArticleOutlined, FavoriteBorder, ShoppingBag } from '@mui/icons-material';
-import './SingleProduct.css';
 import Slider from "react-slick";
+import './SingleProduct.css';
 
 const SingleProduct = () => {
-
-const [slideIndex, setSlideIndex] = useState(0)
-const handleSlide = (idx) => {
-  let value = idx*23.33
-  setSlideIndex(value)
-}
 
 let settings = {
   dots: true,
@@ -25,23 +18,13 @@ let settings = {
   return (
     <>
     <div className="product-container">
-        <div className="product-img-slider">
-          <div className="mobile-img-slider">
+        <div className="product-img-slider-main">
+          <div className="product-img-slider">
             <Slider {...settings}>
             {sampleProducts.slice(1,5).map((i) => {
               return <img src={i.image} alt={i.id} key={i.id} />
             })}
             </Slider>
-          </div>
-          <div className="top">
-            {sampleProducts.slice(1,5).map((i) => {
-              return <img style={{transform:`translateX(${-slideIndex}rem)`}} src={i.image} alt={i.id} key={i.id} />
-            })}
-          </div>
-          <div className="bottom">
-          {sampleProducts.slice(1,5).map((i,idx) => {
-              return <img onClick={()=>handleSlide(idx)} src={i.image} alt={i.id} key={i.id} />
-            })}
           </div>
         </div>
       <div className="product-details-section">
