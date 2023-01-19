@@ -1,0 +1,93 @@
+.reviews-container{
+    margin-top: 3rem;
+    width: 50%;
+    padding-left: 6rem;
+}
+
+.review-form{
+    width: 23rem;
+}
+
+.review-rating{
+    width: 100%;
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.review-rating h4{
+    font-weight: 400;
+}
+
+.review-form textarea{
+    margin-top: 0.2rem;
+    width: 100%;
+    height: 7rem;
+    resize: none;
+    padding: 0.5rem;
+    outline: none;
+    border-radius: 3px;
+    border: none;
+    box-shadow: 0 0 1px 1px #00000039;
+}
+
+.review-form input{
+    margin-top: 2px;
+    width: 100%;
+    height: 2.4rem;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background: #418cd2;
+    color: white;
+}
+
+.review-form input:hover{
+    background: #418cd2cd;
+}
+
+.user-reviews{
+    margin-top: 1rem;
+    width: 24rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.user-review-box{
+    width: 100%;
+    min-height: 5rem;
+    box-shadow: 0 0 2px 0.5px #0000001c;
+    border-radius: 3px;
+    padding: 10px;
+    position: relative;
+}
+
+.ur-pro-rate-date{
+    display: flex;
+    gap: 10px;
+}
+
+.ur-pro-rate-date div:nth-child(2) h5{
+    margin-left: 5px;
+}
+
+.ur-pro-rate-date div:nth-child(3) {
+    font-size: 10px;
+    color: grey;
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    font-weight: 700;
+}
+
+.user-review-para{
+    margin-top: 5px;
+}
+
+.read-or-hide{
+    font-weight: 600;
+    cursor: pointer;
+    color: grey;
+}

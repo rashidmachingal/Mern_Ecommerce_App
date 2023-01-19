@@ -4,6 +4,7 @@ import { ArticleOutlined, FavoriteBorder, ShoppingBag } from '@mui/icons-materia
 import { useRef } from 'react';
 import Slider from "react-slick";
 import './SingleProduct.css';
+import Reviews from '../Reviews/Reviews';
 
 const SingleProduct = () => {
 
@@ -91,6 +92,7 @@ const handlePagination = (index) => {
         </div>
       </div>
     </div>
+    <Reviews/>
     </>
   )
 }
