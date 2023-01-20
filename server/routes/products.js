@@ -23,6 +23,16 @@ router.get("/get-all", async (req, res) => {
     }
 });
 
+// get single product
+router.get("/get/:id", async (req, res) => {
+    try {
+        const singleProducts = await Product.findById(req.params.id)
+        res.status(200).json(singleProducts)
+    } catch (error) {
+        res.status(500).json(error);
+    }
+});
+
 
 
 
