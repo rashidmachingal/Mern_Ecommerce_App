@@ -12,7 +12,7 @@ const productRoute = require("./routes/products.js")
 // middlewares
 app.use(cors());
 app.use(express.json());
-app.use("/api", productRoute);
+app.use("/product", productRoute);
 
 
 // mongodb connection + // server configuration
