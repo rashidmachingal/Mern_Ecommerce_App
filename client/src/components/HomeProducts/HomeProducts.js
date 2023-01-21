@@ -61,7 +61,7 @@ const HomeProducts = ({Category}) => {
       <div onScroll={scrollCheck} ref={scrl} className="home-wrapper">
         {products.map((i)=>{
           return(
-            <Link className="catview-product-box" to={"/product/"+i._id} style={{ textDecoration: 'none' }} key={i.id}>
+            <Link className="catview-product-box" to={"/product/"+i._id} style={{ textDecoration: 'none' }} key={i._id}>
              <div className="catview-product-image">
               <img src={i.images[0]} alt={i.title} />
              </div>

@@ -31,7 +31,7 @@ const Reviews = () => {
             <Avatar style={{backgroundColor:`${avatarColor()}`}} >R</Avatar>
             <div>
               <h5>Rashid M</h5>
-             <Rating size='small' value={3}  readOnly />
+             <Rating size='small' value={3} readOnly={true} />
             </div>
             <div>Jun 12 2022</div>
           </div>
@@ -48,7 +48,7 @@ const Reviews = () => {
             <Avatar style={{backgroundColor:`${avatarColor()}`}} >R</Avatar>
             <div>
               <h5>John Doe</h5>
-             <Rating size='small' value={3}  readOnly />
+             <Rating size='small' value={3}  readOnly={true} />
             </div>
             <div>Aug 04 2021</div>
           </div>
