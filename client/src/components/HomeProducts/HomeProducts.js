@@ -3,12 +3,21 @@ import '../CategoryView/CategoryView.css'
 import {ArrowBackIos, ArrowForwardIos} from '@mui/icons-material';
 import { useEffect, useRef, useState } from 'react';
 import {Link} from 'react-router-dom'
+import { getCategoryProducts } from '../../api/products-api';
 
-const HomeProducts = ({data}) => {
+const HomeProducts = ({Category}) => {
 
+  const [products, setProducts] = useState([])
   const [scrollX, setscrollX] = useState(0); // For detecting start scroll postion
   const [scrolEnd, setscrolEnd] = useState(false); // For detecting end of scrolling
   const scrl = useRef()
+
+  useEffect(() => {
+    getCategoryProducts(Category).then((res) => {
+      setProducts(res.data)
+    })
+  }, [Category])
+  
 
   useEffect(() => {
     //Check width of the scollings
@@ -44,27 +53,27 @@ const HomeProducts = ({data}) => {
     <>
      <div className="homeProContainer">
       <div className="homepro-title">
-        <h2>{data[0].heading}</h2>
+        <h2>Top Selling Products</h2>
       </div>
       <div className="homepro-desc">
-        <span>{data[0].desc}</span>
+        <span>These are some of the most popular and top-selling items on Rash Cart that you can buy right now.</span>
       </div>
       <div onScroll={scrollCheck} ref={scrl} className="home-wrapper">
-        {data[1].map((i)=>{
+        {products.map((i)=>{
           return(
-            <Link className="catview-product-box" to={"/product/"+i.id} style={{ textDecoration: 'none' }} key={i.id}>
+            <Link className="catview-product-box" to={"/product/"+i._id} style={{ textDecoration: 'none' }} key={i.id}>
              <div className="catview-product-image">
-              <img src={i.image} alt={i.title} />
+              <img src={i.images[0]} alt={i.title} />
              </div>
              <div className="catview-product-brand">
-              <h3>{i.brand}</h3>
+              <h3>{i.brand_name}</h3>
              </div>
              <div className="catview-product-title">
              {i.title.length <24 ? <h4>{i.title + " "+ i.title}</h4> : <h4>{i.title}</h4>}
              </div>
              <div className="catview-product-price">
-               <h3>₹{i.price}</h3> 
-               <h6>₹2000</h6>
+               <h3>{i.offer_price}</h3> 
+               <h6>{i.real_price}</h6>
                <h5>(35% OFF)</h5>
              </div>
             </Link>

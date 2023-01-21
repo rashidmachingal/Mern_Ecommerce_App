@@ -16,13 +16,25 @@ router.post("/create", async (req, res) => {
 // get all product
 router.get("/get-all", async (req, res) => {
     const pageIndex = req.query.page
-    const limit = 5
+    const limit = 15
     try {
         const allProducts = await Product.find().limit(limit).skip((pageIndex - 1) * limit)
         res.status(200).json(allProducts)
     } catch (error) {
         res.status(500).json(error);
     }
+});
+
+// get category products
+router.get("/get-category-products/:category", async (req, res) => {
+  const limit = 15
+  const category = req.params.category
+  try {
+      const allProducts = await Product.find({"category":category}).limit(limit)
+      res.status(200).json(allProducts)
+  } catch (error) {
+      res.status(500).json(error);
+  }
 });
 
 // get single product

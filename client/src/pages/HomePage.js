@@ -1,5 +1,5 @@
 import {Banner,Categories, ExploreBanner, HomeProducts,MobileSearch, Navbar} from "../components";
-import { topSellingData, topSellingShoes } from '../components/HomeProducts/Data';
+//import { topSellingData, topSellingShoes } from '../components/HomeProducts/Data';
 
 const HomePage = () => {
   return (
@@ -8,9 +8,8 @@ const HomePage = () => {
     <MobileSearch/>
     <Banner/>
     <Categories/>
-    <HomeProducts data={topSellingData} />
+    <HomeProducts Category="Shirt" /> 
     <ExploreBanner/>
-    <HomeProducts data={topSellingShoes} />
     </>
   )
 }
