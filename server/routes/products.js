@@ -13,6 +13,33 @@ router.post("/create", async (req, res) => {
   }
 });
 
+// update product
+
+router.put("/update/:id", async (req, res) => {
+  try {
+    const updatedProduct = await Product.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedProduct);
+  } catch (error) {
+    res.status(500).json(error)
+  }
+})
+
+// delete product
+router.delete("/delete/:id", async (req, res) => {
+  try {
+    await Product.findByIdAndDelete(req.params.id);
+    res.status(200).json("Product has been deleted...");
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 // get all product
 router.get("/get-all", async (req, res) => {
     const pageIndex = req.query.page
@@ -47,7 +74,17 @@ router.get("/get/:id", async (req, res) => {
     }
 });
 
-
+// search product
+router.get("/search", async (req, res) => {
+    const searchQuery = req.query.query
+    const regex = new RegExp(searchQuery,'i');
+    try {
+        const singleProducts = await Product.find({title:regex})
+        res.status(200).json(singleProducts)
+    } catch (error) {
+        res.status(500).json(error);
+    }
+});
 
 
 
