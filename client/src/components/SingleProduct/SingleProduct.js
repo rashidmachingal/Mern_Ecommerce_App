@@ -2,17 +2,23 @@ import { Rating } from '@mui/material';
 import { ArticleOutlined, FavoriteBorder, ShoppingBag } from '@mui/icons-material';
 import { useEffect, useRef } from 'react';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux'
 import { getSingleProduct } from '../../api/products-api';
 import { useParams } from 'react-router-dom';
 import Slider from "react-slick";
 import Reviews from '../Reviews/Reviews';
 import './SingleProduct.css';
+import { addToCartApi } from '../../api/cart-api';
+import { add_to_cart } from '../../redux/cart';
 
 const SingleProduct = () => {
 
   const [product, setProduct] = useState([])
   const slider = useRef(null);
   const { id } = useParams();
+  const dispatch = useDispatch()
+  const { cartItems } = useSelector((state)=> state.cart)
+  const [selectedSize, setSelectedSize] = useState("")
 
   useEffect(() => {
     getSingleProduct(id).then((res) => {
@@ -32,6 +38,34 @@ let settings = {
 const handlePagination = (index) => {
   slider?.current?.slickGoTo(index);
 }
+
+// add to cart api call
+const addToCart = () => {
+  const cartItemDetails = {
+    userId: "user_1",
+    cartItems: [
+      {
+        productId : product[0]?._id,
+        quantity : 1,
+        size : selectedSize,
+        product_name: product[0]?.title,
+        real_price: product[0]?.real_price,
+        offer_price: product[0]?.offer_price,
+      }
+    ]
+  }
+
+addToCartApi(cartItemDetails).then((res)=> {
+    dispatch(add_to_cart(res.data.cartItems))
+  })
+}
+
+const handleAddToCart = () => {
+  if(cartItems.length === 0){
+    addToCart()
+  }
+}
+
 
   return (
     <>
@@ -73,11 +107,13 @@ const handlePagination = (index) => {
         </div>
         <div className="product-select-size">
           {product[0]?.sizes?.map((size, idx) => (
-              <button key={idx} >{size}</button>
+              <button 
+               className={size===selectedSize ? "selected-size" : null } 
+               onClick={()=>setSelectedSize(size)} key={idx} >{size}</button>
            ))}
         </div>
         <div className="add-to-cart">
-          <button><ShoppingBag/> ADD TO BAG</button>
+          <button onClick={handleAddToCart} ><ShoppingBag/> ADD TO BAG</button>
           <button><FavoriteBorder/> WISHLIST</button>
         </div>
         <div className="product-info">

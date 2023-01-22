@@ -2,8 +2,13 @@ import './App.css';
 import {Footer} from './components';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { CartPage, CategoryViewPage, HomePage, MobileSearchPage, OrderFlowPage, ProductPage, SearchViewPage } from './pages';
+import { useFetchCartData } from './api/cart-api';
 
 const App = ()=> {
+  
+  // fetch user cart
+  useFetchCartData()
+
   return (
     <>
     <BrowserRouter>

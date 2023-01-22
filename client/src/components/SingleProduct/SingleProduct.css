@@ -92,6 +92,7 @@
     margin-top: 0.5rem;
 }
 
+
 .size-chart h4{
     font-weight: 400;
 }
@@ -119,6 +120,10 @@
     border: none;
     cursor: pointer;
     font-weight: 600;
+}
+
+.selected-size{
+    border: 2px solid #418cd2!important;
 }
 
 .product-select-size button:hover{
