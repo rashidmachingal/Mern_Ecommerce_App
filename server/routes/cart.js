@@ -28,6 +28,18 @@ router.put("/update/:userId", async (req, res) => {
     }
   });
 
+// remove cart item
+router.put("/remove-item/:proId/:userId", async (req, res) => {
+  try {
+    const afterRemovedCart = await Cart.findOneAndUpdate(
+      {userId : req.params.userId},
+      {$pull: {cartItems : {productId: req.params.proId}}}
+    )
+    res.status(200).json(afterRemovedCart)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+})
   
 
 
