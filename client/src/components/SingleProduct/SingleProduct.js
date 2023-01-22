@@ -1,21 +1,20 @@
 import { Rating } from '@mui/material';
 import { ArticleOutlined, FavoriteBorder, ShoppingBag } from '@mui/icons-material';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { getSingleProduct } from '../../api/products-api';
 import { useParams } from 'react-router-dom';
 import { addToCartApi } from '../../api/cart-api';
 import { add_to_cart } from '../../redux/cart';
-import Slider from "react-slick";
 import Reviews from '../Reviews/Reviews';
 import AlertMessage from '../AlertMessage/AlertMessage';
 import './SingleProduct.css';
+import ImageSlider from './ImageSlider';
 
 const SingleProduct = () => {
 
   const [product, setProduct] = useState([])
-  const slider = useRef(null);
   const { id } = useParams();
   const dispatch = useDispatch()
   const { cartItems } = useSelector((state)=> state.cart)
@@ -28,19 +27,6 @@ const SingleProduct = () => {
       setProduct([res.data]);
     })
   }, [id])
-
-let settings = {
-  infinite: false,
-  speed: 700,
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  dots: true,
-  dontAnimate:true
-};
-
-const handlePagination = (index) => {
-  slider?.current?.slickGoTo(index);
-}
 
 // add to cart api call
 const addToCart = () => {
@@ -78,20 +64,7 @@ const handleAddToCart = () => {
   return (
     <>
     <div className="product-container">
-        <div className="product-img-slider-main">
-          <div className="product-img-slider">
-           <Slider ref={slider} {...settings}>
-            {product[0]?.images?.map((img, idx) => (
-              <img key={idx} src={img} alt={img} />
-             ))}
-           </Slider>
-          </div>
-          <div className="product-img-pagination">
-            {product[0]?.images?.map((img, idx) => (
-              <img onClick={()=>handlePagination(idx)} key={idx} src={img} alt={img} />
-             ))}
-          </div>
-        </div>
+        <ImageSlider product={product} />
       <div className="product-details-section">
         <div className="product-brand-name">
           <h2>{product[0]?.brand_name}</h2>
