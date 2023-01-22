@@ -21,6 +21,7 @@ const SingleProduct = () => {
   const { cartItems } = useSelector((state)=> state.cart)
   const [selectedSize, setSelectedSize] = useState("")
   const [selectSizeSnack, setSelectSizeSnack] = useState(false)
+  const [addedSuccess, setAddedSuccess] = useState(false)
 
   useEffect(() => {
     getSingleProduct(id).then((res) => {
@@ -69,6 +70,7 @@ const handleAddToCart = () => {
       return
     }
     addToCart()
+    setAddedSuccess(true)
   }
 }
 
@@ -142,6 +144,7 @@ const handleAddToCart = () => {
 
     {/* alerts messages */}
      <AlertMessage type="warning"  open={selectSizeSnack} setOpen={setSelectSizeSnack} message="Please select a size" />
+     <AlertMessage type="success"  open={addedSuccess} setOpen={setAddedSuccess} message="Product added to cart" />
     </>
   )
 }

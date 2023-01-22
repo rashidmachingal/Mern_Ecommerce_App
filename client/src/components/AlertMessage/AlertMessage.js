@@ -9,7 +9,7 @@ const Alert = forwardRef(function Alert(props, ref) {
 const AlertMessage = ({open,setOpen,message,type}) => {
 
  return  (
-   <Snackbar onClose={()=> setOpen(false)}  anchorOrigin={{ vertical: 'top', horizontal: 'right' }} open={open} autoHideDuration={4000} >
+   <Snackbar onClose={()=> setOpen(false)}  anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} open={open} autoHideDuration={4000} >
      <Alert onClose={()=> setOpen(false)} severity={type} >{message}</Alert>
    </Snackbar>
  )
