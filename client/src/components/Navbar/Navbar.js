@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Badge,IconButton,Tooltip } from "@mui/material";
 import AccountMenu from "./AccountMenu";
-import {FavoriteBorderOutlined,Menu,SearchOutlined,LocalMallOutlined,PersonOutlineOutlined } from "@mui/icons-material";
+import {FavoriteBorderOutlined,Menu,SearchOutlined,ShoppingCartOutlined,PersonOutlineOutlined } from "@mui/icons-material";
 import Navdrawer from "./Navdrawer";
 import { Link, useNavigate } from "react-router-dom";
 import OutsideClickHandler from 'react-outside-click-handler';
@@ -41,12 +41,12 @@ const Navbar = () => {
           {openMenu && <AccountMenu/> }
           </OutsideClickHandler>
           <Tooltip title="Whishlist"><IconButton><FavoriteBorderOutlined style={cursorPointer} /></IconButton></Tooltip>
-          <Tooltip title="Bag"><IconButton><Badge badgeContent={cartItems.length} color="primary" style={cursorPointer} ><LocalMallOutlined /></Badge></IconButton></Tooltip>
+          <Tooltip title="Bag"><IconButton><Badge badgeContent={cartItems.length} color="primary" style={cursorPointer} ><ShoppingCartOutlined /></Badge></IconButton></Tooltip>
         </div>
         <div className="nav-icons-ml">
             <SearchOutlined onClick={()=>navigate("/mobile-search")}/>
             <PersonOutlineOutlined/>
-            <Badge badgeContent={cartItems.length}  color="primary" ><LocalMallOutlined/></Badge>
+            <Badge badgeContent={cartItems.length}  color="primary" ><ShoppingCartOutlined/></Badge>
         </div>
         <div onClick={()=>setOpen(!open)}  style={{display:open? "initial" : "none"}} className="nav-ml-shadow"></div>
         <div className="nav-drawer" style={{left:open ? "0px" : "-100vw"}} >

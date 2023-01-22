@@ -1,12 +1,13 @@
 import { Rating } from '@mui/material';
-import { ArticleOutlined, FavoriteBorder, ShoppingBag } from '@mui/icons-material';
+import { AddShoppingCart, ArticleOutlined, FavoriteBorder, ShoppingCartCheckout } from '@mui/icons-material';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { getSingleProduct } from '../../api/products-api';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { addToCartApi } from '../../api/cart-api';
 import { add_to_cart } from '../../redux/cart';
+import { useNavigate,  } from 'react-router-dom'
 import Reviews from '../Reviews/Reviews';
 import AlertMessage from '../AlertMessage/AlertMessage';
 import './SingleProduct.css';
@@ -14,19 +15,30 @@ import ImageSlider from './ImageSlider';
 
 const SingleProduct = () => {
 
-  const [product, setProduct] = useState([])
   const { id } = useParams();
-  const dispatch = useDispatch()
   const { cartItems } = useSelector((state)=> state.cart)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const [product, setProduct] = useState([])
+  const [isAddedToCart, setIsAddedToCart] = useState(false)
   const [selectedSize, setSelectedSize] = useState("")
   const [selectSizeSnack, setSelectSizeSnack] = useState(false)
   const [addedSuccess, setAddedSuccess] = useState(false)
 
+  // fetch single product
   useEffect(() => {
     getSingleProduct(id).then((res) => {
       setProduct([res.data]);
     })
   }, [id])
+
+  // check this product added to cart
+  useEffect(() => {
+    const isAdded = cartItems.find(item => item.productId ===  product[0]?._id);
+    if(isAdded) setIsAddedToCart(true)
+  }, [cartItems,product])
+  
 
 // add to cart api call
 const addToCart = () => {
@@ -57,10 +69,9 @@ const handleAddToCart = () => {
     }
     addToCart()
     setAddedSuccess(true)
+    setSelectedSize("")
   }
 }
-
-
   return (
     <>
     <div className="product-container">
@@ -94,8 +105,10 @@ const handleAddToCart = () => {
            ))}
         </div>
         <div className="add-to-cart">
-          <button onClick={handleAddToCart} ><ShoppingBag/> ADD TO BAG</button>
-          <button><FavoriteBorder/> WISHLIST</button>
+          {isAddedToCart === false ? 
+            <button onClick={handleAddToCart} ><AddShoppingCart/> ADD TO CART</button> 
+           : <button onClick={()=>navigate("/cart")} ><ShoppingCartCheckout/>GO TO CART</button> }
+             <button><FavoriteBorder/> WISHLIST</button>
         </div>
         <div className="product-info">
           <h4>PRODUCT DETAILS <ArticleOutlined/></h4>
