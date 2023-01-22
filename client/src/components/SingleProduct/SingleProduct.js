@@ -5,11 +5,12 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { getSingleProduct } from '../../api/products-api';
 import { useParams } from 'react-router-dom';
-import Slider from "react-slick";
-import Reviews from '../Reviews/Reviews';
-import './SingleProduct.css';
 import { addToCartApi } from '../../api/cart-api';
 import { add_to_cart } from '../../redux/cart';
+import Slider from "react-slick";
+import Reviews from '../Reviews/Reviews';
+import AlertMessage from '../AlertMessage/AlertMessage';
+import './SingleProduct.css';
 
 const SingleProduct = () => {
 
@@ -19,6 +20,7 @@ const SingleProduct = () => {
   const dispatch = useDispatch()
   const { cartItems } = useSelector((state)=> state.cart)
   const [selectedSize, setSelectedSize] = useState("")
+  const [selectSizeSnack, setSelectSizeSnack] = useState(false)
 
   useEffect(() => {
     getSingleProduct(id).then((res) => {
@@ -62,6 +64,10 @@ addToCartApi(cartItemDetails).then((res)=> {
 
 const handleAddToCart = () => {
   if(cartItems.length === 0){
+    if(selectedSize === "") {
+      setSelectSizeSnack(true)
+      return
+    }
     addToCart()
   }
 }
@@ -133,6 +139,9 @@ const handleAddToCart = () => {
       </div>
     </div>
     <Reviews/>
+
+    {/* alerts messages */}
+     <AlertMessage type="warning"  open={selectSizeSnack} setOpen={setSelectSizeSnack} message="Please select a size" />
     </>
   )
 }
