@@ -40,6 +40,16 @@ router.put("/remove-item/:proId/:userId", async (req, res) => {
     res.status(500).json(error)
   }
 })
+
+// get user cart
+router.get("/get/:userId", async (req, res) => {
+  try {
+    const userCart = await Cart.findOne({userId:req.params.userId})
+    res.status(200).json(userCart)
+  } catch (error) {
+    res.status(500).json(error)
+  }
+})
   
 
 
