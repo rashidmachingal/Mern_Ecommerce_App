@@ -13,6 +13,21 @@ router.post("/add", async (req, res) => {
   }
 });
 
+// update cart
+router.put("/update/:userId", async (req, res) => {
+  const userId = req.params.userId
+  const newData = req.body
+    try {
+      const updatedCart = await Cart.findOneAndUpdate(
+        {userId : userId},
+        {$push: {cartItems : newData}}
+      )
+      res.status(200).json(updatedCart);
+    } catch (err) {
+      res.status(500).json(err);
+    }
+  });
+
   
 
 
