@@ -7,12 +7,14 @@ dotenv.config();
 
 //routes
 const productRoute = require("./routes/products.js")
+const cartRoute = require("./routes/cart.js")
 
 
 // middlewares
 app.use(cors());
 app.use(express.json());
 app.use("/product", productRoute);
+app.use("/cart", cartRoute);
 
 
 // mongodb connection + // server configuration
