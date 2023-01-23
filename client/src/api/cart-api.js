@@ -23,3 +23,8 @@ export const useFetchCartData = () => {
     });
   }, [dispatch]);
 };
+
+// update cart 
+export const updateCartApi = async (userId,newItem) => {
+  return await axios.put(`/cart/update/${userId}`, newItem)
+}

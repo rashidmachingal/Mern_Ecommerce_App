@@ -4,14 +4,14 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { getSingleProduct } from '../../api/products-api';
-import { Link, useParams } from 'react-router-dom';
-import { addToCartApi } from '../../api/cart-api';
-import { add_to_cart } from '../../redux/cart';
+import { useParams } from 'react-router-dom';
+import { addToCartApi, updateCartApi } from '../../api/cart-api';
+import { add_to_cart, update_cart } from '../../redux/cart';
 import { useNavigate,  } from 'react-router-dom'
 import Reviews from '../Reviews/Reviews';
 import AlertMessage from '../AlertMessage/AlertMessage';
-import './SingleProduct.css';
 import ImageSlider from './ImageSlider';
+import './SingleProduct.css';
 
 const SingleProduct = () => {
 
@@ -25,6 +25,16 @@ const SingleProduct = () => {
   const [selectedSize, setSelectedSize] = useState("")
   const [selectSizeSnack, setSelectSizeSnack] = useState(false)
   const [addedSuccess, setAddedSuccess] = useState(false)
+
+  // product details for cart
+  const itemForCart = {
+    productId : product[0]?._id,
+    quantity : 1,
+    size : selectedSize,
+    product_name: product[0]?.title,
+    real_price: product[0]?.real_price,
+    offer_price: product[0]?.offer_price,
+  }
 
   // fetch single product
   useEffect(() => {
@@ -44,32 +54,33 @@ const SingleProduct = () => {
 const addToCart = () => {
   const cartItemDetails = {
     userId: "user_1",
-    cartItems: [
-      {
-        productId : product[0]?._id,
-        quantity : 1,
-        size : selectedSize,
-        product_name: product[0]?.title,
-        real_price: product[0]?.real_price,
-        offer_price: product[0]?.offer_price,
-      }
-    ]
+    cartItems: [itemForCart]
   }
 
 addToCartApi(cartItemDetails).then((res)=> {
     dispatch(add_to_cart(res.data.cartItems))
+    setAddedSuccess(true)
+    setSelectedSize("")
   })
 }
 
-const handleAddToCart = () => {
-  if(cartItems.length === 0){
-    if(selectedSize === "") {
-      setSelectSizeSnack(true)
-      return
-    }
-    addToCart()
+// update cart api call
+const updateCart = () => {
+  updateCartApi("user_1",itemForCart).then((res)=> {
+    dispatch(update_cart(itemForCart))
     setAddedSuccess(true)
     setSelectedSize("")
+  })
+}
+
+// add to cart handle function
+const handleAddToCart = () => {
+  if(cartItems.length === 0){
+    if(selectedSize.length === 0) return setSelectSizeSnack(true)
+    addToCart()
+  }else{
+    if(selectedSize.length === 0) return setSelectSizeSnack(true)
+    updateCart()
   }
 }
   return (
@@ -107,7 +118,7 @@ const handleAddToCart = () => {
         <div className="add-to-cart">
           {isAddedToCart === false ? 
             <button onClick={handleAddToCart} ><AddShoppingCart/> ADD TO CART</button> 
-           : <button onClick={()=>navigate("/cart")} ><ShoppingCartCheckout/>GO TO CART</button> }
+           : <button style={{background:"orange"}} onClick={()=>navigate("/cart")} ><ShoppingCartCheckout/>GO TO CART</button> }
              <button><FavoriteBorder/> WISHLIST</button>
         </div>
         <div className="product-info">
