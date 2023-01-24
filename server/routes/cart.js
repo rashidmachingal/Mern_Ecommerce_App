@@ -36,6 +36,51 @@ router.put("/remove-item/:proId/:userId", async (req, res) => {
   }
 })
 
+// cart item count change
+router.post("/count" , async (req, res) => {
+  const userId = req.body.userId
+  const countType = req.body.countType
+  const productId = req.body.productId
+  const currentCount = req.body.currentCount
+  try {
+    if(countType === "increment"){
+      Cart.updateOne(
+        { "userId" : userId, "cartItems.productId": productId }, 
+        { $inc: { "cartItems.$.quantity": 1 } }
+      ).then(() => {
+        res.json({message:"Quantity Icremented Succesfully"})
+      })
+    }
+
+    if(countType === "decrement") {
+
+      // remove item if count 1
+      if(currentCount === 1){
+        Cart.findOneAndUpdate(
+          {userId : userId},
+          {$pull: {cartItems : {productId}}}
+        ).then(()=>{
+          res.json({message:"Product Removed Succesfully"})
+        })
+      }else{
+        Cart.updateOne(
+
+          { "userId" : userId, "cartItems.productId": productId }, 
+          { $inc: { "cartItems.$.quantity": -1 } }
+        ).then(() => {
+          res.json({message:"Quantity Decremented Succesfully"})
+        })
+      }
+
+      
+    }
+
+  } catch (error) {
+    res.status(200).json(error)
+  }
+
+})
+
 // get user cart
 router.get("/get/:userId", async (req, res) => {
   try {
