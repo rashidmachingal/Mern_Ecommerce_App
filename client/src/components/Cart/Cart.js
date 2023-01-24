@@ -27,7 +27,7 @@ const Cart = () => {
             
             {cartItems.length === 0 && 
               <div className='cart-empty' >
-                <img src="https://mir-s3-cdn-cf.behance.net/projects/404/95974e121862329.Y3JvcCw5MjIsNzIxLDAsMTM5.png" />
+                <img alt='empty_cart' src="https://mir-s3-cdn-cf.behance.net/projects/404/95974e121862329.Y3JvcCw5MjIsNzIxLDAsMTM5.png" />
               </div>
             }
             {cartItems?.map((i,idx)=>{
@@ -58,7 +58,7 @@ const Cart = () => {
                 )
             })}
           </div>
-          {cartItems.length != 0 && 
+          {cartItems.length !== 0 && 
           <div className="order-summary">
            <div className="price-details">
            <h3>PRICE DETAILS</h3>

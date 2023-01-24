@@ -1,4 +1,4 @@
-import { Rating } from '@mui/material';
+import { CircularProgress, Rating } from '@mui/material';
 import { AddShoppingCart, ArticleOutlined, FavoriteBorder, ShoppingCartCheckout } from '@mui/icons-material';
 import { useEffect } from 'react';
 import { useState } from 'react';
@@ -25,6 +25,7 @@ const SingleProduct = () => {
   const [selectedSize, setSelectedSize] = useState("")
   const [selectSizeSnack, setSelectSizeSnack] = useState(false)
   const [addedSuccess, setAddedSuccess] = useState(false)
+  const [isCliked, setIsClicked] = useState(false)
 
   // product details for cart
   const itemForCart = {
@@ -55,6 +56,7 @@ const SingleProduct = () => {
 // add to cart api call
 const addToCart = () => {
   if(selectedSize.length === 0) return setSelectSizeSnack(true)
+  setIsClicked(true)
   const cartItemDetails = {
     userId: "user_1",
     cartItems: [itemForCart],
@@ -63,6 +65,7 @@ const addToCart = () => {
 
 addToCartApi(cartItemDetails).then(()=> {
     dispatch(add_to_cart(itemForCart))
+    setIsClicked(false)
     setAddedSuccess(true)
     setSelectedSize("")
   })
@@ -103,7 +106,10 @@ addToCartApi(cartItemDetails).then(()=> {
         </div>
         <div className="add-to-cart">
           {isAddedToCart === false ? 
-            <button onClick={addToCart} ><AddShoppingCart/> ADD TO CART</button> 
+            <button onClick={addToCart} disabled={isCliked} >
+              {isCliked === false && <AddShoppingCart/>}
+              {isCliked ? <CircularProgress color="inherit"  size="23px" /> : " ADD TO CART"}
+            </button> 
            : <button style={{background:"orange"}} onClick={()=>navigate("/cart")} ><ShoppingCartCheckout/>GO TO CART</button> }
              <button><FavoriteBorder/> WISHLIST</button>
         </div>
