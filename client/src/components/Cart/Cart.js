@@ -1,22 +1,38 @@
 import { DeleteOutline } from '@mui/icons-material'
 import { Divider, Tooltip } from '@mui/material'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { removeItem } from '../../api/cart-api'
+import { remove_item } from '../../redux/cart'
 import './Cart.css'
 
 const Cart = () => {
 
     const {cartItems} = useSelector((state) => state.cart)
+    const dispatch = useDispatch()
+    
+    // remove item from cart
+    const handleRemove = (proId,proIdx) => {
+        removeItem(proId,"user_1").then(()=>{
+            dispatch(remove_item(proIdx))
+        })
+    }
 
   return (
     <div className='cart-container'>
         <div className="cart-title">
-         <h2>Shopping Bag</h2>
+         <h2>Your Cart</h2>
         </div>
         <div className='cart-main' >
           <div className="cart-items">
-            {cartItems.map((i)=>{
+            
+            {cartItems.length === 0 && 
+              <div className='cart-empty' >
+                <img src="https://mir-s3-cdn-cf.behance.net/projects/404/95974e121862329.Y3JvcCw5MjIsNzIxLDAsMTM5.png" />
+              </div>
+            }
+            {cartItems?.map((i,idx)=>{
                 return(
-               <div className="cart-item">
+               <div key={i.productId} className="cart-item">
                 <div className="cart-item-img">
                     <img src={i.product_image} alt="cart-item" />
                 </div>
@@ -34,14 +50,15 @@ const Cart = () => {
                     <h3>₹{i.offer_price}</h3>
                 </div>
                 <div className="cart-item-remove">
-                    <Tooltip title="remove">
-                     <DeleteOutline/>
+                    <Tooltip onClick={()=> handleRemove(i.productId,idx)} title="remove">
+                     <DeleteOutline />
                     </Tooltip>
                 </div>
               </div>
                 )
             })}
           </div>
+          {cartItems.length != 0 && 
           <div className="order-summary">
            <div className="price-details">
            <h3>PRICE DETAILS</h3>
@@ -78,7 +95,7 @@ const Cart = () => {
             <h3>₹3500</h3>
             <button>PLACE ORDER</button>
            </div>
-          </div>
+          </div>}
         </div>
     </div>
   )

@@ -23,3 +23,8 @@ export const useFetchCartData = () => {
     });
   }, [dispatch]);
 };
+
+// remove item from cart
+export const removeItem = async (proId,userId) => {
+  return await axios.put(`/cart/remove-item/${proId}/${userId}`);
+};
