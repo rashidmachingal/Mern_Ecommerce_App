@@ -33,6 +33,7 @@ const SingleProduct = () => {
     size : selectedSize,
     product_name: product[0]?.title,
     product_brand: product[0]?.brand_name,
+    product_image: product[0]?.images[0],
     real_price: product[0]?.real_price,
     offer_price: product[0]?.offer_price,
   }
@@ -48,7 +49,6 @@ const SingleProduct = () => {
   useEffect(() => {
     const isAdded = cartItems.find(item => item.productId ===  product[0]?._id);
     if(isAdded) setIsAddedToCart(true)
-    console.log(cartItems)
   }, [cartItems,product])
   
 

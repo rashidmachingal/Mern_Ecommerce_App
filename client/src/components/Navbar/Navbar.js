@@ -41,12 +41,12 @@ const Navbar = () => {
           {openMenu && <AccountMenu/> }
           </OutsideClickHandler>
           <Tooltip title="Whishlist"><IconButton><FavoriteBorderOutlined style={cursorPointer} /></IconButton></Tooltip>
-          <Tooltip title="Bag"><IconButton><Badge badgeContent={cartItems.length} color="primary" style={cursorPointer} ><ShoppingCartOutlined /></Badge></IconButton></Tooltip>
+          <Tooltip title="Bag"><IconButton><Badge onClick={()=>navigate("/cart")} badgeContent={cartItems.length} color="primary" style={cursorPointer} ><ShoppingCartOutlined /></Badge></IconButton></Tooltip>
         </div>
         <div className="nav-icons-ml">
             <SearchOutlined onClick={()=>navigate("/mobile-search")}/>
             <PersonOutlineOutlined/>
-            <Badge badgeContent={cartItems.length}  color="primary" ><ShoppingCartOutlined/></Badge>
+            <Badge onClick={()=>navigate("/cart")} badgeContent={cartItems.length}  color="primary" ><ShoppingCartOutlined/></Badge>
         </div>
         <div onClick={()=>setOpen(!open)}  style={{display:open? "initial" : "none"}} className="nav-ml-shadow"></div>
         <div className="nav-drawer" style={{left:open ? "0px" : "-100vw"}} >
