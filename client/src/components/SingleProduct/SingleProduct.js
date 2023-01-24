@@ -5,8 +5,8 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { getSingleProduct } from '../../api/products-api';
 import { useParams } from 'react-router-dom';
-import { addToCartApi, updateCartApi } from '../../api/cart-api';
-import { add_to_cart, update_cart } from '../../redux/cart';
+import { addToCartApi } from '../../api/cart-api';
+import { add_to_cart } from '../../redux/cart';
 import { useNavigate,  } from 'react-router-dom'
 import Reviews from '../Reviews/Reviews';
 import AlertMessage from '../AlertMessage/AlertMessage';
@@ -32,6 +32,7 @@ const SingleProduct = () => {
     quantity : 1,
     size : selectedSize,
     product_name: product[0]?.title,
+    product_brand: product[0]?.brand_name,
     real_price: product[0]?.real_price,
     offer_price: product[0]?.offer_price,
   }
@@ -47,42 +48,27 @@ const SingleProduct = () => {
   useEffect(() => {
     const isAdded = cartItems.find(item => item.productId ===  product[0]?._id);
     if(isAdded) setIsAddedToCart(true)
+    console.log(cartItems)
   }, [cartItems,product])
   
 
 // add to cart api call
 const addToCart = () => {
+  if(selectedSize.length === 0) return setSelectSizeSnack(true)
   const cartItemDetails = {
     userId: "user_1",
-    cartItems: [itemForCart]
+    cartItems: [itemForCart],
+    updatedItem  : itemForCart
   }
 
-addToCartApi(cartItemDetails).then((res)=> {
-    dispatch(add_to_cart(res.data.cartItems))
+addToCartApi(cartItemDetails).then(()=> {
+    dispatch(add_to_cart(itemForCart))
     setAddedSuccess(true)
     setSelectedSize("")
   })
 }
 
-// update cart api call
-const updateCart = () => {
-  updateCartApi("user_1",itemForCart).then((res)=> {
-    dispatch(update_cart(itemForCart))
-    setAddedSuccess(true)
-    setSelectedSize("")
-  })
-}
 
-// add to cart handle function
-const handleAddToCart = () => {
-  if(cartItems.length === 0){
-    if(selectedSize.length === 0) return setSelectSizeSnack(true)
-    addToCart()
-  }else{
-    if(selectedSize.length === 0) return setSelectSizeSnack(true)
-    updateCart()
-  }
-}
   return (
     <>
     <div className="product-container">
@@ -117,7 +103,7 @@ const handleAddToCart = () => {
         </div>
         <div className="add-to-cart">
           {isAddedToCart === false ? 
-            <button onClick={handleAddToCart} ><AddShoppingCart/> ADD TO CART</button> 
+            <button onClick={addToCart} ><AddShoppingCart/> ADD TO CART</button> 
            : <button style={{background:"orange"}} onClick={()=>navigate("/cart")} ><ShoppingCartCheckout/>GO TO CART</button> }
              <button><FavoriteBorder/> WISHLIST</button>
         </div>

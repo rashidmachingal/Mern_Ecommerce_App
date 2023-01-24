@@ -4,29 +4,24 @@ const router = express.Router();
 
 // add to cart
 router.post("/add", async (req, res) => {
-  const newCart = new Cart(req.body);
   try {
-    const savedCart = await newCart.save();
-    res.status(200).json(savedCart);
+    const isAlreadyCart = await Cart.findOne({userId:req.body.userId})
+    if(isAlreadyCart != null){
+      const updatedCart = await Cart.findOneAndUpdate(
+        {userId : req.body.userId},
+        {$push: {cartItems : req.body.updatedItem}}
+      )
+      res.status(200).json(updatedCart);
+    }else{
+      const newCart = new Cart(req.body);
+      const savedCart = await newCart.save();
+      res.status(200).json(savedCart);
+    }
+
   } catch (err) {
     res.status(500).json(err);
   }
 });
-
-// update cart
-router.put("/update/:userId", async (req, res) => {
-  const userId = req.params.userId
-  const newData = req.body
-    try {
-      const updatedCart = await Cart.findOneAndUpdate(
-        {userId : userId},
-        {$push: {cartItems : newData}}
-      )
-      res.status(200).json(updatedCart);
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
 
 // remove cart item
 router.put("/remove-item/:proId/:userId", async (req, res) => {
