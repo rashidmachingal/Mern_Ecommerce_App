@@ -53,8 +53,8 @@ const SingleProduct = () => {
   }, [cartItems,product])
   
 
-// add to cart api call
-const addToCart = () => {
+// add to cart 
+const handleAddToCart = () => {
   if(selectedSize.length === 0) return setSelectSizeSnack(true)
   setIsClicked(true)
   const cartItemDetails = {
@@ -62,7 +62,7 @@ const addToCart = () => {
     cartItems: [itemForCart],
     updatedItem  : itemForCart
   }
-
+// add to cart api call
 addToCartApi(cartItemDetails).then(()=> {
     dispatch(add_to_cart(itemForCart))
     setIsClicked(false)
@@ -106,7 +106,7 @@ addToCartApi(cartItemDetails).then(()=> {
         </div>
         <div className="add-to-cart">
           {isAddedToCart === false ? 
-            <button onClick={addToCart} disabled={isCliked} >
+            <button onClick={handleAddToCart} disabled={isCliked} >
               {isCliked === false && <AddShoppingCart/>}
               {isCliked ? <CircularProgress color="inherit"  size="23px" /> : " ADD TO CART"}
             </button> 

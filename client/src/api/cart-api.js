@@ -28,3 +28,8 @@ export const useFetchCartData = () => {
 export const removeItem = async (proId,userId) => {
   return await axios.put(`/cart/remove-item/${proId}/${userId}`);
 };
+
+// cart item count
+export const cartItemCount = async (cartCountData) => {
+  return await axios.post(`/cart/count`,cartCountData)
+}

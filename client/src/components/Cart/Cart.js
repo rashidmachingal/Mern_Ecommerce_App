@@ -1,8 +1,8 @@
 import { DeleteOutline } from '@mui/icons-material'
 import { Divider, Tooltip } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
-import { removeItem } from '../../api/cart-api'
-import { remove_item } from '../../redux/cart'
+import { cartItemCount, removeItem } from '../../api/cart-api'
+import { cart_item_count, remove_item } from '../../redux/cart'
 import './Cart.css'
 
 const Cart = () => {
@@ -15,6 +15,19 @@ const Cart = () => {
         removeItem(proId,"user_1").then(()=>{
             dispatch(remove_item(proIdx))
         })
+    }
+
+    // cart item count
+    const handleCartCount = (countType, currentCount,productId,productIndex) => {
+      const cartCountData = {
+        "userId" : "user_1",
+        "countType" : countType,
+        "productId" : productId,
+        "currentCount" : currentCount
+    }
+    cartItemCount(cartCountData).then(() => {
+      dispatch(cart_item_count({countType, productIndex,currentCount}))
+    })
     }
 
   return (
@@ -41,9 +54,9 @@ const Cart = () => {
                     <h5>Size :{i.size}</h5>
                 </div>
                 <div className="cart-item-quantity">
-                    <button>-</button>
+                    <button onClick={()=> handleCartCount("decrement",i.quantity,i.productId,idx)}>-</button>
                     <span>{i.quantity}</span>
-                    <button>+</button>
+                    <button onClick={()=> handleCartCount("increment",i.quantity,i.productId,idx)} >+</button>
                 </div>
                 <div className="cart-item-price">
                     <h3>₹{i.real_price}</h3>
