@@ -10,3 +10,5 @@ export {default as SingleProduct } from './SingleProduct/SingleProduct';
 export {default as MobileSearch } from './MobileSearch/MobileSearch';
 export {default as Cart } from './Cart/Cart';
 export {default as OrderFlow } from './OrderFlow/OrderFlow';
+export {default as Login } from './Login/Login';
+export {default as Register } from './Register/Register';
