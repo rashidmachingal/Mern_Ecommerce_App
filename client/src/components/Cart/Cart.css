@@ -197,7 +197,7 @@
     border-radius: 6px;
     border: none;
     cursor: pointer;
-    background: #418cd2;
+    background: var(--primary-blue);
     color: white;
 }
 
@@ -225,7 +225,7 @@
     height: 2rem;
     width: 90%;
     cursor: pointer;
-    background: #418cd2;
+    background: var(--primary-blue);
     color: white;
     outline: none;
     border: none;
@@ -233,7 +233,7 @@
 }
 
 .order-summary-checkout button:hover{
-    background: #418cd2d3;
+    background: var(--primary-hover-blue);
 }
 
 @media (max-width:1100px) {

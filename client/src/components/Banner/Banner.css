@@ -29,7 +29,7 @@
 } 
 
 .banner-left button{
-    background: #418cd2;
+    background: var(--primary-blue);
     border: none;
     outline: none;
     color: white;
@@ -42,7 +42,7 @@
 }
 
 .banner-left button:hover{
-    background: #418cd2df;
+    background: var(--primary-hover-blue);
 }
 
 /* banner right item */

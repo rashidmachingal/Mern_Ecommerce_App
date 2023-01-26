@@ -44,14 +44,14 @@
     width: 80%;
     border: none;
     outline: none;
-    background: #418cd2;
+    background: var(--primary-blue);
     color: white;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .select-payment-box button:hover{
-    background: #4696e1d9;
+    background: var(--primary-hover-blue);
 }
 
 .back-btn{

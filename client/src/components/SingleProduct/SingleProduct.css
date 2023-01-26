@@ -123,7 +123,7 @@
 }
 
 .selected-size{
-    border: 2px solid #418cd2!important;
+    border: 2px solid var(--primary-blue)!important;
 }
 
 .product-select-size button:hover{
@@ -147,13 +147,13 @@
     height: 2.8rem;
     border: none;
     border-radius: 8px;
-    background: #418cd2;
+    background: var(--primary-blue);
     color: white;
     cursor: pointer;
 }
 
 .add-to-cart button:hover{
-    background: rgb(40, 115, 185)
+    background: var(--primary-hover-blue);
 }
 
 .add-to-cart button:nth-child(2){

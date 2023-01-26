@@ -55,12 +55,12 @@
 }
 
 .filter-brand-names div input{
-    accent-color: #418cd2;
+    accent-color: var(--primary-blue);
 }
 
 .filter-brand-names span{
     margin-top: 0.2rem;
-    color: #418cd2;
+    color: var(--primary-blue);
     cursor: pointer;
 } 
 

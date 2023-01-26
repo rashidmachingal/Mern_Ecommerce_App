@@ -39,12 +39,12 @@
     border: none;
     outline: none;
     cursor: pointer;
-    background: #418cd2;
+    background: var(--primary-blue);
     color: white;
 }
 
 .review-form input:hover{
-    background: #418cd2cd;
+    background: var(--primary-hover-blue);
 }
 
 .user-reviews{

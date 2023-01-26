@@ -30,7 +30,7 @@
     width: 2.5rem;
     height: 2.5rem;
     border-radius: 50%;
-    border: 2px solid #418cd2;
+    border: 2px solid var(--primary-blue);
     color: #418cd2;
     display: flex;
     justify-content: center;
@@ -38,7 +38,7 @@
 }
 
 .order-flow-item.active span{
-    background: #418cd2;
+    background: var(--primary-blue);
     color: white;
 }
 
@@ -52,7 +52,7 @@
 }
 
 .order-flow-bar-line{
-    border: 1px solid #418cd2;
+    border: 1px solid var(--primary-blue);
     border-radius: 5px;
     width: 10%;
     margin-bottom: 1rem;

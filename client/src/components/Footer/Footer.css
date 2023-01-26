@@ -96,12 +96,12 @@
     border-radius: 6px;
     border: none;
     cursor: pointer;
-    background: #418cd2;
+    background: var(--primary-blue);
     color: white;
 }
 
 .footer-box-3 button:hover{
-    background: #418cd2df;
+    background: var(--primary-hover-blue);
 }
 
 /* footer section two */
