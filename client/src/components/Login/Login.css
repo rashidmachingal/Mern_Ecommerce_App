@@ -42,6 +42,9 @@
     color: white;
     cursor: pointer;
     border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .login-container button:hover{
