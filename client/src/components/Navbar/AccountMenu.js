@@ -1,11 +1,15 @@
 import { ArticleOutlined, FavoriteBorderOutlined, ShoppingBagOutlined } from '@mui/icons-material'
 import { Divider, ListItemIcon, MenuItem } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 import './Navbar.css'
 
 const AccountMenu = () => {
+
+  const navigate = useNavigate()
+
   return (
     <div className="account-menu" >
-       <MenuItem>
+       <MenuItem onClick={()=>navigate("/login")} >
          <button className='nav-login' >Login / Register</button>
         </MenuItem>
         <Divider />
