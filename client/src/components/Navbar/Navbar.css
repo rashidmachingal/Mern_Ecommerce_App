@@ -104,7 +104,6 @@
   border-top: 3px solid var(--primary-blue);
   background: white;
   box-shadow: 0 0 5px 0.1px rgba(0, 0, 0, 0.135);
-
   animation: anime 0.4s ease 0s ;
 }
 
@@ -115,6 +114,22 @@
   to{
     transform: translateY(0);
   }
+}
+
+.profile-menu{
+  bottom: -13.9rem!important;
+}
+
+
+.my-account{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.my-account p{
+  font-weight: 600;
 }
 
 .nav-login{
