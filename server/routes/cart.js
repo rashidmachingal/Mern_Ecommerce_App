@@ -7,6 +7,18 @@ router.post("/add", async (req, res) => {
   try {
     const isAlreadyCart = await Cart.findOne({userId:req.body.userId})
     if(isAlreadyCart != null){
+
+      // move guest cart to user cart
+      const isGuestMove = req.body.type
+      if(isGuestMove){
+        const updatedCart = await Cart.findOneAndUpdate(
+          {userId : req.body.userId},
+          {$push: {cartItems : { $each: req.body.cartItems }}}
+        )
+        res.status(200).json(updatedCart);
+        return
+      }
+
       const updatedCart = await Cart.findOneAndUpdate(
         {userId : req.body.userId},
         {$push: {cartItems : req.body.updatedItem}}

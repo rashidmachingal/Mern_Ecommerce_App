@@ -1,16 +1,19 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { RegisterUser } from "../../api/user-api";
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { user_auth } from "../../redux/user";
 import { CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom'
 import "../Login/Login.css";
+import { addToCart } from "../../api/cart-api";
 
 const Register = () => {
 
   const [userData, setUserData] = useState({first_name: "",second_name: "", email: "", password: ""});
   const [isLoading, setIsLoading] = useState(false)
+
+  const { cartItems } = useSelector((state) => state.cart)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -30,6 +33,16 @@ const Register = () => {
       }
       dispatch(user_auth(authDetails))
       setIsLoading(false)
+      
+      // move guestCart to server
+      const cartItemDetails = {userId: res.data._id,cartItems: cartItems, type: true}
+      const isCart = localStorage.getItem("cartItems")
+      if(isCart){
+        addToCart(cartItemDetails).then(() => {
+          localStorage.removeItem("cartItems")
+        })
+      }
+      
       navigate("/")
     })
   }

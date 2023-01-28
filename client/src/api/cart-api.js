@@ -8,6 +8,7 @@ export const addToCart = async (cartItemDetails) => {
   return await axios.post(`/cart/add`, cartItemDetails);
 };
 
+
 // get user cart 
 export const getUserCart = async (userId) => {
   return await axios.get(`/cart/get/${userId}`);

@@ -17,7 +17,7 @@ const SingleProduct = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const { cartItems } = useSelector((state)=> state.cart)
-  const { userId } = useSelector((state)=> state.user)
+  const { userId, token } = useSelector((state)=> state.user)
 
   const [product, setProduct] = useState([])
   const [isAddedToCart, setIsAddedToCart] = useState(false)
@@ -61,15 +61,27 @@ const handleAddToCart = () => {
     cartItems: [itemForCart],
     updatedItem  : itemForCart
   }
-// add to cart api call
-addToCart(cartItemDetails).then(()=> {
+
+  // guest user add to cart
+  if(token === null){
+    let guestCart = JSON.parse(localStorage.getItem('cartItems')) || [];
+    guestCart.push(itemForCart)
+    localStorage.setItem('cartItems', JSON.stringify(guestCart))
     dispatch(add_to_cart(itemForCart))
     setIsClicked(false)
     setAddedSuccess(true)
     setSelectedSize("")
-  })
-}
+  }else{
+    // add to cart api call
+    addToCart(cartItemDetails).then(()=> {
+      dispatch(add_to_cart(itemForCart))
+      setIsClicked(false)
+      setAddedSuccess(true)
+      setSelectedSize("")
+    })
+  }
 
+}
 
   return (
     <>
