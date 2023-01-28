@@ -50,7 +50,7 @@ const Navbar = () => {
           {token === null && <Tooltip title="Profile"><IconButton onClick={()=> setOpenMenu(!openMenu)} ><PersonOutlineOutlined style={cursorPointer} /></IconButton></Tooltip>}
           {token && <IconButton onClick={()=> setProfileMenu(!profileMenu)} ><Avatar sx={{ width: 32, height: 32 }} >{user_name.charAt(0)}</Avatar></IconButton>}
           {openMenu && <AccountMenu/> }
-          {profileMenu && <ProfileMenu user_name={user_name} />}
+          {profileMenu && <ProfileMenu user_name={user_name} setProfileMenu={setProfileMenu} />}
           </OutsideClickHandler>
           <Tooltip title="Whishlist"><IconButton><FavoriteBorderOutlined style={cursorPointer} /></IconButton></Tooltip>
           <Tooltip title="Bag"><IconButton onClick={()=>navigate("/cart")} ><Badge badgeContent={cartItems.length} color="primary" style={cursorPointer} ><ShoppingCartOutlined /></Badge></IconButton></Tooltip>
@@ -58,13 +58,13 @@ const Navbar = () => {
 
         <div className="nav-icons-ml">
             <SearchOutlined onClick={()=>navigate("/mobile-search")}/>
-            <PersonOutlineOutlined/>
+            {token === null && <PersonOutlineOutlined onClick={()=> navigate("/login")} />}
             <Badge onClick={()=>navigate("/cart")} badgeContent={cartItems.length}  color="primary" ><ShoppingCartOutlined/></Badge>
         </div>
 
         <div onClick={()=>setOpen(!open)}  style={{display:open? "initial" : "none"}} className="nav-ml-shadow"></div>
         <div className="nav-drawer" style={{left:open ? "0px" : "-100vw"}} >
-         <Navdrawer token={token} user_name={user_name} />
+         <Navdrawer token={token} user_name={user_name} setOpen={setOpen} />
         </div>
       </nav>
     </>

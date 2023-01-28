@@ -1,13 +1,24 @@
-import {
-  ArticleOutlined,
-  FavoriteBorderOutlined,
-  LogoutOutlined,
-  ShoppingBagOutlined,
-} from "@mui/icons-material";
+import { ArticleOutlined, FavoriteBorderOutlined, LogoutOutlined, ShoppingBagOutlined} from "@mui/icons-material";
 import { Avatar, Divider, ListItemIcon, MenuItem } from "@mui/material";
+import { useDispatch } from 'react-redux'
+import { logout } from '../../redux/user'
+import { clear_cart } from '../../redux/cart'
+import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
 
-const ProfileMenu = ({user_name}) => {
+const ProfileMenu = ({user_name,setProfileMenu}) => {
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    localStorage.removeItem("user")
+    dispatch(logout())
+    dispatch(clear_cart())
+    navigate("/")
+    setProfileMenu(false)
+  }
+
   return (
     <div className="account-menu profile-menu">
       <MenuItem>
@@ -36,7 +47,7 @@ const ProfileMenu = ({user_name}) => {
         WhisList
       </MenuItem>
       <Divider/>
-      <MenuItem>
+      <MenuItem onClick={handleLogout}>
         <ListItemIcon>
           <LogoutOutlined fontSize="small" />
         </ListItemIcon>
