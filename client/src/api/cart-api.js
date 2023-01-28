@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { get_cart } from "../redux/cart";
 import axios from "./axios";
 
 //add to cart
-export const addToCartApi = async (cartItemDetails) => {
+export const addToCart = async (cartItemDetails) => {
   return await axios.post(`/cart/add`, cartItemDetails);
 };
 
@@ -15,13 +15,14 @@ export const getUserCart = async (userId) => {
 
 export const useFetchCartData = () => {
   const dispatch = useDispatch();
+  const { userId } = useSelector((state) => state.user)
   useEffect(() => {
-    getUserCart("user_1").then((res) => {
+    getUserCart(userId).then((res) => {
       if (res.data != null) {
         dispatch(get_cart(res.data.cartItems));
       }
     });
-  }, [dispatch]);
+  }, [dispatch, userId]);
 };
 
 // remove item from cart

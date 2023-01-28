@@ -1,13 +1,11 @@
 import { CircularProgress, Rating } from '@mui/material';
 import { AddShoppingCart, ArticleOutlined, FavoriteBorder, ShoppingCartCheckout } from '@mui/icons-material';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react';
+import { useNavigate, useParams  } from 'react-router-dom'
 import { getSingleProduct } from '../../api/products-api';
-import { useParams } from 'react-router-dom';
-import { addToCartApi } from '../../api/cart-api';
+import { addToCart } from '../../api/cart-api';
 import { add_to_cart } from '../../redux/cart';
-import { useNavigate,  } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import Reviews from '../Reviews/Reviews';
 import AlertMessage from '../AlertMessage/AlertMessage';
 import ImageSlider from './ImageSlider';
@@ -16,9 +14,10 @@ import './SingleProduct.css';
 const SingleProduct = () => {
 
   const { id } = useParams();
-  const { cartItems } = useSelector((state)=> state.cart)
-  const dispatch = useDispatch()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const { cartItems } = useSelector((state)=> state.cart)
+  const { userId } = useSelector((state)=> state.user)
 
   const [product, setProduct] = useState([])
   const [isAddedToCart, setIsAddedToCart] = useState(false)
@@ -58,12 +57,12 @@ const handleAddToCart = () => {
   if(selectedSize.length === 0) return setSelectSizeSnack(true)
   setIsClicked(true)
   const cartItemDetails = {
-    userId: "user_1",
+    userId: userId,
     cartItems: [itemForCart],
     updatedItem  : itemForCart
   }
 // add to cart api call
-addToCartApi(cartItemDetails).then(()=> {
+addToCart(cartItemDetails).then(()=> {
     dispatch(add_to_cart(itemForCart))
     setIsClicked(false)
     setAddedSuccess(true)

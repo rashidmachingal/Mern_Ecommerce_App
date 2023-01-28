@@ -8,11 +8,12 @@ import './Cart.css'
 const Cart = () => {
 
     const {cartItems} = useSelector((state) => state.cart)
+    const { userId } = useSelector((state) => state.user)
     const dispatch = useDispatch()
     
     // remove item from cart
     const handleRemove = (proId,proIdx) => {
-        removeItem(proId,"user_1").then(()=>{
+        removeItem(proId,userId).then(()=>{
             dispatch(remove_item(proIdx))
         })
     }
@@ -20,7 +21,7 @@ const Cart = () => {
     // cart item count
     const handleCartCount = (countType, currentCount,productId,productIndex) => {
       const cartCountData = {
-        "userId" : "user_1",
+        "userId" : userId,
         "countType" : countType,
         "productId" : productId,
         "currentCount" : currentCount
