@@ -64,7 +64,7 @@ const Navbar = () => {
 
         <div onClick={()=>setOpen(!open)}  style={{display:open? "initial" : "none"}} className="nav-ml-shadow"></div>
         <div className="nav-drawer" style={{left:open ? "0px" : "-100vw"}} >
-         <Navdrawer/>
+         <Navdrawer token={token} user_name={user_name} />
         </div>
       </nav>
     </>

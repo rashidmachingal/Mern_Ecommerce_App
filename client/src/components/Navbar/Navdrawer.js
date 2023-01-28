@@ -1,18 +1,23 @@
-import { Article, Favorite, Notifications, Person, ShoppingBag } from "@mui/icons-material";
+import { Article, Favorite, Logout, Notifications, Person, ShoppingBag } from "@mui/icons-material";
 import { Divider, ListItemIcon, MenuItem } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
 
-const Navdrawer = () => {
+const Navdrawer = ({token, user_name}) => {
 
   const navigate = useNavigate()
 
   return (
     <>
+    {token === null ? 
     <div onClick={()=>navigate("/login")} className="nav-dr-login">
      <div><Person/></div>
      <span>Login & Register</span>
-    </div>
+    </div> : 
+    <div className="nav-dr-login">
+      <div><Person/></div>
+      <span>{user_name}</span>
+    </div>}
     <div>
     <MenuItem><ListItemIcon> <Article fontSize="small" /></ListItemIcon>My Orders</MenuItem>
     <MenuItem><ListItemIcon> <ShoppingBag fontSize="small" /></ListItemIcon>My Cart</MenuItem>
@@ -20,6 +25,7 @@ const Navdrawer = () => {
     <MenuItem><ListItemIcon> <Person fontSize="small" /></ListItemIcon>My Account</MenuItem>
     <MenuItem><ListItemIcon> <Notifications fontSize="small" /></ListItemIcon>My Notifications</MenuItem>
     <Divider/>
+    <MenuItem><ListItemIcon> <Logout fontSize="small" /></ListItemIcon>Logout</MenuItem>
     </div>
     </>
   )
