@@ -21,6 +21,7 @@
     margin-top: 1rem;
     padding-left: 1rem;
     display: flex;
+    align-items: center;
     justify-content: center;
     gap: 5rem;
     /* background: lightblue; */
@@ -107,7 +108,7 @@
 
 .order-summary{
     width: 20rem;
-    height: 18.6rem;
+    max-height: 18.6rem;
     border: 0.1px solid rgba(0, 0, 0, 0.098);
     box-shadow: 0 0 2px 0.1px rgba(0, 0, 0, 0.095);
 }

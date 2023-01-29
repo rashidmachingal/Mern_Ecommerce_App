@@ -1,5 +1,6 @@
 import { DeleteOutline } from '@mui/icons-material'
 import { Divider, Tooltip } from '@mui/material'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { cartItemCount, removeItem } from '../../api/cart-api'
 import { cart_item_count, remove_item } from '../../redux/cart'
@@ -10,6 +11,24 @@ const Cart = () => {
     const {cartItems} = useSelector((state) => state.cart)
     const { userId, token } = useSelector((state) => state.user)
     const dispatch = useDispatch()
+
+    // price details
+    const [itemsPrice, setItemsPrice] = useState(0)
+    // eslint-disable-next-line
+    const [deliveryCharge, setDeliveryCharge] = useState(50)
+    // eslint-disable-next-line
+    const [dicount, setDiscount] = useState(55)
+    const [totalAmount, setTotalAmount] = useState(0)
+
+    useEffect(() => {
+      let updatedItemsPrice = 0;
+      cartItems?.map((i) => {
+        return updatedItemsPrice += i?.offer_price * i?.quantity;
+      });
+      setItemsPrice(updatedItemsPrice);
+      setTotalAmount(deliveryCharge + itemsPrice - dicount);
+    }, [cartItems, deliveryCharge, dicount, itemsPrice]);
+    
     
     // remove item from cart
     const handleRemove = (proId,proIdx) => {  
@@ -95,8 +114,8 @@ const Cart = () => {
                     <button onClick={()=> handleCartCount("increment",i?.quantity,i?.productId,idx)} >+</button>
                 </div>
                 <div className="cart-item-price">
-                    <h3>₹{i?.real_price}</h3>
-                    <h3>₹{i?.offer_price}</h3>
+                    <h3>₹{i?.real_price * i?.quantity}</h3>
+                    <h3>₹{i?.offer_price * i?.quantity}</h3>
                 </div>
                 <div className="cart-item-remove">
                     <Tooltip onClick={()=> handleRemove(i.productId,idx)} title="remove">
@@ -114,17 +133,19 @@ const Cart = () => {
            </div>
            <Divider/>
            <div className="order-summary-details">
-            <div><h3>Price (2 items)</h3></div>
-            <div><h3>₹24,991</h3></div>
+            <div><h3>Price ({cartItems?.length} items)</h3></div>
+            <div><h3>₹{itemsPrice}</h3></div>
            </div>
            <div className="order-summary-details">
             <div><h3>Delivery Charges</h3></div>
-            <div><h3>₹100</h3></div>
+            <div><h3>₹{deliveryCharge}</h3></div>
            </div>
-           <div className="order-summary-details">
-            <div><h3>Discount</h3></div>
-            <div><h3 style={{color:"green"}} >-₹560</h3></div>
-           </div>
+           {dicount !== 0 && 
+             <div className="order-summary-details">
+              <div><h3>Discount</h3></div>
+              <div><h3 style={{color:"green"}} >-₹{dicount}</h3></div>
+             </div>
+            }
            <div className="order-promo-code">
               <div>
               <h3>Promo Code</h3>
@@ -137,11 +158,10 @@ const Cart = () => {
            <Divider/>
            <div className="order-summary-details total-amount">
             <div><h3>Total Amount</h3></div>
-            <div><h3>₹3500</h3></div>
+            <div><h3>₹{totalAmount}</h3></div>
            </div>
            <Divider/>
            <div className="order-summary-checkout">
-            <h3>₹3500</h3>
             <button>PLACE ORDER</button>
            </div>
           </div>}
