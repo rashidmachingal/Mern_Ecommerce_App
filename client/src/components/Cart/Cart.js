@@ -8,27 +8,62 @@ import './Cart.css'
 const Cart = () => {
 
     const {cartItems} = useSelector((state) => state.cart)
-    const { userId } = useSelector((state) => state.user)
+    const { userId, token } = useSelector((state) => state.user)
     const dispatch = useDispatch()
     
     // remove item from cart
-    const handleRemove = (proId,proIdx) => {
+    const handleRemove = (proId,proIdx) => {  
+      // guest cart item remove
+      if(token === null){
+        let guestCart = JSON.parse(localStorage.getItem('cartItems'))
+        guestCart.splice(proIdx,1)
+        localStorage.setItem('cartItems', JSON.stringify(guestCart))
+        dispatch(remove_item(proIdx))
+      }else{
+        // user cart item remove
         removeItem(proId,userId).then(()=>{
-            dispatch(remove_item(proIdx))
+          dispatch(remove_item(proIdx))
         })
+      }
     }
 
     // cart item count
     const handleCartCount = (countType, currentCount,productId,productIndex) => {
+      // cart count data
       const cartCountData = {
         "userId" : userId,
         "countType" : countType,
         "productId" : productId,
         "currentCount" : currentCount
-    }
-    cartItemCount(cartCountData).then(() => {
-      dispatch(cart_item_count({countType, productIndex,currentCount}))
-    })
+      }
+
+      // guest user cart count
+      if(token === null) {
+        let guestCart = JSON.parse(localStorage.getItem('cartItems'))
+        if(countType === "increment") {
+          guestCart[productIndex].quantity = currentCount + 1
+          localStorage.setItem('cartItems', JSON.stringify(guestCart))
+          dispatch(cart_item_count({countType, productIndex,currentCount}))
+        }
+
+        if(countType === "decrement") {
+          if(currentCount === 1){
+            guestCart.splice(productIndex, 1)
+            localStorage.setItem('cartItems', JSON.stringify(guestCart))
+            dispatch(cart_item_count({countType, productIndex,currentCount}))
+            return
+          }
+          guestCart[productIndex].quantity = currentCount - 1
+          localStorage.setItem('cartItems' , JSON.stringify(guestCart))
+          dispatch(cart_item_count({countType, productIndex,currentCount}))
+        }
+
+      }else{
+      // user cart count  
+      cartItemCount(cartCountData).then(() => {
+        dispatch(cart_item_count({countType, productIndex,currentCount}))
+      })
+      }
     }
 
   return (
@@ -46,22 +81,22 @@ const Cart = () => {
             }
             {cartItems?.map((i,idx)=>{
                 return(
-               <div key={i.productId} className="cart-item">
+               <div key={i?.productId} className="cart-item">
                 <div className="cart-item-img">
-                    <img src={i.product_image} alt="cart-item" />
+                    <img src={i?.product_image} alt="cart-item" />
                 </div>
                 <div className="cart-item-name">
-                    <h3>{i.product_name}</h3>
-                    <h5>Size :{i.size}</h5>
+                    <h3>{i?.product_name}</h3>
+                    <h5>Size :{i?.size}</h5>
                 </div>
                 <div className="cart-item-quantity">
-                    <button onClick={()=> handleCartCount("decrement",i.quantity,i.productId,idx)}>-</button>
-                    <span>{i.quantity}</span>
-                    <button onClick={()=> handleCartCount("increment",i.quantity,i.productId,idx)} >+</button>
+                    <button onClick={()=> handleCartCount("decrement",i?.quantity,i?.productId,idx)}>-</button>
+                    <span>{i?.quantity}</span>
+                    <button onClick={()=> handleCartCount("increment",i?.quantity,i?.productId,idx)} >+</button>
                 </div>
                 <div className="cart-item-price">
-                    <h3>₹{i.real_price}</h3>
-                    <h3>₹{i.offer_price}</h3>
+                    <h3>₹{i?.real_price}</h3>
+                    <h3>₹{i?.offer_price}</h3>
                 </div>
                 <div className="cart-item-remove">
                     <Tooltip onClick={()=> handleRemove(i.productId,idx)} title="remove">
