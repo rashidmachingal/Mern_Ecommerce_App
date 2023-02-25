@@ -1,8 +1,8 @@
-import './App.css';
-import {Footer} from './components';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { CartPage, CategoryViewPage, HomePage, LoginPage, MobileSearchPage, OrderFlowPage, ProductPage, RegisterPage, SearchViewPage } from './pages';
 import { useFetchCartData } from './api/cart-api';
+import {Footer} from './components';
+import './App.css';
 
 const App = ()=> {
   

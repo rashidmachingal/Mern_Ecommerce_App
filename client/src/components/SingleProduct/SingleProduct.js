@@ -7,9 +7,9 @@ import { addToCart } from '../../api/cart-api';
 import { add_to_cart } from '../../redux/cart';
 import { useDispatch, useSelector } from 'react-redux'
 import Reviews from '../Reviews/Reviews';
-import AlertMessage from '../AlertMessage/AlertMessage';
 import ImageSlider from './ImageSlider';
 import './SingleProduct.css';
+import { toast } from 'react-toastify';
 
 const SingleProduct = () => {
 
@@ -22,8 +22,6 @@ const SingleProduct = () => {
   const [product, setProduct] = useState([])
   const [isAddedToCart, setIsAddedToCart] = useState(false)
   const [selectedSize, setSelectedSize] = useState("")
-  const [selectSizeSnack, setSelectSizeSnack] = useState(false)
-  const [addedSuccess, setAddedSuccess] = useState(false)
   const [isCliked, setIsClicked] = useState(false)
 
   // product details for cart
@@ -54,7 +52,7 @@ const SingleProduct = () => {
 
 // add to cart 
 const handleAddToCart = () => {
-  if(selectedSize.length === 0) return setSelectSizeSnack(true)
+  if(selectedSize.length === 0) return toast.warn("Please select a size")
   setIsClicked(true)
   const cartItemDetails = {
     userId: userId,
@@ -69,14 +67,14 @@ const handleAddToCart = () => {
     localStorage.setItem('cartItems', JSON.stringify(guestCart))
     dispatch(add_to_cart(itemForCart))
     setIsClicked(false)
-    setAddedSuccess(true)
+    toast.success("Product added to cart")
     setSelectedSize("")
   }else{
     // add to cart api call
     addToCart(cartItemDetails).then(()=> {
       dispatch(add_to_cart(itemForCart))
       setIsClicked(false)
-      setAddedSuccess(true)
+      toast.success("Product added to cart")
       setSelectedSize("")
     })
   }
@@ -141,10 +139,6 @@ const handleAddToCart = () => {
       </div>
     </div>
     <Reviews/>
-
-    {/* alerts messages */}
-     <AlertMessage type="warning"  open={selectSizeSnack} setOpen={setSelectSizeSnack} message="Please select a size" />
-     <AlertMessage type="success"  open={addedSuccess} setOpen={setAddedSuccess} message="Product added to cart" />
     </>
   )
 }
