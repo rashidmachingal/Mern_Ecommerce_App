@@ -29,7 +29,7 @@ const Banner = () => {
              <button>SHOP NOW!</button>
             </div>
             <div className="banner-right">
-             <div className="banner-circle"></div>
+             <div style={{background:data.color}} className="banner-circle"></div>
              <img src={data.url} alt="img" />
             </div>
            </div>
