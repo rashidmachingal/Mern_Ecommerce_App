@@ -1,11 +1,11 @@
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import './SelectPayment.css'
 
-const SelectPayment = ({setActive}) => {
+const SelectPayment = ({setStep}) => {
   return (
-    <div className='select-payment' >
+    <div className='address-container' >
         <div className="back-btn">
-            <ChevronLeftIcon onClick={()=> setActive(1)} fontSize='medium' />
+            <ChevronLeftIcon onClick={()=> setStep(prev=> prev-1)} fontSize='medium' />
         </div>
         <div className="select-payment-title">
             <h3>Select Payment Method</h3>

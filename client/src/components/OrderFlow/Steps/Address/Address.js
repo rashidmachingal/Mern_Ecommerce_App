@@ -2,7 +2,7 @@ import { useState } from 'react'
 import Form from './Form'
 import './Address.css'
 
-const Address = ({setActive}) => {
+const Address = ({setStep}) => {
   const [isAddress, setIsAddress] = useState(false)
 
   return (
@@ -17,9 +17,7 @@ const Address = ({setActive}) => {
       </div>
       }
      {!isAddress && <Form setIsAddress={setIsAddress} />}
-
-     {isAddress && <button onClick={()=>setActive(2)} className='address-conti-btn' >Continue</button>}
-
+     {isAddress && <button onClick={()=>setStep(prev=> prev+1)} className='address-conti-btn' >Continue</button>}
     </div>
   )
 }

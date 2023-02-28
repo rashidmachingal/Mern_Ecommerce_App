@@ -1,11 +1,13 @@
 .address-container{
-    background: rgba(211, 211, 211, 0.515);
+    margin-top: 1rem;
+    background: #d3d3d383;
     width: 50vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 1rem;
     padding-bottom: 1rem;
+    position: relative;
 }
 
 /* address form */
@@ -125,5 +127,8 @@
 @media (max-width:555px) {
     .address-container{
         width: 98%;
+    }
+    .address-conti-btn{
+        width: 90%;
     }
 }

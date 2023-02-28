@@ -54,7 +54,7 @@
 .order-flow-bar-line{
     border: 1px solid var(--primary-blue);
     border-radius: 5px;
-    width: 10%;
+    width: 15%;
     margin-bottom: 1rem;
 }
 
@@ -63,6 +63,6 @@
         justify-content: space-around;
     }
     .order-flow-bar-line{
-        width: 30%;
+        width: 35%;
     }
 }
