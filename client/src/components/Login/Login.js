@@ -1,11 +1,11 @@
 import { Alert, CircularProgress } from '@mui/material'
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { LoginUser } from '../../api/user-api'
 import { useDispatch, useSelector } from 'react-redux'
 import { user_auth } from "../../redux/user";
-import './Login.css'
 import { addToCart } from '../../api/cart-api'
+import './Login.css'
 
 const Login = () => {
 
@@ -16,6 +16,8 @@ const Login = () => {
   const { cartItems } = useSelector((state) => state.cart)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const reference = searchParams.get("ref")
 
   const handleChange = (e) => {
     const {name, value} = e.target
@@ -42,7 +44,7 @@ const Login = () => {
           localStorage.removeItem("cartItems")
         })
       }
-
+      if(reference === "placeorder") return navigate("/checkout")
       navigate("/")
     }).catch((err) => {
       setIsLoading(false)

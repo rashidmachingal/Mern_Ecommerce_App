@@ -2,6 +2,7 @@ import { DeleteOutline } from '@mui/icons-material'
 import { Divider, Tooltip } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import { cartItemCount, removeItem } from '../../api/cart-api'
 import { cart_item_count, remove_item } from '../../redux/cart'
 import './Cart.css'
@@ -11,6 +12,7 @@ const Cart = () => {
     const {cartItems} = useSelector((state) => state.cart)
     const { userId, token } = useSelector((state) => state.user)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     // price details
     const [itemsPrice, setItemsPrice] = useState(0)
@@ -83,6 +85,12 @@ const Cart = () => {
         dispatch(cart_item_count({countType, productIndex,currentCount}))
       })
       }
+    }
+
+    // click place order button
+    const handlePlaceOrder = () => {
+      if(token === null) return navigate("/login?ref=placeorder")
+      navigate("/checkout")
     }
 
   return (
@@ -162,7 +170,7 @@ const Cart = () => {
            </div>
            <Divider/>
            <div className="order-summary-checkout">
-            <button>PLACE ORDER</button>
+            <button onClick={handlePlaceOrder} >PLACE ORDER</button>
            </div>
           </div>}
         </div>
