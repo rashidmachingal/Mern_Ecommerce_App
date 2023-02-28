@@ -1,5 +1,5 @@
 import { ArticleOutlined, FavoriteBorderOutlined, ShoppingBagOutlined } from '@mui/icons-material'
-import { Divider, ListItemIcon, MenuItem } from '@mui/material'
+import { Divider } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 import './Navbar.css'
 
@@ -9,28 +9,22 @@ const AccountMenu = () => {
 
   return (
     <div className="account-menu" >
-       <MenuItem onClick={()=>navigate("/login")} >
-         <button className='nav-login' >Login / Register</button>
-        </MenuItem>
-        <Divider />
-        <MenuItem>
-          <ListItemIcon>
-            <ArticleOutlined fontSize="small" />
-          </ListItemIcon>
-          Orders    
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <ShoppingBagOutlined fontSize="small" />
-          </ListItemIcon>
-          Cart
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <FavoriteBorderOutlined fontSize="small" />
-          </ListItemIcon>
-          WhisList
-        </MenuItem>
+      <div onClick={()=> navigate("/login")} className='menu-login' >
+       <button>Login / Register</button>
+      </div>
+      <Divider/>
+      <div className='menu-item' >
+       <ArticleOutlined fontSize="small" />
+       <h4>Orders</h4>
+      </div>
+      <div className='menu-item' >
+        <ShoppingBagOutlined fontSize="small" />
+        <h4>Cart</h4>
+      </div>
+      <div className='menu-item' >
+        <FavoriteBorderOutlined fontSize="small" />
+        <h4>WishList</h4>
+      </div>
     </div>
   )
 }

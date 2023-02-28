@@ -22,7 +22,7 @@ const Navdrawer = ({token, user_name, setOpen}) => {
   return (
     <>
     {token === null ? 
-    <div onClick={()=>navigate("/login")} className="nav-dr-login">
+    <div draggable onClick={()=>navigate("/login")} className="nav-dr-login">
      <div><Person/></div>
      <span>Login & Register</span>
     </div> : 
@@ -31,13 +31,13 @@ const Navdrawer = ({token, user_name, setOpen}) => {
       <span>{user_name}</span>
     </div>}
     <div>
+    <MenuItem><ListItemIcon> <Person fontSize="small" /></ListItemIcon>My Account</MenuItem>
     <MenuItem><ListItemIcon> <Article fontSize="small" /></ListItemIcon>My Orders</MenuItem>
     <MenuItem><ListItemIcon> <ShoppingBag fontSize="small" /></ListItemIcon>My Cart</MenuItem>
     <MenuItem><ListItemIcon> <Favorite fontSize="small" /></ListItemIcon>My Wishlist</MenuItem>
-    <MenuItem><ListItemIcon> <Person fontSize="small" /></ListItemIcon>My Account</MenuItem>
     <MenuItem><ListItemIcon> <Notifications fontSize="small" /></ListItemIcon>My Notifications</MenuItem>
     <Divider/>
-    <MenuItem onClick={handleLogout} ><ListItemIcon> <Logout fontSize="small" /></ListItemIcon>Logout</MenuItem>
+    {token && <MenuItem onClick={handleLogout} ><ListItemIcon> <Logout fontSize="small" /></ListItemIcon>Logout</MenuItem>}
     </div>
     </>
   )

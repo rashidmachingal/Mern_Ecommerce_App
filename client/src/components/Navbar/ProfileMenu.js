@@ -1,5 +1,5 @@
 import { ArticleOutlined, FavoriteBorderOutlined, LogoutOutlined, ShoppingBagOutlined} from "@mui/icons-material";
-import { Avatar, Divider, ListItemIcon, MenuItem } from "@mui/material";
+import { Avatar, Divider } from "@mui/material";
 import { useDispatch } from 'react-redux'
 import { logout } from '../../redux/user'
 import { clear_cart } from '../../redux/cart'
@@ -20,39 +20,29 @@ const ProfileMenu = ({user_name,setProfileMenu}) => {
   }
 
   return (
-    <div className="account-menu profile-menu">
-      <MenuItem>
-         <div className="my-account" >
+    <div className="account-menu">
+      <div className="my-account" >
             <Avatar sx={{ width: 32, height: 32 }} />
             <p>{user_name}</p>
-         </div>
-      </MenuItem>
+      </div>
       <Divider />
-      <MenuItem>
-        <ListItemIcon>
-          <ArticleOutlined fontSize="small" />
-        </ListItemIcon>
-        Orders
-      </MenuItem>
-      <MenuItem>
-        <ListItemIcon>
-          <ShoppingBagOutlined fontSize="small" />
-        </ListItemIcon>
-        Cart
-      </MenuItem>
-      <MenuItem>
-        <ListItemIcon>
-          <FavoriteBorderOutlined fontSize="small" />
-        </ListItemIcon>
-        WhisList
-      </MenuItem>
-      <Divider/>
-      <MenuItem onClick={handleLogout}>
-        <ListItemIcon>
-          <LogoutOutlined fontSize="small" />
-        </ListItemIcon>
-        Logout
-      </MenuItem>
+      <div className='menu-item' >
+       <ArticleOutlined fontSize="small" />
+       <h4>Orders</h4>
+      </div>
+      <div onClick={()=>navigate("/cart")} className='menu-item' >
+        <ShoppingBagOutlined fontSize="small" />
+        <h4>Cart</h4>
+      </div>
+      <div className='menu-item' >
+        <FavoriteBorderOutlined fontSize="small" />
+        <h4>WishList</h4>
+      </div>
+      <Divider />
+      <div onClick={handleLogout} className="menu-item">
+        <LogoutOutlined fontSize="small" />
+        <h4>Logout</h4>
+      </div>
     </div>
   );
 };
