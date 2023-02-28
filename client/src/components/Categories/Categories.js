@@ -13,7 +13,7 @@ const Categories = () => {
             {categoriesData.map((i)=>{
               return (
                <Link to={"/category/"+i.title.toLocaleLowerCase()} key={i.id} className='category-in'>
-                <div className="category-image">
+                <div className="category-image" style={{background: i.color}} >
                  <img src={i.image} alt="img" />
                 </div>
                 <div className="category-name">
