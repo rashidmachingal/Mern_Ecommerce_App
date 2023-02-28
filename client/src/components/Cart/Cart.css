@@ -41,6 +41,7 @@
     box-shadow: 0 0 2px 0.1px rgba(0, 0, 0, 0.095);
     display: flex;
     align-items: center;
+    border-radius: 20px;
 }
 
 .cart-item-img{
@@ -54,7 +55,8 @@
 .cart-item-img img{
     width: 6rem;
     height: auto;
-    border-radius: 15px;
+    border-radius: 10px;
+    background: linear-gradient(to right, #eee8e8, #f2f2f2);
 }
 
 .cart-item-name{
