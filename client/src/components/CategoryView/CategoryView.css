@@ -110,11 +110,14 @@
 }
 
 .catview-product-image{
+    background: linear-gradient(to right, #eee8e8, #f2f2f2);
+    border-radius: 10px;
     width: 100%;
 }
 
 .catview-product-image img{
     width: 100%;
+    border-radius: 10px;
 }
 
 .catview-product-brand h3{
