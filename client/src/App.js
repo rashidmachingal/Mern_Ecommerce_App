@@ -1,13 +1,15 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { CartPage, CategoryViewPage, HomePage, LoginPage, MobileSearchPage, OrderFlowPage, ProductPage, RegisterPage, SearchViewPage } from './pages';
-import { useFetchCartData } from './api/cart-api';
 import {Footer} from './components';
+import { FetchCartData, GetPriceDetails } from './functions/cartFunctions';
 import './App.css';
 
 const App = ()=> {
   
   // fetch user cart
-  useFetchCartData()
+  FetchCartData()
+  // update summary price details
+  GetPriceDetails()
 
   return (
     <>
