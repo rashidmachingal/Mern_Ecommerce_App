@@ -1,6 +1,5 @@
 import { DeleteOutline } from '@mui/icons-material'
 import { Divider, Tooltip } from '@mui/material'
-import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { cartItemCount, removeItem } from '../../api/cart-api'
@@ -11,25 +10,9 @@ const Cart = () => {
 
     const {cartItems} = useSelector((state) => state.cart)
     const { userId, token } = useSelector((state) => state.user)
+    const { itemsPrice, deliveryCharge, dicount, totalAmount } = useSelector((state) => state.price)
     const dispatch = useDispatch()
     const navigate = useNavigate()
-
-    // price details
-    const [itemsPrice, setItemsPrice] = useState(0)
-    // eslint-disable-next-line
-    const [deliveryCharge, setDeliveryCharge] = useState(50)
-    // eslint-disable-next-line
-    const [dicount, setDiscount] = useState(55)
-    const [totalAmount, setTotalAmount] = useState(0)
-
-    useEffect(() => {
-      let updatedItemsPrice = 0;
-      cartItems?.map((i) => {
-        return updatedItemsPrice += i?.offer_price * i?.quantity;
-      });
-      setItemsPrice(updatedItemsPrice);
-      setTotalAmount(deliveryCharge + itemsPrice - dicount);
-    }, [cartItems, deliveryCharge, dicount, itemsPrice]);
     
     
     // remove item from cart
