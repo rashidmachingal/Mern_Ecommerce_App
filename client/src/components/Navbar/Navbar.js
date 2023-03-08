@@ -29,7 +29,10 @@ const Navbar = () => {
         <div className="nav-menu">
         <Menu onClick={()=>setOpen(!open)} />
         </div>
-        <Link className="nav-logo" to="/"><h2>RashCart</h2></Link>
+        <Link className="nav-logo" to="/">
+          <img src="https://i.ibb.co/Bqyp53V/image-removebg-preview.png" alt="logo" />
+          <h2>RASH</h2>
+          </Link>
         <div className="nav-search">
           <SearchOutlined style={{color:"grey"}} />
           <input placeholder="Search for products" type="text" />

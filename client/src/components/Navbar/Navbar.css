@@ -29,6 +29,10 @@
   font-weight: 800;
 }
 
+.nav-logo img{
+  width: 2rem;
+}
+
 /* items */
 .nav-items {
   font-weight: 600;
