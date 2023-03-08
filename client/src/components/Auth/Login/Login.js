@@ -1,10 +1,10 @@
 import { Alert, CircularProgress } from '@mui/material'
 import { useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
-import { LoginUser } from '../../api/user-api'
+import { LoginUser } from '../../../api/user-api'
 import { useDispatch, useSelector } from 'react-redux'
-import { user_auth } from "../../redux/user";
-import { addToCart } from '../../api/cart-api'
+import { user_auth } from "../../../redux/user";
+import { addToCart } from '../../../api/cart-api'
 import './Login.css'
 
 const Login = () => {
@@ -55,12 +55,30 @@ const Login = () => {
   return (
     <>
     <div className='login-container' >
-        <form onSubmit={handleLogin}>
-          <input onChange={handleChange} value={loginData.email} name="email" type="text" placeholder='Email' />
-          <input onChange={handleChange} value={loginData.password} name="password" type="password" placeholder='Password' />
-          <button>{isLoading ? <CircularProgress size="15px" /> : "LOGIN"}</button>
-          <div>
-            <Link to="/">Forget Password?</Link>
+        <form onSubmit={handleLogin} autoComplete='off' >
+          <div className='login-title' >
+           <h1>Login</h1>
+          </div>
+          <div className='login-form-group'>
+            <label>Email</label>
+            <input onChange={handleChange} value={loginData.email} name="email" type="text" placeholder='Enter Your Email' />
+          </div>
+          <div className='login-form-group'>
+            <label>Password</label>
+           <input onChange={handleChange} value={loginData.password} name="password" type="password" placeholder='Enter Your Password' />
+          </div>
+          <div className='forget-pass'>
+            <div>
+              <input type="checkbox" />
+              <label>Remember me</label>
+            </div>
+            <Link to="/register" >Forget password?</Link>
+          </div>
+          <div className='login-form-submit'>
+           <button disabled={isLoading} >{isLoading ? <CircularProgress size="15px" /> : "LOGIN"}</button>
+          </div>
+          <div className='forget-pass' style={{marginTop:"3px"}} >
+            <p>Don't have an account?</p>
             <Link to="/register" >Create New Account?</Link>
           </div>
         </form>
