@@ -1,0 +1,95 @@
+.register-container form{
+    min-height: 16rem!important;
+}
+
+.login-container{
+    margin-top:  4.333rem;
+    min-height: 40vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.login-container form{
+    margin-top: 3rem;
+    width: 25rem; 
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.login-container form div{
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+}
+
+.login-form-group{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.login-form-group input{
+    width: 98%;
+    height: 2.5rem;
+    padding: 5px;
+    outline: none;
+    border: 1px solid #00000053;
+    border: none;
+    border-radius: 4px;
+    background: #d3d3d34a;
+}
+
+.forget-pass{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.forget-pass div{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.forget-pass a{
+    color: var(--primary-blue);
+    text-decoration: none;
+    min-width: 8rem;
+}
+
+.login-form-submit{
+    margin-top: 1rem;
+}
+
+.login-form-submit button{
+    width: 98%;
+    height: 2.5rem;
+    border: none;
+    background: var(--primary-blue);
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-container button:hover{
+    background: var(--primary-hover-blue);
+}
+
+/* responsive design */
+@media (max-width:500px) {
+    .login-container form{
+        width: 98%;
+    }
+}
