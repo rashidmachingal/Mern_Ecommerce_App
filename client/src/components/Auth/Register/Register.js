@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { RegisterUser } from "../../api/user-api";
+import { RegisterUser } from "../../../api/user-api";
 import { useDispatch, useSelector } from "react-redux"
-import { user_auth } from "../../redux/user";
+import { user_auth } from "../../../redux/user";
 import { CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom'
 import "../Login/Login.css";
-import { addToCart } from "../../api/cart-api";
+import { addToCart } from "../../../api/cart-api";
 
 const Register = () => {
 
@@ -51,13 +51,31 @@ const Register = () => {
     <>
       <div className="login-container register-container">
         <form onSubmit={handleRegister} >
-          <input onChange={hanldeChange} value={userData.first_name} name="first_name" type="text" placeholder="First Name" />
-          <input onChange={hanldeChange} value={userData.second_name} name="second_name" type="text" placeholder="Second Name" />
-          <input onChange={hanldeChange} value={userData.email} name="email" type="text" placeholder="Email" />
-          <input onChange={hanldeChange} value={userData.password} name="password" type="password" placeholder="Password" />
-          <button>{isLoading ? <CircularProgress size="15px" color="inherit" /> : "REGISTER"}</button>
-          <div>
-            <Link to="/login">Already have an account?</Link>
+          <div className='login-title' >
+           <h1>Register</h1>
+          </div>
+          <div className="login-form-group">
+            <label>First Name</label>
+            <input onChange={hanldeChange} value={userData.first_name} name="first_name" type="text" placeholder="Enter First Name" />
+          </div>
+          <div className="login-form-group">
+            <lable>Second Name</lable>
+            <input onChange={hanldeChange} value={userData.second_name} name="second_name" type="text" placeholder="Enter Second Name" />
+          </div>
+          <div className="login-form-group">
+            <label>Email</label>
+            <input onChange={hanldeChange} value={userData.email} name="email" type="text" placeholder="Enter Email" />
+          </div>
+          <div className="login-form-group">
+            <label>Passsword</label>
+            <input onChange={hanldeChange} value={userData.password} name="password" type="password" placeholder="Enter Password" />
+          </div>
+          <div className="login-form-submit">
+           <button disabled={isLoading} >{isLoading ? <CircularProgress size="15px" color="inherit" /> : "REGISTER"}</button> 
+          </div>
+          <div className="forget-pass" >
+            <p>Already have and account</p>
+            <Link to="/login">Login to your account</Link>
           </div>
         </form>
       </div>
