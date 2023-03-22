@@ -25,6 +25,11 @@ const Register = () => {
   const handleRegister = (e) => {
     setIsLoading(true)
     e.preventDefault()
+    console.log(e.target[3].dataset.pattern)
+    console.log(e.target[3].title)
+    setIsLoading(false)
+    return
+    // eslint-disable-next-line
     RegisterUser(userData).then((res) => {
       const authDetails = {
         user_name : res.data.first_name,
@@ -59,7 +64,7 @@ const Register = () => {
             <input onChange={hanldeChange} value={userData.first_name} name="first_name" type="text" placeholder="Enter First Name" />
           </div>
           <div className="login-form-group">
-            <lable>Second Name</lable>
+            <label>Second Name</label>
             <input onChange={hanldeChange} value={userData.second_name} name="second_name" type="text" placeholder="Enter Second Name" />
           </div>
           <div className="login-form-group">
@@ -68,7 +73,12 @@ const Register = () => {
           </div>
           <div className="login-form-group">
             <label>Passsword</label>
-            <input onChange={hanldeChange} value={userData.password} name="password" type="password" placeholder="Enter Password" />
+            <input   
+            data-pattern = '[A-Za-z]{3}'
+            title="this field this required"
+            onChange={hanldeChange} 
+            value={userData.password} 
+            name="password" type="password" placeholder="Enter Password" />
           </div>
           <div className="login-form-submit">
            <button disabled={isLoading} >{isLoading ? <CircularProgress size="15px" color="inherit" /> : "REGISTER"}</button> 
