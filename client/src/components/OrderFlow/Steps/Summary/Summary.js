@@ -1,28 +1,11 @@
 import { ChevronLeft } from '@mui/icons-material'
 import { Divider } from '@mui/material'
-import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import './Summary.css'
 
 const Summary = ({setStep}) => {
     const { cartItems } = useSelector((state) => state.cart)
-
-     // price details
-    const [itemsPrice, setItemsPrice] = useState(0)
-    // eslint-disable-next-line
-    const [deliveryCharge, setDeliveryCharge] = useState(50)
-    // eslint-disable-next-line
-    const [dicount, setDiscount] = useState(55)
-    const [totalAmount, setTotalAmount] = useState(0)
-
-    useEffect(() => {
-        let updatedItemsPrice = 0;
-        cartItems?.map((i) => {
-          return updatedItemsPrice += i?.offer_price * i?.quantity;
-        });
-        setItemsPrice(updatedItemsPrice);
-        setTotalAmount(deliveryCharge + itemsPrice - dicount);
-      }, [cartItems, deliveryCharge, dicount, itemsPrice]);
+    const { itemsPrice, deliveryCharge, dicount, totalAmount } = useSelector((state) => state.price)
 
   return (
     <div className="address-container" >

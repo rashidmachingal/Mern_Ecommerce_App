@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const guestCart = JSON.parse(localStorage.getItem('cartItems')) || []
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
     cartItems: guestCart
 }
 
