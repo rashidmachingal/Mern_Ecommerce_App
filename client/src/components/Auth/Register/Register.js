@@ -5,13 +5,15 @@ import { useDispatch, useSelector } from "react-redux"
 import { user_auth } from "../../../redux/user";
 import { CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom'
-import "../Login/Login.css";
 import { addToCart } from "../../../api/cart-api";
+import { formValidation } from "../../../functions/formValidation";
+import "../Login/Login.css";
 
 const Register = () => {
 
   const [userData, setUserData] = useState({first_name: "",second_name: "", email: "", password: ""});
   const [isLoading, setIsLoading] = useState(false)
+  const [errors, setErrors] = useState({});
 
   const { cartItems } = useSelector((state) => state.cart)
   const dispatch = useDispatch()
@@ -25,6 +27,15 @@ const Register = () => {
   const handleRegister = (e) => {
     setIsLoading(true)
     e.preventDefault()
+    const newErrors = formValidation(userData);
+    setErrors(newErrors)
+    if(Object.keys(newErrors).length === 0){
+      userRegister()
+    }
+    setIsLoading(false)
+  }
+
+  const userRegister = () => {
     RegisterUser(userData).then((res) => {
       const authDetails = {
         user_name : res.data.first_name,
@@ -42,7 +53,6 @@ const Register = () => {
           localStorage.removeItem("cartItems")
         })
       }
-      
       navigate("/")
     })
   }
@@ -57,10 +67,11 @@ const Register = () => {
           <div className="login-form-group">
             <label>First Name</label>
             <input onChange={hanldeChange} value={userData.first_name} name="first_name" type="text" placeholder="Enter First Name" />
+            <span>{errors.first_name}</span>
           </div>
           <div className="login-form-group">
-            <lable>Second Name</lable>
-            <input onChange={hanldeChange} value={userData.second_name} name="second_name" type="text" placeholder="Enter Second Name" />
+            <label>Last Name</label>
+            <input onChange={hanldeChange} value={userData.second_name} name="second_name" type="text" placeholder="Enter Last Name" />
           </div>
           <div className="login-form-group">
             <label>Email</label>
