@@ -1,15 +1,15 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { CartPage, CategoryViewPage, HomePage, LoginPage, MobileSearchPage, OrderFlowPage, ProductPage, RegisterPage, SearchViewPage } from './pages';
-import {Footer} from './components';
-import { FetchCartData, GetPriceDetails } from './functions/cartFunctions';
+import { FetchUserCartDataAndUpdate, CreatePriceDetails } from './helpers/updateStoreData';
+import { Footer } from './components';
 import './App.css';
 
 const App = ()=> {
   
-  // fetch user cart
-  FetchCartData()
-  // update summary price details
-  GetPriceDetails()
+// fetch user cart data and update store cart data if user logged in
+  FetchUserCartDataAndUpdate()
+// create order price details
+CreatePriceDetails()
 
   return (
     <>

@@ -6,7 +6,7 @@ import { user_auth } from "../../../redux/user";
 import { CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom'
 import { addToCart } from "../../../api/cart-api";
-import { formValidation } from "../../../functions/formValidation";
+import { formValidation } from "../../../utils/formValidation";
 import "../Login/Login.css";
 
 const Register = () => {

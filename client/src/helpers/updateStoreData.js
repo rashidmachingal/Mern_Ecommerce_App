@@ -4,8 +4,8 @@ import { getUserCart } from "../api/cart-api";
 import { get_cart } from "../redux/cart";
 import { update_summary } from "../redux/price";
 
-// fetch user cart data
-export const FetchCartData = () => {
+// fetch user cart data and update store cart data if user logged in
+export const FetchUserCartDataAndUpdate = () => {
     const dispatch = useDispatch();
     const { userId } = useSelector((state) => state.user)
     useEffect(() => {
@@ -18,7 +18,7 @@ export const FetchCartData = () => {
   };
 
 // create order price details
-export const GetPriceDetails = () => {
+export const CreatePriceDetails = () => {
     const dispatch = useDispatch()
     const { cartItems } = useSelector((state) => state.cart)
 
