@@ -1,9 +1,8 @@
-import { Navbar, OrderFlow } from '../components'
+import { OrderFlow } from '../components'
 
 const OrderFlowPage = () => {
   return (
     <div>
-        <Navbar/>
         <OrderFlow/>
     </div>
   )

@@ -1,10 +1,9 @@
 import React from 'react'
-import { Login, Navbar } from '../components'
+import { Login } from '../components'
 
 const LoginPage = () => {
   return (
     <>
-    <Navbar/>
     <Login/>
     </>
   )

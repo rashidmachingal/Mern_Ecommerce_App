@@ -1,9 +1,8 @@
-import { Navbar, Register } from "../components"
+import { Register } from "../components"
 
 const LoginPage = () => {
   return (
     <>
-    <Navbar/>
     <Register/>
     </>
   )

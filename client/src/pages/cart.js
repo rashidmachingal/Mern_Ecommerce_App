@@ -1,9 +1,8 @@
-import { Cart, Navbar } from "../components"
+import { Cart } from "../components"
 
 const CartPage = () => {
   return (
     <>
-     <Navbar/>
      <Cart/>
     </>
   )

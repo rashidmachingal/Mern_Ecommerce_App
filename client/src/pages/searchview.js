@@ -1,9 +1,8 @@
-import {Navbar, SearchView} from "../components"
+import { SearchView} from "../components"
 
 const SearchViewPage = () => {
   return (
     <>
-    <Navbar/>
     <SearchView/>
     </>
   )

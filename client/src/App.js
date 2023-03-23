@@ -1,19 +1,20 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { CartPage, CategoryViewPage, HomePage, LoginPage, MobileSearchPage, OrderFlowPage, ProductPage, RegisterPage, SearchViewPage } from './pages';
 import { FetchUserCartDataAndUpdate, CreatePriceDetails } from './helpers/updateStoreData';
-import { Footer } from './components';
-import './App.css';
+import { Footer, Navbar } from './components';
+import './styles/App.css';
 
 const App = ()=> {
   
-// fetch user cart data and update store cart data if user logged in
+  // fetch user cart data and update store cart data if user logged in
   FetchUserCartDataAndUpdate()
-// create order price details
-CreatePriceDetails()
+  // create order price details
+  CreatePriceDetails()
 
   return (
     <>
     <BrowserRouter>
+      <Navbar/>
       <Routes>
        <Route path="/" element={<HomePage/>} />
        <Route path="/register" element={<RegisterPage/>} />

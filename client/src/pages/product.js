@@ -1,9 +1,8 @@
-import { Navbar, SingleProduct } from "../components"
+import { SingleProduct } from "../components"
 
 const ProductPage = () => {
   return (
     <>
-    <Navbar/>
     <SingleProduct/>
     </>
   )

@@ -1,9 +1,8 @@
-import {CategoryView, Navbar} from '../components'
+import {CategoryView} from '../components'
 
 const CategoryViewPage = () => {
   return (
     <>
-    <Navbar/>
     <CategoryView/>
     </>
   )
