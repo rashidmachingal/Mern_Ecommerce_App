@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
-import { RegisterUser } from "../../../api/user-api";
-import { useDispatch } from "react-redux"
-import { user_auth } from "../../../redux/user";
 import { CircularProgress } from '@mui/material';
+import { Link, useSearchParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux"
+import { user_auth } from "../../../redux/user";
 import { useNavigate } from 'react-router-dom'
 import { formValidation } from "../../../utils/formValidation";
-import { MoveGuestCartToServer } from "../../../helpers/cartFunctions";
+import { RegisterUser } from "../../../api/user-api";
+import { addToCart } from "../../../api/cart-api"
 import "../Login/Login.css";
 
 const Register = () => {
@@ -14,11 +14,13 @@ const Register = () => {
   const [userData, setUserData] = useState({first_name: "",second_name: "", email: "", password: ""});
   const [isLoading, setIsLoading] = useState(false)
   const [errors, setErrors] = useState({});
+  const { cartItems } = useSelector((state) => state.cart)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const reference = searchParams.get("ref")
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -46,7 +48,14 @@ const Register = () => {
       dispatch(user_auth(authDetails))
       setIsLoading(false)
       // move guest user cart to server
-      MoveGuestCartToServer(res.data._id)
+      const cartItemDetails = {userId:res.data._id, cartItems, type: true}
+      const isCart = localStorage.getItem("cartItems")
+      if(isCart){
+          addToCart(cartItemDetails).then(() => {
+            localStorage.removeItem("cartItems")
+          })
+      }
+      // go to checkout if user from place order
       if(reference === "placeorder") return navigate("/checkout")
       navigate("/")
     })

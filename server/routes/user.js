@@ -20,10 +20,11 @@ router.post("/register", async (req, res) => {
     const registeredUser = await newUser.save();
     // create token
     const { password, ...others } = registeredUser._doc;
-    const token = jwt.sign({id: registeredUser._id,first_name: registeredUser.first_name},process.env.JWT_SEC);
+    const token = jwt.sign({id: registeredUser._id,first_name: registeredUser.first_name},process.env.PASS_SEC);
     res.status(200).json({...others, token})
   } catch (error) {
     res.status(500).json(error)
+    console.log(error)
   } 
 });
 
@@ -46,7 +47,7 @@ router.post("/login", async (req, res) => {
         }
 
         // create token
-        const token = jwt.sign({id: user._id,first_name: user.first_name},process.env.JWT_SEC);
+        const token = jwt.sign({id: user._id,first_name: user.first_name},process.env.PASS_SEC);
         const { password, ...others } = user._doc;
         res.status(200).json({...others, token})
 

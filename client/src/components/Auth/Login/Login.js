@@ -1,10 +1,10 @@
-import { Alert, CircularProgress } from '@mui/material'
 import { useState } from 'react'
+import { Alert, CircularProgress } from '@mui/material'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
-import { LoginUser } from '../../../api/user-api'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { user_auth } from "../../../redux/user";
-import { MoveGuestCartToServer } from '../../../helpers/cartFunctions'
+import { LoginUser } from '../../../api/user-api'
+import { addToCart } from '../../../api/cart-api'
 import './Login.css'
 
 const Login = () => {
@@ -12,6 +12,7 @@ const Login = () => {
   const [loginData, setLoginData] = useState({email:"", password: ""})
   const [isLoading, setIsLoading] = useState(false)
   const [wrongCred, setWrongCred] = useState(false)
+  const { cartItems } = useSelector((state) => state.cart)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -35,7 +36,13 @@ const Login = () => {
       dispatch(user_auth(authDetails))
       setIsLoading(false)
       // move guest user cart to server
-      MoveGuestCartToServer(res.data._id)
+      const cartItemDetails = {userId:res.data._id, cartItems, type: true}
+      const isCart = localStorage.getItem("cartItems")
+      if(isCart){
+        addToCart(cartItemDetails).then(() => {
+          localStorage.removeItem("cartItems")
+        })
+      }
       // go to checkout if user from place order
       if(reference === "placeorder") return navigate("/checkout")
       navigate("/")
@@ -72,7 +79,7 @@ const Login = () => {
           </div>
           <div className='forget-pass' style={{marginTop:"3px"}} >
             <p>Don't have an account?</p>
-            <Link to="/register" >Create New Account?</Link>
+            <Link to={`/register?ref=${reference}`} >Create New Account?</Link>
           </div>
         </form>
         {wrongCred && <Alert severity="error">Email or Password Wrong!</Alert>}
