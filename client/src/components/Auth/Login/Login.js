@@ -2,18 +2,17 @@ import { Alert, CircularProgress } from '@mui/material'
 import { useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { LoginUser } from '../../../api/user-api'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { user_auth } from "../../../redux/user";
-import { addToCart } from '../../../api/cart-api'
+import { MoveGuestCartToServer } from '../../../helpers/cartFunctions'
 import './Login.css'
 
 const Login = () => {
-
+  
   const [loginData, setLoginData] = useState({email:"", password: ""})
   const [isLoading, setIsLoading] = useState(false)
   const [wrongCred, setWrongCred] = useState(false)
 
-  const { cartItems } = useSelector((state) => state.cart)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
@@ -25,9 +24,9 @@ const Login = () => {
   }
 
   const handleLogin = (e) => {
-    e.preventDefault()
-    setIsLoading(true)
-    LoginUser(loginData).then((res) => {
+      e.preventDefault()
+      setIsLoading(true)
+      LoginUser(loginData).then((res) => {
       const authDetails = {
         user_name : res.data.first_name,
         userId : res.data._id,
@@ -35,15 +34,9 @@ const Login = () => {
       }
       dispatch(user_auth(authDetails))
       setIsLoading(false)
-
-      // move guestCart to server
-      const cartItemDetails = {userId: res.data._id,cartItems: cartItems, type: true}
-      const isCart = localStorage.getItem("cartItems")
-      if(isCart){
-        addToCart(cartItemDetails).then(() => {
-          localStorage.removeItem("cartItems")
-        })
-      }
+      // move guest user cart to server
+      MoveGuestCartToServer(res.data._id)
+      // go to checkout if user from place order
       if(reference === "placeorder") return navigate("/checkout")
       navigate("/")
     }).catch((err) => {

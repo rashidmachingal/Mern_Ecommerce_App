@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { RegisterUser } from "../../../api/user-api";
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { user_auth } from "../../../redux/user";
 import { CircularProgress } from '@mui/material';
 import { useNavigate } from 'react-router-dom'
-import { addToCart } from "../../../api/cart-api";
 import { formValidation } from "../../../utils/formValidation";
+import { MoveGuestCartToServer } from "../../../helpers/cartFunctions";
 import "../Login/Login.css";
 
 const Register = () => {
@@ -15,11 +15,12 @@ const Register = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [errors, setErrors] = useState({});
 
-  const { cartItems } = useSelector((state) => state.cart)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const reference = searchParams.get("ref")
 
-  const hanldeChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setUserData({ ...userData, [name]: value });
   };
@@ -44,15 +45,9 @@ const Register = () => {
       }
       dispatch(user_auth(authDetails))
       setIsLoading(false)
-      
-      // move guestCart to server
-      const cartItemDetails = {userId: res.data._id,cartItems: cartItems, type: true}
-      const isCart = localStorage.getItem("cartItems")
-      if(isCart){
-        addToCart(cartItemDetails).then(() => {
-          localStorage.removeItem("cartItems")
-        })
-      }
+      // move guest user cart to server
+      MoveGuestCartToServer(res.data._id)
+      if(reference === "placeorder") return navigate("/checkout")
       navigate("/")
     })
   }
@@ -66,20 +61,20 @@ const Register = () => {
           </div>
           <div className="login-form-group">
             <label>First Name</label>
-            <input onChange={hanldeChange} value={userData.first_name} name="first_name" type="text" placeholder="Enter First Name" />
+            <input onChange={handleChange} value={userData.first_name} name="first_name" type="text" placeholder="Enter First Name" />
             <span>{errors.first_name}</span>
           </div>
           <div className="login-form-group">
             <label>Last Name</label>
-            <input onChange={hanldeChange} value={userData.second_name} name="second_name" type="text" placeholder="Enter Last Name" />
+            <input onChange={handleChange} value={userData.second_name} name="second_name" type="text" placeholder="Enter Last Name" />
           </div>
           <div className="login-form-group">
             <label>Email</label>
-            <input onChange={hanldeChange} value={userData.email} name="email" type="text" placeholder="Enter Email" />
+            <input onChange={handleChange} value={userData.email} name="email" type="text" placeholder="Enter Email" />
           </div>
           <div className="login-form-group">
             <label>Passsword</label>
-            <input onChange={hanldeChange} value={userData.password} name="password" type="password" placeholder="Enter Password" />
+            <input onChange={handleChange} value={userData.password} name="password" type="password" placeholder="Enter Password" />
           </div>
           <div className="login-form-submit">
            <button disabled={isLoading} >{isLoading ? <CircularProgress size="15px" color="inherit" /> : "REGISTER"}</button> 
