@@ -75,7 +75,7 @@ const Login = () => {
             <Link to="/register" >Forget password?</Link>
           </div>
           <div className='login-form-submit'>
-           <button disabled={isLoading} >{isLoading ? <CircularProgress size="15px" /> : "LOGIN"}</button>
+           <button disabled={isLoading} >{isLoading ? <CircularProgress size="15px" color="inherit" /> : "LOGIN"}</button>
           </div>
           <div className='forget-pass' style={{marginTop:"3px"}} >
             <p>Don't have an account?</p>

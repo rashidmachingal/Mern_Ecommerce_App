@@ -34,8 +34,9 @@ const Register = () => {
     setErrors(newErrors)
     if(Object.keys(newErrors).length === 0){
       userRegister()
+    }else{
+      setIsLoading(false)
     }
-    setIsLoading(false)
   }
 
   const userRegister = () => {
@@ -86,7 +87,7 @@ const Register = () => {
             <input onChange={handleChange} value={userData.password} name="password" type="password" placeholder="Enter Password" />
           </div>
           <div className="login-form-submit">
-           <button disabled={isLoading} >{isLoading ? <CircularProgress size="15px" color="inherit" /> : "REGISTER"}</button> 
+           <button disabled={isLoading} >{isLoading ? <CircularProgress size="15px" color="inherit"/> : "REGISTER"}</button> 
           </div>
           <div className="forget-pass" >
             <p>Already have and account</p>
