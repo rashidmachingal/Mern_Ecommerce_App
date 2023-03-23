@@ -70,21 +70,32 @@ const Register = () => {
            <h1>Register</h1>
           </div>
           <div className="login-form-group">
-            <label>First Name</label>
-            <input onChange={handleChange} value={userData.first_name} name="first_name" type="text" placeholder="Enter First Name" />
+            <div>
+             <label>First Name</label>
+             <input onChange={handleChange} value={userData.first_name} name="first_name" type="text" placeholder="Enter First Name" />
+            </div>
             <span>{errors.first_name}</span>
           </div>
           <div className="login-form-group">
-            <label>Last Name</label>
-            <input onChange={handleChange} value={userData.second_name} name="second_name" type="text" placeholder="Enter Last Name" />
+            <div>
+             <label>Last Name</label>
+             <input onChange={handleChange} value={userData.second_name} name="second_name" type="text" placeholder="Enter Last Name" />
+            </div>
+            <span>{errors.second_name}</span>
           </div>
           <div className="login-form-group">
-            <label>Email</label>
-            <input onChange={handleChange} value={userData.email} name="email" type="text" placeholder="Enter Email" />
+            <div>
+             <label>Email</label>
+             <input onChange={handleChange} value={userData.email} name="email" type="text" placeholder="Enter Email" />
+            </div>
+            <span>{errors.email}</span>
           </div>
           <div className="login-form-group">
-            <label>Passsword</label>
-            <input onChange={handleChange} value={userData.password} name="password" type="password" placeholder="Enter Password" />
+            <div>
+             <label>Passsword</label>
+             <input onChange={handleChange} value={userData.password} name="password" type="password" placeholder="Enter Password" />
+            </div>
+            <span>{errors.password}</span>
           </div>
           <div className="login-form-submit">
            <button disabled={isLoading} >{isLoading ? <CircularProgress size="15px" color="inherit"/> : "REGISTER"}</button> 

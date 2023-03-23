@@ -1,6 +1,7 @@
 :root {
     --primary-blue : #2c88dd;
     --primary-hover-blue : #297bc8e5;
+    --disabled-blue: #2c87dd89;
 }
 
 *{

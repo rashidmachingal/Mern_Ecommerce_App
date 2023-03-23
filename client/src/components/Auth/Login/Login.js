@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { user_auth } from "../../../redux/user";
 import { LoginUser } from '../../../api/user-api'
 import { addToCart } from '../../../api/cart-api'
+import { formValidation } from '../../../utils/formValidation';
 import './Login.css'
 
 const Login = () => {
@@ -12,6 +13,7 @@ const Login = () => {
   const [loginData, setLoginData] = useState({email:"", password: ""})
   const [isLoading, setIsLoading] = useState(false)
   const [wrongCred, setWrongCred] = useState(false)
+  const [errors, setErrors] = useState({});
   const { cartItems } = useSelector((state) => state.cart)
 
   const dispatch = useDispatch()
@@ -27,7 +29,17 @@ const Login = () => {
   const handleLogin = (e) => {
       e.preventDefault()
       setIsLoading(true)
-      LoginUser(loginData).then((res) => {
+      const newErrors = formValidation(loginData);
+      setErrors(newErrors)
+      if(Object.keys(newErrors).length === 0){
+        userLogin()
+      }else{
+        setIsLoading(false)
+      }
+  }
+
+  const userLogin = () => {
+    LoginUser(loginData).then((res) => {
       const authDetails = {
         user_name : res.data.first_name,
         userId : res.data._id,
@@ -60,12 +72,18 @@ const Login = () => {
            <h1>Login</h1>
           </div>
           <div className='login-form-group'>
-            <label>Email</label>
-            <input onChange={handleChange} value={loginData.email} name="email" type="text" placeholder='Enter Your Email' />
+            <div>
+             <label>Email</label>
+             <input onChange={handleChange} value={loginData.email} name="email" type="text" placeholder='Enter Your Email' />
+            </div>
+            <span>{errors.email}</span>
           </div>
           <div className='login-form-group'>
-            <label>Password</label>
-           <input onChange={handleChange} value={loginData.password} name="password" type="password" placeholder='Enter Your Password' />
+            <div>
+             <label>Password</label>
+             <input onChange={handleChange} value={loginData.password} name="password" type="password" placeholder='Enter Your Password' />
+            </div>
+            <span>{errors.password}</span>
           </div>
           <div className='forget-pass'>
             <div>
