@@ -109,3 +109,36 @@
         width: 98%;
     }
 }
+
+/* otp verfication form */
+.otp-inputs{
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    gap: 5px;
+}
+
+.otp-inputs input{
+    width: 16.6666%;
+    height: 2.5rem;
+    padding: 10px;
+    text-align: center;
+    font-size: 20px;
+    border: 1px solid #00000053;
+    border: none;
+    border-radius: 4px;
+    background: #d3d3d34a;
+}
+
+.otp-inputs input:focus{
+    outline: 2px solid var(--primary-blue);
+}
+
+.otp-submit button{
+    width: 100%;
+}
+
+.resent-otp span{
+    color: var(--primary-blue);
+    cursor: pointer;
+}

@@ -45,6 +45,10 @@ const Login = () => {
         userId : res.data._id,
         token : res.data.token
       }
+
+      // go to otp page if user not verified
+      if(!res.data.verified) return navigate(`/otp?ref=${reference}`)
+
       dispatch(user_auth(authDetails))
       setIsLoading(false)
       // move guest user cart to server

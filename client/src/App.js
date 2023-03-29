@@ -1,5 +1,5 @@
-import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
-import { CartPage, CategoryViewPage, HomePage, LoginPage, MobileSearchPage, OrderFlowPage, ProductPage, RegisterPage, SearchViewPage } from './pages';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { CartPage, CategoryViewPage, HomePage, LoginPage, MobileSearchPage, OrderFlowPage, OtpVerificationPage, ProductPage, RegisterPage, SearchViewPage } from './pages';
 import { FetchUserCartDataAndUpdate, CreatePriceDetails } from './helpers/updateStoreData';
 import { Footer, Navbar } from './components';
 import './styles/App.css';
@@ -19,6 +19,7 @@ const App = ()=> {
        <Route path="/" element={<HomePage/>} />
        <Route path="/register" element={<RegisterPage/>} />
        <Route path="/login" element={<LoginPage/>} />
+       <Route path="/otp" element={<OtpVerificationPage/>} />
        <Route path="/product/:id" element={<ProductPage/>} />
        <Route path="/category/:category" element={<CategoryViewPage/>} />
        <Route path="/search" element={<SearchViewPage/>} />

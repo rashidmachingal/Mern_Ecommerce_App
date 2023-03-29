@@ -12,3 +12,4 @@ export {default as Cart } from './Cart/Cart';
 export {default as OrderFlow } from './OrderFlow/OrderFlow';
 export {default as Login } from './Auth/Login/Login';
 export {default as Register } from './Auth/Register/Register';
+export {default as OtpVerifcation } from './Auth/OtpVerifcation/OtpVerification';
