@@ -92,7 +92,13 @@ const registerUser = async (req, res) => {
       const diffMinutes = (currentTime - timestamp) / (1000 * 60);
       // verify otp
       if(user.otp.code === userOtp && diffMinutes < 10){
+        User.findOneAndUpdate(
+          { email: req.body.email },
+          { verified: true },
+          { new: true }
+      ).then(() => {
         res.status(200).json({message:"Otp Verification Success"})
+      })
       }else{
         res.status(401).json({message: "Invalid Otp"})
       }
