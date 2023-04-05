@@ -7,6 +7,7 @@ const UserSchema = new mongoose.Schema(
     email: { type: String },
     password: { type: String },
     verified: { type: Boolean, default: false },
+    otp: {type : Object},
     address: { type: Array },
   },
   { timestamps: true }

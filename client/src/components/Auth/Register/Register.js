@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CircularProgress } from '@mui/material';
+import { Alert, CircularProgress } from '@mui/material';
 import { Link, useSearchParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux"
 import { user_auth } from "../../../redux/user";
@@ -13,6 +13,7 @@ const Register = () => {
 
   const [userData, setUserData] = useState({first_name: "",second_name: "", email: "", password: ""});
   const [isLoading, setIsLoading] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
   const [errors, setErrors] = useState({});
   const { cartItems } = useSelector((state) => state.cart)
 
@@ -30,6 +31,7 @@ const Register = () => {
   const handleRegister = (e) => {
     setIsLoading(true)
     e.preventDefault()
+    setErrorMessage("")
     const newErrors = formValidation(userData);
     setErrors(newErrors)
     if(Object.keys(newErrors).length === 0){
@@ -46,6 +48,8 @@ const Register = () => {
         userId : res.data._id,
         token : res.data.token
       }
+
+      console.log("data",res.data)
       
       // go to otp page if user not verified
       if(!res.data.verified) return navigate(`/otp?ref=${reference}`)
@@ -63,6 +67,15 @@ const Register = () => {
       // go to checkout if user from place order
       if(reference === "placeorder") return navigate("/checkout")
       navigate("/")
+    }).catch((err) => {
+      // check if user already registered 
+      if(err.response.data.message === "User already exists"){
+        setErrorMessage("Already Registered Email!")
+        setIsLoading(false)
+        return
+      }
+      setIsLoading(false)
+      setErrorMessage("Something Went Wrong!")
     })
   }
 
@@ -109,6 +122,7 @@ const Register = () => {
             <Link to="/login">Login to your account</Link>
           </div>
         </form>
+        {errorMessage.length > 0 && <Alert severity="error">{errorMessage}</Alert>}
       </div>
     </>
   );
