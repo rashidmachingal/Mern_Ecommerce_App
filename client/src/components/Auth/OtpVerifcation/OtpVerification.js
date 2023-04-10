@@ -1,10 +1,20 @@
 import { useEffect, useRef, useState } from 'react'
+import { Alert, CircularProgress } from '@mui/material';
+import { LoginUser, VerifyOtp } from '../../../api/auth-api';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { user_auth } from '../../../redux/user';
+import { addToCart } from '../../../api/cart-api';
+import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import '../Login/Login.css'
 
-const OtpVerification = () => {
+const OtpVerification = ({ password, email }) => {
     const inputRef = useRef({})
     const [resendTimeoutStart, setResendTimeoutStart] = useState(false);
     const [resendTimeLeft, setResendTimeLeft] = useState(23);
+    const [isLoading, setIsLoading] = useState(false);
+    const [wrongOTP, setWrongOTP] = useState(false)
+
     const [otp, setOtp] = useState({
         digitOne   : "",
         digitTwo   : "",
@@ -13,6 +23,12 @@ const OtpVerification = () => {
         digitFive  : "",
         digitSix   : ""
     })
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const [searchParams] = useSearchParams()
+    const reference = searchParams.get("ref")
+    const { cartItems } = useSelector((state) => state.cart)
 
     // otp resend count down
     useEffect(() => {
@@ -34,6 +50,9 @@ const OtpVerification = () => {
     const handleResendOtp = () => {
       setResendTimeLeft(23)
       setResendTimeoutStart(true)
+      LoginUser({email,password}).then((res) => {
+        toast.success("OTP Sented Successfully")
+      })
     }
 
     // set otp values
@@ -49,16 +68,50 @@ const OtpVerification = () => {
             if(index > 0) inputRef.current[index - 1].focus()
         }
     }
+
+    const handleOtpVerification = (e) => {
+      e.preventDefault()
+      setIsLoading(true)
+      const completeOtp = Object.values(otp).join("");
+      VerifyOtp({email, password, completeOtp}).then((res) => {
+        // if user verified login
+        if(res.data.verified === true){
+          const authDetails = {
+            user_name : res.data.user_name,
+            userId : res.data._id,
+            token : res.data.token
+          }
+
+          dispatch(user_auth(authDetails))
+          setIsLoading(false)
+          // move guest user cart to server
+          const cartItemDetails = {userId:res.data._id, cartItems, type: true}
+          const isCart = localStorage.getItem("cartItems")
+          if(isCart){
+            addToCart(cartItemDetails).then(() => {
+              localStorage.removeItem("cartItems")
+            })
+          }
+          // go to checkout if user from place order
+          if(reference === "placeorder") return navigate("/checkout")
+          navigate("/")
+        }
+      }).catch((err) => {
+        console.log(err,"error")
+        if(err.response.data.otpVerification === false){
+          setIsLoading(false)
+          setWrongOTP(true)
+        }
+      })
+    }
     
   return (
     <>
     <div className='login-container' >
-      <form autoComplete='off' >
+      <form onSubmit={handleOtpVerification} autoComplete='off' >
        <div className='login-title' >
         <h1>OTP Verification</h1>
-        <p>
-          Please enter the OTP that we sent to your email address. rashi******t@gmail.com
-        </p>
+        <p>Please enter the OTP that we sent to your email address. rashi******t@gmail.com</p>
        </div>
        <div className='otp-inputs' >
         {Object.keys(otp).map((keys, index) => {
@@ -78,9 +131,10 @@ const OtpVerification = () => {
         {!resendTimeoutStart && <span onClick={handleResendOtp} >Resent OTP</span>}
        </div>
        <div className='login-form-submit otp-submit' >
-           <button>VERIFY</button>
+           <button disabled={isLoading} >{isLoading ? <CircularProgress size="15px" color="inherit" /> : "VERIFY"}</button>
         </div>
       </form>
+      {wrongOTP && <Alert severity="error">Invalid OTP!</Alert>}
     </div>
     </>
   )

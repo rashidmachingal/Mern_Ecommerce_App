@@ -1,27 +1,18 @@
 import { useState } from "react";
 import { Alert, CircularProgress } from '@mui/material';
-import { Link, useSearchParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux"
-import { user_auth } from "../../../redux/user";
-import { useNavigate } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import { formValidation } from "../../../utils/formValidation";
-import { RegisterUser } from "../../../api/user-api";
-import { addToCart } from "../../../api/cart-api"
+import { RegisterUser } from "../../../api/auth-api";
+import { OtpVerifcation } from "../..";
 import "../Login/Login.css";
 
 const Register = () => {
 
-  const [userData, setUserData] = useState({first_name: "",second_name: "", email: "", password: ""});
+  const [userData, setUserData] = useState({user_name: "", email: "", password: ""});
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
+  const [renderOtp, setRenderOtp] = useState(false)
   const [errors, setErrors] = useState({});
-  const { cartItems } = useSelector((state) => state.cart)
-
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const [searchParams] = useSearchParams()
-  const reference = searchParams.get("ref")
-  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -43,30 +34,11 @@ const Register = () => {
 
   const userRegister = () => {
     RegisterUser(userData).then((res) => {
-      const authDetails = {
-        user_name : res.data.first_name,
-        userId : res.data._id,
-        token : res.data.token
+      // render otp component 
+      if(!res.data.verified) {
+        setRenderOtp(true)
+        return
       }
-
-      console.log("data",res.data)
-      
-      // go to otp page if user not verified
-      if(!res.data.verified) return navigate(`/otp?ref=${reference}`)
-
-      dispatch(user_auth(authDetails))
-      setIsLoading(false)
-      // move guest user cart to server
-      const cartItemDetails = {userId:res.data._id, cartItems, type: true}
-      const isCart = localStorage.getItem("cartItems")
-      if(isCart){
-          addToCart(cartItemDetails).then(() => {
-            localStorage.removeItem("cartItems")
-          })
-      }
-      // go to checkout if user from place order
-      if(reference === "placeorder") return navigate("/checkout")
-      navigate("/")
     }).catch((err) => {
       // check if user already registered 
       if(err.response.data.message === "User already exists"){
@@ -81,24 +53,17 @@ const Register = () => {
 
   return (
     <>
-      <div className="login-container register-container">
+      {!renderOtp && <div className="login-container register-container">
         <form onSubmit={handleRegister} >
           <div className='login-title' >
            <h1>Register</h1>
           </div>
           <div className="login-form-group">
             <div>
-             <label>First Name</label>
-             <input onChange={handleChange} value={userData.first_name} name="first_name" type="text" placeholder="Enter First Name" />
+             <label>Your Name</label>
+             <input onChange={handleChange} value={userData.user_name} name="user_name" type="text" placeholder="Enter Your Name" />
             </div>
-            <span>{errors.first_name}</span>
-          </div>
-          <div className="login-form-group">
-            <div>
-             <label>Last Name</label>
-             <input onChange={handleChange} value={userData.second_name} name="second_name" type="text" placeholder="Enter Last Name" />
-            </div>
-            <span>{errors.second_name}</span>
+            <span>{errors.user_name}</span>
           </div>
           <div className="login-form-group">
             <div>
@@ -123,7 +88,9 @@ const Register = () => {
           </div>
         </form>
         {errorMessage.length > 0 && <Alert severity="error">{errorMessage}</Alert>}
-      </div>
+      </div>}
+       {/* render otp component */}
+       { renderOtp && <OtpVerifcation password={userData.password} email={userData.email} />}
     </>
   );
 };

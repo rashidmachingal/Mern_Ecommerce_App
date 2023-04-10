@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 dotenv.config();
 
 //routes
-const userRoute = require("./routes/user.js")
+const authRoute = require("./routes/auth.js")
 const productRoute = require("./routes/products.js")
 const cartRoute = require("./routes/cart.js")
 
@@ -14,12 +14,12 @@ const cartRoute = require("./routes/cart.js")
 // middlewares
 app.use(cors());
 app.use(express.json());
-app.use("/user", userRoute);
+app.use("/auth", authRoute);
 app.use("/product", productRoute);
 app.use("/cart", cartRoute);
 
 
-// mongodb connection + // server configuration
+// mongodb connection + server configuration
 mongoose
   .connect(process.env.MONGO_URL)
   .then(() => {

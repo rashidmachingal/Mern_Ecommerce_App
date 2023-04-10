@@ -3,9 +3,10 @@ import { Alert, CircularProgress } from '@mui/material'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { user_auth } from "../../../redux/user";
-import { LoginUser } from '../../../api/user-api'
+import { LoginUser } from '../../../api/auth-api'
 import { addToCart } from '../../../api/cart-api'
 import { formValidation } from '../../../utils/formValidation';
+import { OtpVerifcation } from '../../../components'
 import './Login.css'
 
 const Login = () => {
@@ -13,6 +14,7 @@ const Login = () => {
   const [loginData, setLoginData] = useState({email:"", password: ""})
   const [isLoading, setIsLoading] = useState(false)
   const [wrongCred, setWrongCred] = useState(false)
+  const [renderOtp, setRenderOtp] = useState(false)
   const [errors, setErrors] = useState({});
   const { cartItems } = useSelector((state) => state.cart)
 
@@ -41,13 +43,16 @@ const Login = () => {
   const userLogin = () => {
     LoginUser(loginData).then((res) => {
       const authDetails = {
-        user_name : res.data.first_name,
+        user_name : res.data.user_name,
         userId : res.data._id,
         token : res.data.token
       }
 
-      // go to otp page if user not verified
-      if(!res.data.verified) return navigate(`/otp?ref=${reference}`)
+      // render otp component if user not verified
+      if(!res.data.verified){
+        setRenderOtp(true)
+        return
+      }
 
       dispatch(user_auth(authDetails))
       setIsLoading(false)
@@ -63,14 +68,18 @@ const Login = () => {
       if(reference === "placeorder") return navigate("/checkout")
       navigate("/")
     }).catch((err) => {
-      setIsLoading(false)
-      setWrongCred(true)
+      if(err?.response?.data?.auth === false){
+        setIsLoading(false)
+        setWrongCred(true)
+      }else{
+        setIsLoading(false)
+      }
     })
   }
 
   return (
     <>
-    <div className='login-container' >
+    { !renderOtp && <div className='login-container' >
         <form onSubmit={handleLogin} autoComplete='off' >
           <div className='login-title' >
            <h1>Login</h1>
@@ -105,7 +114,9 @@ const Login = () => {
           </div>
         </form>
         {wrongCred && <Alert severity="error">Email or Password Wrong!</Alert>}
-    </div>
+    </div>}
+    {/* render otp component */}
+        { renderOtp && <OtpVerifcation password={loginData.password} email={loginData.email} />}
     </>
   )
 }
