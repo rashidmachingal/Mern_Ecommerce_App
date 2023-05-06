@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Alert, CircularProgress } from '@mui/material'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { CircularProgress } from '@mui/material'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { user_auth } from "../../../redux/user";
 import { LoginUser } from '../../../api/auth-api'
@@ -11,10 +11,11 @@ import './Login.css'
 
 const Login = () => {
   
-  const [loginData, setLoginData] = useState({email:"", password: ""})
+  const [mobile, setMobile] = useState({mobile:""})
+  const [email, setEmail] = useState({email: ""})
   const [isLoading, setIsLoading] = useState(false)
-  const [wrongCred, setWrongCred] = useState(false)
   const [renderOtp, setRenderOtp] = useState(false)
+  const [loginMethod, setLoginMethod] = useState("mobile")
   const [errors, setErrors] = useState({});
   const { cartItems } = useSelector((state) => state.cart)
 
@@ -25,26 +26,27 @@ const Login = () => {
 
   const handleChange = (e) => {
     const {name, value} = e.target
-    setLoginData({ ...loginData, [name]: value })
+    if(name === "mobile") setMobile({mobile:value})
+    if(name === "email") setEmail({email:value})
   }
 
   const handleLogin = (e) => {
       e.preventDefault()
       setIsLoading(true)
-      const newErrors = formValidation(loginData);
+      const dataForValidation = loginMethod === "mobile" ? mobile : email
+      const newErrors = formValidation(dataForValidation);
       setErrors(newErrors)
       if(Object.keys(newErrors).length === 0){
         userLogin()
       }else{
-        setIsLoading(false)
+          setIsLoading(false)
       }
   }
 
   const userLogin = () => {
-    LoginUser(loginData).then((res) => {
+    const dataForValidation = loginMethod === "mobile" ? mobile : email
+    LoginUser(dataForValidation).then((res) => {
       const authDetails = {
-        user_name : res.data.user_name,
-        userId : res.data._id,
         token : res.data.token
       }
 
@@ -70,7 +72,6 @@ const Login = () => {
     }).catch((err) => {
       if(err?.response?.data?.auth === false){
         setIsLoading(false)
-        setWrongCred(true)
       }else{
         setIsLoading(false)
       }
@@ -82,41 +83,32 @@ const Login = () => {
     { !renderOtp && <div className='login-container' >
         <form onSubmit={handleLogin} autoComplete='off' >
           <div className='login-title' >
-           <h1>Login</h1>
+           <h1>Login or Signup</h1>
           </div>
           <div className='login-form-group'>
             <div>
-             <label>Email</label>
-             <input onChange={handleChange} value={loginData.email} name="email" type="text" placeholder='Enter Your Email' />
+             <label>{loginMethod === "email" ? "Email" : "Mobile"}</label>
+             {loginMethod === "email" && <label onClick={()=> setLoginMethod("mobile")} >Login with Mobile?</label>}
+             {loginMethod === "mobile" && <label onClick={()=> setLoginMethod("email")} >Login with Email?</label>}
             </div>
-            <span>{errors.email}</span>
-          </div>
-          <div className='login-form-group'>
-            <div>
-             <label>Password</label>
-             <input onChange={handleChange} value={loginData.password} name="password" type="password" placeholder='Enter Your Password' />
+            <div className='login-form-input' >
+             {loginMethod === "mobile" && <div><img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/41/Flag_of_India.svg/20px-Flag_of_India.svg.png" alt="india" />+91 </div>}
+             <input 
+              onChange={handleChange}
+              value={loginMethod === "mobile" ? mobile.mobile : email.email} 
+              name={loginMethod === "mobile" ? "mobile" : "email"} 
+              type="text" 
+              placeholder={`Enter Your ${loginMethod === "mobile" ? "Mobile" : "Email"}`} />
             </div>
-            <span>{errors.password}</span>
-          </div>
-          <div className='forget-pass'>
-            <div>
-              <input type="checkbox" />
-              <label>Remember me</label>
-            </div>
-            <Link to="/register" >Forget password?</Link>
+            <span>{loginMethod === "mobile" ? errors.mobile : errors.email}</span>
           </div>
           <div className='login-form-submit'>
-           <button disabled={isLoading} >{isLoading ? <CircularProgress size="15px" color="inherit" /> : "LOGIN"}</button>
-          </div>
-          <div className='forget-pass' style={{marginTop:"3px"}} >
-            <p>Don't have an account?</p>
-            <Link to={`/register?ref=${reference}`} >Create New Account?</Link>
+           <button disabled={isLoading} >{isLoading ? <CircularProgress size="15px" color="inherit" /> : "CONTINUE"}</button>
           </div>
         </form>
-        {wrongCred && <Alert severity="error">Email or Password Wrong!</Alert>}
     </div>}
     {/* render otp component */}
-        { renderOtp && <OtpVerifcation password={loginData.password} email={loginData.email} />}
+        { renderOtp && <OtpVerifcation loginMethodData={loginMethod === "mobile" ? mobile.mobile : email.email} />}
     </>
   )
 }

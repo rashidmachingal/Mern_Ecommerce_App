@@ -67,14 +67,14 @@ const Register = () => {
           </div>
           <div className="login-form-group">
             <div>
-             <label>Email</label>
+             <label>Email or Mobile</label>
              <input onChange={handleChange} value={userData.email} name="email" type="text" placeholder="Enter Email" />
             </div>
             <span>{errors.email}</span>
           </div>
           <div className="login-form-group">
             <div>
-             <label>Passsword</label>
+             <label>Password</label>
              <input onChange={handleChange} value={userData.password} name="password" type="password" placeholder="Enter Password" />
             </div>
             <span>{errors.password}</span>

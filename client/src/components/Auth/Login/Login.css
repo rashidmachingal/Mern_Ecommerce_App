@@ -2,6 +2,14 @@
     min-height: 16rem!important;
 }
 
+.login-title{
+    padding-bottom: 1rem;
+}
+
+.login-title h1{ 
+    text-align: center;
+}
+
 .login-container{
     margin-top:  4.333rem;
     min-height: 40vh;
@@ -38,12 +46,17 @@
 
 .login-form-group div{
     display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 5px;
+    justify-content: space-between;
+    padding-right: 10px;
+}
+
+.login-form-group div label:last-of-type{
+    color: var(--primary-blue);
+    cursor: pointer;
 }
 
 .login-form-group input{
+    margin-top: 5px;
     width: 98%;
     height: 2.5rem;
     padding: 5px;
@@ -58,22 +71,23 @@
     color: red;
 }
 
-.forget-pass{
-    width: 100%;
+.login-form-input{
     display: flex;
-    justify-content: space-between;
+    align-items: center;
 }
 
-.forget-pass div{
+.login-form-input div{
+    margin-top: 5px;
+    width: 4rem!important;
     display: flex;
     align-items: center;
     gap: 5px;
-}
-
-.forget-pass a{
-    color: var(--primary-blue);
-    text-decoration: none;
-    min-width: 8rem;
+    background: #d3d3d34a;
+    height: 2.5rem;
+    border-radius: 4px;
+    padding: 5px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 .login-form-submit{

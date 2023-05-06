@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import '../Login/Login.css'
 
-const OtpVerification = ({ password, email }) => {
+const OtpVerification = ({ loginMethodData }) => {
     const inputRef = useRef({})
     const [resendTimeoutStart, setResendTimeoutStart] = useState(false);
     const [resendTimeLeft, setResendTimeLeft] = useState(23);
@@ -50,7 +50,7 @@ const OtpVerification = ({ password, email }) => {
     const handleResendOtp = () => {
       setResendTimeLeft(23)
       setResendTimeoutStart(true)
-      LoginUser({email,password}).then((res) => {
+      LoginUser({loginMethodData}).then((res) => {
         toast.success("OTP Sented Successfully")
       })
     }
@@ -73,7 +73,7 @@ const OtpVerification = ({ password, email }) => {
       e.preventDefault()
       setIsLoading(true)
       const completeOtp = Object.values(otp).join("");
-      VerifyOtp({email, password, completeOtp}).then((res) => {
+      VerifyOtp({loginMethodData, completeOtp}).then((res) => {
         // if user verified login
         if(res.data.verified === true){
           const authDetails = {

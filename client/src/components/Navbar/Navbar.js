@@ -21,7 +21,7 @@ const Navbar = () => {
   const navigate = useNavigate()
   const { cartItems } = useSelector((state)=> state.cart)
   // get user name and token
-  const { token, user_name } = useSelector((state)=> state.user)
+  const { token } = useSelector((state)=> state.user)
 
   return (
     <>
@@ -43,9 +43,9 @@ const Navbar = () => {
             setProfileMenu(false)
           }}>
           {token === null && <Tooltip title="Profile"><IconButton onClick={()=> setOpenMenu(!openMenu)} ><PersonOutlineOutlined style={cursorPointer} /></IconButton></Tooltip>}
-          {token && <IconButton onClick={()=> setProfileMenu(!profileMenu)} ><Avatar sx={{ width: 32, height: 32 }} >{user_name.charAt(0)}</Avatar></IconButton>}
+          {token && <IconButton onClick={()=> setProfileMenu(!profileMenu)} ><Avatar sx={{ width: 32, height: 32 }} >R</Avatar></IconButton>}
           {openMenu && <AccountMenu/> }
-          {profileMenu &&  <ProfileMenu user_name={user_name} setProfileMenu={setProfileMenu} />}
+          {profileMenu &&  <ProfileMenu setProfileMenu={setProfileMenu} />}
           </OutsideClickHandler>
           <Tooltip title="Whishlist"><IconButton><FavoriteBorderOutlined style={cursorPointer} /></IconButton></Tooltip>
           <Tooltip title="Bag"><IconButton onClick={()=>navigate("/cart")} ><Badge badgeContent={cartItems.length} color="primary" style={cursorPointer} ><ShoppingCartOutlined /></Badge></IconButton></Tooltip>
@@ -59,7 +59,7 @@ const Navbar = () => {
 
         <div onClick={()=>setOpen(!open)}  style={{display:open? "initial" : "none"}} className="nav-ml-shadow"></div>
         <div className="nav-drawer" style={{left:open ? "0px" : "-100vw"}} >
-         <Navdrawer token={token} user_name={user_name} setOpen={setOpen} />
+         <Navdrawer token={token} setOpen={setOpen} />
         </div>
       </nav>
     </>

@@ -6,7 +6,7 @@ import { clear_cart } from '../../redux/cart'
 import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
 
-const ProfileMenu = ({user_name,setProfileMenu}) => {
+const ProfileMenu = ({setProfileMenu}) => {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -23,7 +23,6 @@ const ProfileMenu = ({user_name,setProfileMenu}) => {
     <div className="account-menu">
       <div className="my-account" >
             <Avatar sx={{ width: 32, height: 32 }} />
-            <p>{user_name}</p>
       </div>
       <Divider />
       <div className='menu-item' >
