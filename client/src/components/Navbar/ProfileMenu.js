@@ -1,6 +1,6 @@
 import { ArticleOutlined, FavoriteBorderOutlined, LogoutOutlined, ShoppingBagOutlined} from "@mui/icons-material";
 import { Avatar, Divider } from "@mui/material";
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../../redux/user'
 import { clear_cart } from '../../redux/cart'
 import { useNavigate } from "react-router-dom";
@@ -10,6 +10,7 @@ const ProfileMenu = ({setProfileMenu}) => {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { authData } = useSelector((state) => state.user)
 
   const handleLogout = () => {
     localStorage.removeItem("user")
@@ -23,6 +24,10 @@ const ProfileMenu = ({setProfileMenu}) => {
     <div className="account-menu">
       <div className="my-account" >
             <Avatar sx={{ width: 32, height: 32 }} />
+            <div>
+            <p>Your Account</p>
+            <span>{authData}</span>
+            </div>
       </div>
       <Divider />
       <div className='menu-item' >

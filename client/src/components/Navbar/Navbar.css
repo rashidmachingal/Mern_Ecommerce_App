@@ -163,9 +163,19 @@
   cursor: pointer;
 }
 
+.my-account div{
+  display: flex;
+  flex-direction: column;
+}
+
 .my-account p{
   font-weight: 600;
 }
+
+.my-account span{
+  font-size: 12px;
+}
+
 /* responsive  */
 
 .nav-search-ml {display: none;}

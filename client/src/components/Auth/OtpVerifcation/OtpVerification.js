@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Alert, CircularProgress } from '@mui/material';
-import { LoginUser, VerifyOtp } from '../../../api/auth-api';
+import { AuthUser, VerifyOtp } from '../../../api/auth-api';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { user_auth } from '../../../redux/user';
 import { addToCart } from '../../../api/cart-api';
@@ -50,7 +50,7 @@ const OtpVerification = ({ loginMethodData }) => {
     const handleResendOtp = () => {
       setResendTimeLeft(23)
       setResendTimeoutStart(true)
-      LoginUser({loginMethodData}).then((res) => {
+      AuthUser({loginMethodData}).then((res) => {
         toast.success("OTP Sented Successfully")
       })
     }
@@ -76,10 +76,10 @@ const OtpVerification = ({ loginMethodData }) => {
       VerifyOtp({loginMethodData, completeOtp}).then((res) => {
         // if user verified login
         if(res.data.verified === true){
+          console.log(res.data.authData)
           const authDetails = {
-            user_name : res.data.user_name,
-            userId : res.data._id,
-            token : res.data.token
+            token : res.data.token,
+            authData : res.data.authData
           }
 
           dispatch(user_auth(authDetails))

@@ -1,10 +1,6 @@
 import { useState } from 'react'
 import { CircularProgress } from '@mui/material'
-import { useNavigate, useSearchParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { user_auth } from "../../../redux/user";
-import { LoginUser } from '../../../api/auth-api'
-import { addToCart } from '../../../api/cart-api'
+import { AuthUser } from '../../../api/auth-api'
 import { formValidation } from '../../../utils/formValidation';
 import { OtpVerifcation } from '../../../components'
 import './Login.css'
@@ -17,12 +13,7 @@ const Login = () => {
   const [renderOtp, setRenderOtp] = useState(false)
   const [loginMethod, setLoginMethod] = useState("mobile")
   const [errors, setErrors] = useState({});
-  const { cartItems } = useSelector((state) => state.cart)
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const [searchParams] = useSearchParams()
-  const reference = searchParams.get("ref")
 
   const handleChange = (e) => {
     const {name, value} = e.target
@@ -45,30 +36,12 @@ const Login = () => {
 
   const userLogin = () => {
     const dataForValidation = loginMethod === "mobile" ? mobile : email
-    LoginUser(dataForValidation).then((res) => {
-      const authDetails = {
-        token : res.data.token
-      }
+    AuthUser(dataForValidation).then((res) => {
 
-      // render otp component if user not verified
-      if(!res.data.verified){
-        setRenderOtp(true)
-        return
-      }
-
-      dispatch(user_auth(authDetails))
+      // render otp component if otp verification needed
+      if(res.data.needOTPVerification === true) setRenderOtp(true)
       setIsLoading(false)
-      // move guest user cart to server
-      const cartItemDetails = {userId:res.data._id, cartItems, type: true}
-      const isCart = localStorage.getItem("cartItems")
-      if(isCart){
-        addToCart(cartItemDetails).then(() => {
-          localStorage.removeItem("cartItems")
-        })
-      }
-      // go to checkout if user from place order
-      if(reference === "placeorder") return navigate("/checkout")
-      navigate("/")
+
     }).catch((err) => {
       if(err?.response?.data?.auth === false){
         setIsLoading(false)
@@ -108,7 +81,7 @@ const Login = () => {
         </form>
     </div>}
     {/* render otp component */}
-        { renderOtp && <OtpVerifcation loginMethodData={loginMethod === "mobile" ? mobile.mobile : email.email} />}
+        { renderOtp && <OtpVerifcation loginMethodData={loginMethod === "mobile" ? mobile : email} />}
     </>
   )
 }

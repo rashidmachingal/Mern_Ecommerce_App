@@ -6,8 +6,8 @@ export const RegisterUser = async (userData) => {
 };
 
 //login user
-export const LoginUser = async (loginData) => {
-    return await axios.post(`/auth/login`, loginData)
+export const AuthUser = async (loginData) => {
+    return await axios.post(`/auth/auth`, loginData)
 };
 
 // otp verification 

@@ -43,7 +43,7 @@ const Navbar = () => {
             setProfileMenu(false)
           }}>
           {token === null && <Tooltip title="Profile"><IconButton onClick={()=> setOpenMenu(!openMenu)} ><PersonOutlineOutlined style={cursorPointer} /></IconButton></Tooltip>}
-          {token && <IconButton onClick={()=> setProfileMenu(!profileMenu)} ><Avatar sx={{ width: 32, height: 32 }} >R</Avatar></IconButton>}
+          {token && <IconButton onClick={()=> setProfileMenu(!profileMenu)} ><Avatar sx={{ width: 32, height: 32 }} ></Avatar></IconButton>}
           {openMenu && <AccountMenu/> }
           {profileMenu &&  <ProfileMenu setProfileMenu={setProfileMenu} />}
           </OutsideClickHandler>

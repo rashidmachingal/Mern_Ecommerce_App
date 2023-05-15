@@ -1,12 +1,9 @@
-const { registerUser, loginUser, otpVerification } = require("../controllers/authController");
+const { otpVerification, authUser } = require("../controllers/authController");
 const express = require("express");
 const router = express.Router();
 
-// register user
-router.post('/register', registerUser);
-
-// login user
-router.post("/login", loginUser)
+// auth user 
+router.post("/auth", authUser)
 
 // check verification code
 router.post("/otp-verify", otpVerification)

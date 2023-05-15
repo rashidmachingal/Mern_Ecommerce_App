@@ -3,28 +3,48 @@ const User = require("../models/User");
 const CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 
-//register user
-const registerUser = async (req, res) => {
+// user login or signup
+const authUser = async (req, res) => {
+  try {
+    if(req.body.email){
+      loginOrSignUpWithEmail(req, res)
+    }
+
+    if(req.body.mobile){
+      console.log("mobile")
+    }
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+}
+
+// register or login with email
+const loginOrSignUpWithEmail = async (req, res) => {
     try {
       // Check if user already exists
       const isAlreadyUser = await User.findOne({ email: req.body.email });
-      if (isAlreadyUser) return res.status(409).json({ message: 'User already exists' });
-  
-      // Encrypt user password
-      const encryptedPassword = CryptoJS.AES.encrypt(req.body.password, process.env.PASS_SEC).toString();
 
-      // Create new user
-      const newUser = new User({
-        user_name: req.body.user_name,
-        email: req.body.email,
-        password: encryptedPassword,
-      });
-       await newUser.save();
+      // sent otp if user already registered with email
+      if (isAlreadyUser) {
+        // create otp and update on db and sent to already registered email
+        createAndSendOtp(req.body.email)
+        res.status(200).json({ needOTPVerification: true });
+      }
 
-      // create otp and update on db and sent email
-      createAndSendOtp(req.body.email)
-      res.status(200).json({verified:false})
-      
+      // create new user if user not registered with email already
+      if(!isAlreadyUser){
+        const newUser = new User({email: req.body.email});
+        await newUser.save().then((savedUser) => {
+          res.status(200).json({needOTPVerification:true})
+        }).catch((error) => {
+          res.status(500).json({ message: 'Error saving user', error });
+        })
+        // create otp and update on db and sent to registered email
+        createAndSendOtp(req.body.email)
+      }
+
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: 'Server error' });
@@ -32,34 +52,16 @@ const registerUser = async (req, res) => {
   };
 
 
-  //login user
-  const loginUser = async (req, res)  => {
+// create jwt token sent to user
+  const createJwtToken = async (req, res)  => {
     try {
-      const user = await User.findOne({email:req.body.email})
-      if(user === null) return res.status(401).json({auth:false});
-
-      // decripting password
-      const decryptedPassword = CryptoJS.AES.decrypt(
-          user.password,
-          process.env.PASS_SEC
-      );
-      const originalPassword = decryptedPassword.toString(CryptoJS.enc.Utf8)
-
-      // authentication failed sent to client
-      if(originalPassword !== req.body.password){
-          return res.status(401).json({auth:false});
-      }
-
-      // check user verified or not if not sent otp and upadate on db and sent not verified to client
-      if(user.verified === false) {
-        createAndSendOtp(req.body.email)
-        res.status(200).json({verified:false})
-      }else{
-        // login success - create jwt token and sent to client
-        const token = jwt.sign({id: user._id,first_name: user.first_name},process.env.PASS_SEC);
-        const { password, otp , ...others } = user._doc;
-        res.status(200).json({...others, token})
-      }
+        const token = jwt.sign({id: req.body},process.env.PASS_SEC);
+        if(req.body.loginMethodData.email){
+          console.log(req.body.loginMethodData.email)
+          res.status(200).json({verified:true,token,authData:req.body.loginMethodData.email})
+        }else{
+          res.status(200).json({verified:true,token,authData:req.body.loginMethodData.mobile})
+        }
 
   } catch (error) {
       res.status(500).json(error)
@@ -69,8 +71,20 @@ const registerUser = async (req, res) => {
   // otp verification
   const otpVerification = async (req, res) => {
     try {
+      // user submited otp
       const userOtp = req.body.completeOtp;
-      const user = await User.findOne({ email: req.body.email });
+
+      if(req.body.loginMethodData.email){
+        const user = await User.findOne({ email: req.body.loginMethodData.email });
+        console.log("email")
+        verifyOtp(user)
+      }else{
+        const user = await User.findOne({ mobile: req.body.loginMethodData.mobile});
+        console.log("mobile")
+        verifyOtp(user)
+      }
+      
+      function verifyOtp (user) {
       // otp expiry check
       const currentTime = new Date().getTime();
       const timestamp = new Date(user.otp.expiry).getTime()
@@ -82,15 +96,17 @@ const registerUser = async (req, res) => {
           { verified: true },
           { new: true }
       ).then(() => {
-        loginUser(req, res)
+        createJwtToken(req, res)
       })
       }else{
         res.status(401).json({otpVerification:false})
       }
+      }
     } catch (error) {
       res.status(500).json(error)
+      console.log(error)
     }
   }
 
-  module.exports = { registerUser, loginUser, otpVerification };
+  module.exports = { otpVerification, authUser };
 
